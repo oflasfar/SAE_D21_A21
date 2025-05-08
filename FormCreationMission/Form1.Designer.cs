@@ -54,6 +54,7 @@
             this.label5 = new System.Windows.Forms.Label();
             this.dgvPompiers = new System.Windows.Forms.DataGridView();
             this.dgvEngins = new System.Windows.Forms.DataGridView();
+            this.btnRapport = new System.Windows.Forms.Button();
             this.gbInformationsUsager.SuspendLayout();
             this.gbDecisionRegulateur.SuspendLayout();
             this.gbMobilisation.SuspendLayout();
@@ -64,6 +65,7 @@
             // lblIdMission
             // 
             this.lblIdMission.AutoSize = true;
+            this.lblIdMission.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.lblIdMission.Location = new System.Drawing.Point(111, 27);
             this.lblIdMission.Name = "lblIdMission";
             this.lblIdMission.Size = new System.Drawing.Size(72, 16);
@@ -73,6 +75,7 @@
             // lblId
             // 
             this.lblId.AutoSize = true;
+            this.lblId.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.lblId.Location = new System.Drawing.Point(193, 27);
             this.lblId.Name = "lblId";
             this.lblId.Size = new System.Drawing.Size(44, 16);
@@ -82,6 +85,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
+            this.label3.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.label3.Location = new System.Drawing.Point(562, 27);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(103, 16);
@@ -91,6 +95,7 @@
             // lblDateDeclanchee
             // 
             this.lblDateDeclanchee.AutoSize = true;
+            this.lblDateDeclanchee.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.lblDateDeclanchee.Location = new System.Drawing.Point(671, 27);
             this.lblDateDeclanchee.Name = "lblDateDeclanchee";
             this.lblDateDeclanchee.Size = new System.Drawing.Size(44, 16);
@@ -108,6 +113,7 @@
             this.gbInformationsUsager.Controls.Add(this.lblCodePostale);
             this.gbInformationsUsager.Controls.Add(this.lblAdresseSinistre);
             this.gbInformationsUsager.Controls.Add(this.lblMotif);
+            this.gbInformationsUsager.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.gbInformationsUsager.Location = new System.Drawing.Point(114, 57);
             this.gbInformationsUsager.Name = "gbInformationsUsager";
             this.gbInformationsUsager.Size = new System.Drawing.Size(943, 161);
@@ -197,6 +203,7 @@
             this.gbDecisionRegulateur.Controls.Add(this.cbNatureSinistre);
             this.gbDecisionRegulateur.Controls.Add(this.label1);
             this.gbDecisionRegulateur.Controls.Add(this.label2);
+            this.gbDecisionRegulateur.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.gbDecisionRegulateur.Location = new System.Drawing.Point(114, 235);
             this.gbDecisionRegulateur.Name = "gbDecisionRegulateur";
             this.gbDecisionRegulateur.Size = new System.Drawing.Size(943, 96);
@@ -206,6 +213,7 @@
             // 
             // btnConstituerEquipe
             // 
+            this.btnConstituerEquipe.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.btnConstituerEquipe.Location = new System.Drawing.Point(557, 67);
             this.btnConstituerEquipe.Name = "btnConstituerEquipe";
             this.btnConstituerEquipe.Size = new System.Drawing.Size(131, 23);
@@ -225,6 +233,7 @@
             // 
             // btnQuitter
             // 
+            this.btnQuitter.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.btnQuitter.Location = new System.Drawing.Point(431, 67);
             this.btnQuitter.Name = "btnQuitter";
             this.btnQuitter.Size = new System.Drawing.Size(120, 23);
@@ -266,6 +275,7 @@
             this.gbMobilisation.Controls.Add(this.label5);
             this.gbMobilisation.Controls.Add(this.dgvPompiers);
             this.gbMobilisation.Controls.Add(this.dgvEngins);
+            this.gbMobilisation.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.gbMobilisation.Location = new System.Drawing.Point(114, 348);
             this.gbMobilisation.Name = "gbMobilisation";
             this.gbMobilisation.Size = new System.Drawing.Size(943, 321);
@@ -277,6 +287,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
+            this.label4.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.label4.Location = new System.Drawing.Point(161, 33);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(109, 16);
@@ -286,6 +297,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
+            this.label5.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.label5.Location = new System.Drawing.Point(627, 33);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(126, 16);
@@ -294,7 +306,9 @@
             // 
             // dgvPompiers
             // 
+            this.dgvPompiers.BackgroundColor = System.Drawing.SystemColors.ActiveBorder;
             this.dgvPompiers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvPompiers.GridColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.dgvPompiers.Location = new System.Drawing.Point(431, 52);
             this.dgvPompiers.Name = "dgvPompiers";
             this.dgvPompiers.RowHeadersWidth = 51;
@@ -314,11 +328,23 @@
             this.dgvEngins.TabIndex = 0;
             this.dgvEngins.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.dgvEngins_KeyPress);
             // 
+            // btnRapport
+            // 
+            this.btnRapport.Location = new System.Drawing.Point(944, 675);
+            this.btnRapport.Name = "btnRapport";
+            this.btnRapport.Size = new System.Drawing.Size(113, 26);
+            this.btnRapport.TabIndex = 20;
+            this.btnRapport.Text = "Rapport";
+            this.btnRapport.UseVisualStyleBackColor = true;
+            this.btnRapport.Click += new System.EventHandler(this.btnRapport_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.DarkRed;
             this.ClientSize = new System.Drawing.Size(1174, 738);
+            this.Controls.Add(this.btnRapport);
             this.Controls.Add(this.gbMobilisation);
             this.Controls.Add(this.gbDecisionRegulateur);
             this.Controls.Add(this.gbInformationsUsager);
@@ -370,6 +396,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.DataGridView dgvPompiers;
         private System.Windows.Forms.DataGridView dgvEngins;
+        private System.Windows.Forms.Button btnRapport;
     }
 }
 

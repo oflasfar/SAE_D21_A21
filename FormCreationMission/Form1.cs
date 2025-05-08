@@ -8,6 +8,16 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SQLite;
+using System.IO;
+using System.Runtime.Remoting.Contexts;
+using iText.Kernel.Pdf;
+using iText.Layout.Element;
+using iText.Layout;
+using iText.Kernel.Font;
+using iText.IO.Font.Constants;
+using iText.Layout.Properties;
+
+
 
 namespace FormCreationMission
 {
@@ -102,6 +112,10 @@ namespace FormCreationMission
 
             //Recuperation de la valeur returner par la combobox NatureSinistre
             int idNatureSinistre = Convert.ToInt32(cbNatureSinistre.SelectedValue);
+            //Recuperation de la valeur returner par la combobox Caserne
+            int idCaserne = Convert.ToInt32(cbCaserneImmobiliser.SelectedValue);
+            MessageBox.Show("ID caserne sélectionnée : " + idCaserne);
+
 
 
             // Récupération des engins nécessaires
@@ -109,7 +123,17 @@ namespace FormCreationMission
             {
                 string type = row["codeTypeEngin"].ToString();
                 int nb = Convert.ToInt32(row["nombre"]);
-                enginsNecessaires.Add((type, nb));
+                // Vérifier si la caserne dispose de ce type d’engin
+                var enginsDispoDansCaserne = MesDatas.DsGlobal.Tables["Engin"].Select(
+                    $"codeTypeEngin = '{type}' AND idCaserne = '{idCaserne}' AND enMission = 0 AND enPanne = 0"
+                );
+                //MessageBox.Show($"[DEBUG] {enginsDispoDansCaserne.Length} engin(s) dispo de type {type} dans caserne {idCaserne}");
+
+
+                if (enginsDispoDansCaserne.Length >= nb)
+                {
+                    enginsNecessaires.Add((type, nb));
+                }
             }
 
             // Préparer le DataGridView
@@ -129,10 +153,9 @@ namespace FormCreationMission
             /////////
             ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             /////////
-            //////
+            ///
 
             dgvPompiers.Rows.Clear();
-
             foreach (var (typeEngin, nombre) in enginsNecessaires)
             {
                 // Étape 1 : Récupérer les ID d’habilitations nécessaires pour ce type d’engin
@@ -176,6 +199,10 @@ namespace FormCreationMission
                 {
                     dgvPompiers.Rows.Add(p["matricule"], p["nom"], p["prenom"]);
                 }
+
+                ///////////////////////////:
+                ///
+                
             }
 
         }
@@ -188,6 +215,71 @@ namespace FormCreationMission
         private void dgvPompiers_KeyPress(object sender, KeyPressEventArgs e)
         {
             e.Handled = true;
+        }
+
+        private void btnRapport_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string nFichier = "Rapport_Mission.pdf";
+                string chemin = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), nFichier);
+
+                using (PdfWriter writer = new PdfWriter(chemin))
+                using (PdfDocument pdf = new PdfDocument(writer))
+                using (Document doc = new Document(pdf))
+                {
+                    // Titre
+                    doc.Add(new Paragraph("📋 RAPPORT DE MISSION")
+                        .SetFontSize(16)
+                        .SetTextAlignment(TextAlignment.CENTER));
+
+                    doc.Add(new Paragraph("\n"));
+
+                    // Infos principales
+                    doc.Add(new Paragraph($"📌 Mission n° : {lblId.Text ?? "N/A"}"));
+                    doc.Add(new Paragraph($"📅 Date de déclenchement : {lblDateDeclanchee.Text ?? "N/A"}"));
+                    doc.Add(new Paragraph($"🔥 Nature du sinistre : {cbNatureSinistre.Text ?? "N/A"}"));
+                    doc.Add(new Paragraph($"🏢 Caserne : {cbCaserneImmobiliser.Text ?? "N/A"}"));
+                    doc.Add(new Paragraph($"📍 Adresse : {(txtRue?.Text ?? "")}, {(txtCodePostale?.Text ?? "")}, {(txtVille?.Text ?? "")}"));
+                    doc.Add(new Paragraph($"📝 Description : {(txtMotif?.Text ?? "")}"));
+
+                    doc.Add(new Paragraph("\n==================================================\n"));
+
+                    // Engins
+                    doc.Add(new Paragraph("🚒 Engins mobilisés :"));
+                    foreach (DataGridViewRow row in dgvEngins.Rows)
+                    {
+                        if (!row.IsNewRow && row.Cells[0].Value != null)
+                        {
+                            string type = row.Cells[0].Value.ToString();
+                            string numero = row.Cells.Count > 1 && row.Cells[1].Value != null ? row.Cells[1].Value.ToString() : "N/A";
+                            doc.Add(new Paragraph($"- {type} (n° {numero})"));
+                        }
+                    }
+
+                    // Pompiers
+                    doc.Add(new Paragraph("\n👨‍🚒 Pompiers mobilisés :"));
+                    foreach (DataGridViewRow row in dgvPompiers.Rows)
+                    {
+                        if (!row.IsNewRow && row.Cells[0].Value != null)
+                        {
+                            string nom = row.Cells.Count > 1 ? row.Cells[1].Value?.ToString() ?? "NOM" : "NOM";
+                            string prenom = row.Cells.Count > 2 ? row.Cells[2].Value?.ToString() ?? "PRÉNOM" : "PRÉNOM";
+                            doc.Add(new Paragraph($"- {prenom} {nom}"));
+                        }
+                    }
+
+                    // Signature
+                    doc.Add(new Paragraph($"\n📄 Rapport généré le {DateTime.Now:dd/MM/yyyy HH:mm}"));
+                }
+
+                MessageBox.Show("✅ Rapport PDF généré sur le bureau !");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("❌ ERREUR PDF : " + ex.Message);
+            }
+
         }
     }
 }
