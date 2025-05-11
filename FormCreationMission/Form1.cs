@@ -107,28 +107,23 @@ namespace FormCreationMission
         private void btnConstituerEquipe_Click(object sender, EventArgs e)
         {
             gbMobilisation.Visible = true;
-
+            // Liste finale des engins nécessaires
             List<(string codeTypeEngin, int nombre)> enginsNecessaires = new List<(string, int)>();
 
-            //Recuperation de la valeur returner par la combobox NatureSinistre
+            // 1. Récupération des valeurs depuis les ComboBox
             int idNatureSinistre = Convert.ToInt32(cbNatureSinistre.SelectedValue);
-            //Recuperation de la valeur returner par la combobox Caserne
             int idCaserne = Convert.ToInt32(cbCaserneImmobiliser.SelectedValue);
             MessageBox.Show("ID caserne sélectionnée : " + idCaserne);
 
-
-
-            // Récupération des engins nécessaires
+            // 2. Recherche des engins nécessaires pour ce type de sinistre
             foreach (DataRow row in MesDatas.DsGlobal.Tables["Necessiter"].Select("idNatureSinistre = " + idNatureSinistre))
             {
                 string type = row["codeTypeEngin"].ToString();
                 int nb = Convert.ToInt32(row["nombre"]);
-                // Vérifier si la caserne dispose de ce type d’engin
-                var enginsDispoDansCaserne = MesDatas.DsGlobal.Tables["Engin"].Select(
-                    $"codeTypeEngin = '{type}' AND idCaserne = '{idCaserne}' AND enMission = 0 AND enPanne = 0"
-                );
-                //MessageBox.Show($"[DEBUG] {enginsDispoDansCaserne.Length} engin(s) dispo de type {type} dans caserne {idCaserne}");
 
+                var enginsDispoDansCaserne = MesDatas.DsGlobal.Tables["Engin"].Select(
+                    $"codeTypeEngin = '{type}' AND idCaserne = {idCaserne} AND enMission = 0 AND enPanne = 0"
+                );
 
                 if (enginsDispoDansCaserne.Length >= nb)
                 {
@@ -136,29 +131,41 @@ namespace FormCreationMission
                 }
             }
 
-            // Préparer le DataGridView
+            // 3. Affichage dans le DataGridView des engins
             dgvEngins.Rows.Clear();
             if (dgvEngins.Columns.Count == 0)
             {
                 dgvEngins.Columns.Add("typeEngin", "Type d'engin");
                 dgvEngins.Columns.Add("nombre", "Quantité requise");
+                dgvEngins.Columns.Add("equipage", "Équipage requis");
             }
 
-            // Remplir le DataGridView
             foreach (var (type, nb) in enginsNecessaires)
             {
-                dgvEngins.Rows.Add(type, nb);
-            }
-            //////
-            /////////
-            ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            /////////
-            ///
+                // Récupérer l’équipage depuis la table TypeEngin
+                int equipage = 0;
+                DataRow[] typeEnginRow = MesDatas.DsGlobal.Tables["TypeEngin"]
+                    .Select($"code = '{type}'");
+                if (typeEnginRow.Length > 0)
+                {
+                    equipage = Convert.ToInt32(typeEnginRow[0]["equipage"]);
+                }
 
+                dgvEngins.Rows.Add(type, nb, equipage);
+            }
+
+            // 4. Affichage des pompiers
             dgvPompiers.Rows.Clear();
+            if (dgvPompiers.Columns.Count == 0)
+            {
+                dgvPompiers.Columns.Add("matricule", "Matricule");
+                dgvPompiers.Columns.Add("nom", "Nom");
+                dgvPompiers.Columns.Add("prenom", "Prénom");
+                dgvPompiers.Columns.Add("pourEngin", "Type Engin");
+            }
+
             foreach (var (typeEngin, nombre) in enginsNecessaires)
             {
-                // Étape 1 : Récupérer les ID d’habilitations nécessaires pour ce type d’engin
                 var habilitations = MesDatas.DsGlobal.Tables["Embarquer"]
                     .Select($"codeTypeEngin = '{typeEngin}'")
                     .Select(row => Convert.ToInt32(row["idHabilitation"]))
@@ -186,24 +193,26 @@ namespace FormCreationMission
                     }
                 }
 
-                // Prendre autant de pompiers que nécessaire (ou moins si pas assez)
-                var selection = pompiersEligibles.Take(nombre).ToList();
-                if (dgvPompiers.Columns.Count == 0)
+                // Récupérer nombre d’équipiers requis pour cet engin
+                int equipage = 0;
+                DataRow[] rowType = MesDatas.DsGlobal.Tables["TypeEngin"].Select($"code = '{typeEngin}'");
+                if (rowType.Length > 0)
                 {
-                    dgvPompiers.Columns.Add("matricule", "Matricule");
-                    dgvPompiers.Columns.Add("nom", "Nom");
-                    dgvPompiers.Columns.Add("prenom", "Prénom");
-                }
-                // Affichage dans DataGridView
-                foreach (var p in selection)
-                {
-                    dgvPompiers.Rows.Add(p["matricule"], p["nom"], p["prenom"]);
+                    equipage = Convert.ToInt32(rowType[0]["equipage"]);
                 }
 
-                ///////////////////////////:
-                ///
-                
+                // nombre total de pompiers à prendre = nombre d'engins * équipage
+                int totalPompiers = equipage * nombre;
+
+                var selection = pompiersEligibles.Take(totalPompiers).ToList();
+
+                foreach (var p in selection)
+                {
+                    dgvPompiers.Rows.Add(p["matricule"], p["nom"], p["prenom"], typeEngin);
+                }
             }
+
+
 
         }
 

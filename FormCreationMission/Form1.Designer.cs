@@ -114,9 +114,9 @@
             this.gbInformationsUsager.Controls.Add(this.lblAdresseSinistre);
             this.gbInformationsUsager.Controls.Add(this.lblMotif);
             this.gbInformationsUsager.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.gbInformationsUsager.Location = new System.Drawing.Point(114, 57);
+            this.gbInformationsUsager.Location = new System.Drawing.Point(56, 57);
             this.gbInformationsUsager.Name = "gbInformationsUsager";
-            this.gbInformationsUsager.Size = new System.Drawing.Size(943, 161);
+            this.gbInformationsUsager.Size = new System.Drawing.Size(1001, 161);
             this.gbInformationsUsager.TabIndex = 4;
             this.gbInformationsUsager.TabStop = false;
             this.gbInformationsUsager.Text = "Informations Usager";
@@ -204,9 +204,9 @@
             this.gbDecisionRegulateur.Controls.Add(this.label1);
             this.gbDecisionRegulateur.Controls.Add(this.label2);
             this.gbDecisionRegulateur.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.gbDecisionRegulateur.Location = new System.Drawing.Point(114, 235);
+            this.gbDecisionRegulateur.Location = new System.Drawing.Point(56, 235);
             this.gbDecisionRegulateur.Name = "gbDecisionRegulateur";
-            this.gbDecisionRegulateur.Size = new System.Drawing.Size(943, 96);
+            this.gbDecisionRegulateur.Size = new System.Drawing.Size(1001, 96);
             this.gbDecisionRegulateur.TabIndex = 15;
             this.gbDecisionRegulateur.TabStop = false;
             this.gbDecisionRegulateur.Text = "Décision du regulateur";
@@ -276,9 +276,9 @@
             this.gbMobilisation.Controls.Add(this.dgvPompiers);
             this.gbMobilisation.Controls.Add(this.dgvEngins);
             this.gbMobilisation.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.gbMobilisation.Location = new System.Drawing.Point(114, 348);
+            this.gbMobilisation.Location = new System.Drawing.Point(56, 348);
             this.gbMobilisation.Name = "gbMobilisation";
-            this.gbMobilisation.Size = new System.Drawing.Size(943, 321);
+            this.gbMobilisation.Size = new System.Drawing.Size(1001, 321);
             this.gbMobilisation.TabIndex = 16;
             this.gbMobilisation.TabStop = false;
             this.gbMobilisation.Text = "Mobilisation des engins et des pompiers";
@@ -309,22 +309,22 @@
             this.dgvPompiers.BackgroundColor = System.Drawing.SystemColors.ActiveBorder;
             this.dgvPompiers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvPompiers.GridColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.dgvPompiers.Location = new System.Drawing.Point(431, 52);
+            this.dgvPompiers.Location = new System.Drawing.Point(411, 52);
             this.dgvPompiers.Name = "dgvPompiers";
             this.dgvPompiers.RowHeadersWidth = 51;
             this.dgvPompiers.RowTemplate.Height = 24;
-            this.dgvPompiers.Size = new System.Drawing.Size(490, 185);
+            this.dgvPompiers.Size = new System.Drawing.Size(566, 238);
             this.dgvPompiers.TabIndex = 1;
             this.dgvPompiers.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.dgvPompiers_KeyPress);
             // 
             // dgvEngins
             // 
             this.dgvEngins.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvEngins.Location = new System.Drawing.Point(41, 52);
+            this.dgvEngins.Location = new System.Drawing.Point(6, 52);
             this.dgvEngins.Name = "dgvEngins";
             this.dgvEngins.RowHeadersWidth = 51;
             this.dgvEngins.RowTemplate.Height = 24;
-            this.dgvEngins.Size = new System.Drawing.Size(347, 185);
+            this.dgvEngins.Size = new System.Drawing.Size(399, 238);
             this.dgvEngins.TabIndex = 0;
             this.dgvEngins.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.dgvEngins_KeyPress);
             // 
