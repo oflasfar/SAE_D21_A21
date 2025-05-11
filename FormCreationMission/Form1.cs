@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.Data.SQLite;
 using System.IO;
 using System.Runtime.Remoting.Contexts;
+using iText;
 using iText.Kernel.Pdf;
 using iText.Layout.Element;
 using iText.Layout;
@@ -233,61 +234,90 @@ namespace FormCreationMission
                 string nFichier = "Rapport_Mission.pdf";
                 string chemin = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), nFichier);
 
+                // Supprimer le fichier existant
+                if (File.Exists(chemin))
+                {
+                    File.Delete(chemin);
+                }
+
                 using (PdfWriter writer = new PdfWriter(chemin))
                 using (PdfDocument pdf = new PdfDocument(writer))
                 using (Document doc = new Document(pdf))
                 {
-                    // Titre
-                    doc.Add(new Paragraph("📋 RAPPORT DE MISSION")
-                        .SetFontSize(16)
+                    // Titre du rapport
+                    doc.Add(new Paragraph("RAPPORT DE MISSION")
+                        .SetFontSize(18)
                         .SetTextAlignment(TextAlignment.CENTER));
 
-                    doc.Add(new Paragraph("\n"));
+                    doc.Add(new Paragraph(""));
 
-                    // Infos principales
-                    doc.Add(new Paragraph($"📌 Mission n° : {lblId.Text ?? "N/A"}"));
-                    doc.Add(new Paragraph($"📅 Date de déclenchement : {lblDateDeclanchee.Text ?? "N/A"}"));
-                    doc.Add(new Paragraph($"🔥 Nature du sinistre : {cbNatureSinistre.Text ?? "N/A"}"));
-                    doc.Add(new Paragraph($"🏢 Caserne : {cbCaserneImmobiliser.Text ?? "N/A"}"));
-                    doc.Add(new Paragraph($"📍 Adresse : {(txtRue?.Text ?? "")}, {(txtCodePostale?.Text ?? "")}, {(txtVille?.Text ?? "")}"));
-                    doc.Add(new Paragraph($"📝 Description : {(txtMotif?.Text ?? "")}"));
+                    // Infos mission
+                    doc.Add(new Paragraph("Numero de mission : " + (lblId.Text ?? "N/A")));
+                    doc.Add(new Paragraph("Date declenchement : " + (lblDateDeclanchee.Text ?? "N/A")));
+                    doc.Add(new Paragraph("Nature du sinistre : " + (cbNatureSinistre.Text ?? "N/A")));
+                    doc.Add(new Paragraph("Caserne : " + (cbCaserneImmobiliser.Text ?? "N/A")));
+                    doc.Add(new Paragraph("Adresse : " + txtRue.Text + ", " + txtCodePostale.Text + " " + txtVille.Text));
+                    doc.Add(new Paragraph("Description : " + txtMotif.Text));
 
-                    doc.Add(new Paragraph("\n==================================================\n"));
+                    doc.Add(new Paragraph("--------------------------------------------------"));
 
-                    // Engins
-                    doc.Add(new Paragraph("🚒 Engins mobilisés :"));
-                    foreach (DataGridViewRow row in dgvEngins.Rows)
+                    // Engins mobilisés
+                    doc.Add(new Paragraph("Engins mobilises :"));
+
+                    if (dgvEngins.Rows.Count == 0)
                     {
-                        if (!row.IsNewRow && row.Cells[0].Value != null)
+                        doc.Add(new Paragraph("- Aucun engin mobilise."));
+                    }
+                    else
+                    {
+                        foreach (DataGridViewRow row in dgvEngins.Rows)
                         {
-                            string type = row.Cells[0].Value.ToString();
-                            string numero = row.Cells.Count > 1 && row.Cells[1].Value != null ? row.Cells[1].Value.ToString() : "N/A";
-                            doc.Add(new Paragraph($"- {type} (n° {numero})"));
+                            if (!row.IsNewRow && row.Cells[0].Value != null)
+                            {
+                                string type = row.Cells[0].Value?.ToString() ?? "Inconnu";
+                                string quantite = row.Cells.Count > 1 && row.Cells[1].Value != null ? row.Cells[1].Value.ToString() : "N/A";
+                                string equipage = row.Cells.Count > 2 && row.Cells[2].Value != null ? row.Cells[2].Value.ToString() : "N/A";
+
+                                doc.Add(new Paragraph("- " + type + " : " + quantite + " engin(s), " + equipage + " pompier(s) par engin"));
+                            }
                         }
                     }
 
-                    // Pompiers
-                    doc.Add(new Paragraph("\n👨‍🚒 Pompiers mobilisés :"));
-                    foreach (DataGridViewRow row in dgvPompiers.Rows)
+                    doc.Add(new Paragraph(""));
+
+                    // Pompiers mobilisés
+                    doc.Add(new Paragraph("Pompiers mobilises :"));
+
+                    if (dgvPompiers.Rows.Count == 0)
                     {
-                        if (!row.IsNewRow && row.Cells[0].Value != null)
+                        doc.Add(new Paragraph("- Aucun pompier affecte."));
+                    }
+                    else
+                    {
+                        foreach (DataGridViewRow row in dgvPompiers.Rows)
                         {
-                            string nom = row.Cells.Count > 1 ? row.Cells[1].Value?.ToString() ?? "NOM" : "NOM";
-                            string prenom = row.Cells.Count > 2 ? row.Cells[2].Value?.ToString() ?? "PRÉNOM" : "PRÉNOM";
-                            doc.Add(new Paragraph($"- {prenom} {nom}"));
+                            if (!row.IsNewRow && row.Cells[0].Value != null)
+                            {
+                                string nom = row.Cells.Count > 1 ? row.Cells[1].Value?.ToString() ?? "Nom" : "Nom";
+                                string prenom = row.Cells.Count > 2 ? row.Cells[2].Value?.ToString() ?? "Prenom" : "Prenom";
+                                string engin = row.Cells.Count > 3 ? row.Cells[3].Value?.ToString() ?? "?" : "?";
+
+                                doc.Add(new Paragraph("- " + prenom + " " + nom + " (engin : " + engin + ")"));
+                            }
                         }
                     }
 
-                    // Signature
-                    doc.Add(new Paragraph($"\n📄 Rapport généré le {DateTime.Now:dd/MM/yyyy HH:mm}"));
+                    doc.Add(new Paragraph(""));
+                    doc.Add(new Paragraph("Rapport genere le " + DateTime.Now.ToString("dd/MM/yyyy HH:mm")));
                 }
 
-                MessageBox.Show("✅ Rapport PDF généré sur le bureau !");
+                MessageBox.Show("Rapport PDF genere avec succes sur le bureau !");
             }
             catch (Exception ex)
             {
-                MessageBox.Show("❌ ERREUR PDF : " + ex.Message);
+                MessageBox.Show("Erreur PDF : " + ex.Message);
             }
+
 
         }
     }
