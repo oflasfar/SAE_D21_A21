@@ -329,6 +329,37 @@ namespace FormCreationMission
             {
                 MessageBox.Show("Erreur PDF : " + ex.Message);
             }
+
+            try
+            {
+                string sql = "INSERT INTO Mission (id, dateHeureDepart, motifAppel, adresse, cp, ville, terminee, idNatureSinistre, idCaserne) " +
+             "VALUES (@id, @date, @motif, @adresse, @cp, @ville, 0, @nature, @caserne)";
+
+
+                using (var cmd = new SQLiteCommand(sql, Connexion.Connec))
+                {
+                    cmd.Parameters.AddWithValue("@id", Convert.ToInt32(lblId.Text)); // ou ne pas l'inclure si id est AUTOINCREMENT
+                    cmd.Parameters.AddWithValue("@date", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+                    cmd.Parameters.AddWithValue("@motif", txtMotif.Text);
+                    cmd.Parameters.AddWithValue("@adresse", txtRue.Text);
+                    cmd.Parameters.AddWithValue("@cp", txtCodePostale.Text);
+                    cmd.Parameters.AddWithValue("@ville", txtVille.Text);
+                    cmd.Parameters.AddWithValue("@nature", Convert.ToInt32(cbNatureSinistre.SelectedValue));
+                    cmd.Parameters.AddWithValue("@caserne", Convert.ToInt32(cbCaserneImmobiliser.SelectedValue));
+
+                    
+
+                    int lignes = cmd.ExecuteNonQuery(); // ← SI ERREUR ICI, ELLE SERA ATTRAPÉE
+                    MessageBox.Show("✅ Mission insérée avec succès !");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("❌ Erreur SQL : " + ex.Message);
+            }
+
+
+
         }
 
 
