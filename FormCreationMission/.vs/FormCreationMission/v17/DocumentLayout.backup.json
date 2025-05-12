@@ -3,11 +3,11 @@
   "WorkspaceRootPath": "C:\\OMAR\\S2\\SAE-D21\\FormCreationMission\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{8A63E9D9-5BF8-4633-963C-F87589628EF1}|FormCreationMission.csproj|C:\\OMAR\\S2\\SAE-D21\\FormCreationMission\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{8A63E9D9-5BF8-4633-963C-F87589628EF1}|FormCreationMission.csproj|c:\\omar\\s2\\sae-d21\\formcreationmission\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8A63E9D9-5BF8-4633-963C-F87589628EF1}|FormCreationMission.csproj|solutionrelative:form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8A63E9D9-5BF8-4633-963C-F87589628EF1}|FormCreationMission.csproj|c:\\omar\\s2\\sae-d21\\formcreationmission\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{8A63E9D9-5BF8-4633-963C-F87589628EF1}|FormCreationMission.csproj|C:\\OMAR\\S2\\SAE-D21\\FormCreationMission\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{8A63E9D9-5BF8-4633-963C-F87589628EF1}|FormCreationMission.csproj|solutionrelative:form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
@@ -38,7 +38,8 @@
               "RelativeToolTip": "mesDatas.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-07T07:22:01.971Z"
+              "WhenOpened": "2025-05-07T07:22:01.971Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -50,7 +51,8 @@
               "RelativeToolTip": "Connexion.cs",
               "ViewState": "AgIAABAAAAAAAAAAAAAzwBQAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-07T07:21:43.573Z"
+              "WhenOpened": "2025-05-07T07:21:43.573Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -72,7 +74,7 @@
               "RelativeDocumentMoniker": "Form1.cs",
               "ToolTip": "C:\\OMAR\\S2\\SAE-D21\\FormCreationMission\\Form1.cs",
               "RelativeToolTip": "Form1.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAABMAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAbAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-05-07T06:33:06.341Z",
               "EditorCaption": ""

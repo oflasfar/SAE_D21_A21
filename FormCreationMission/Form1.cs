@@ -10,13 +10,11 @@ using System.Windows.Forms;
 using System.Data.SQLite;
 using System.IO;
 using System.Runtime.Remoting.Contexts;
-using iText;
-using iText.Kernel.Pdf;
-using iText.Layout.Element;
-using iText.Layout;
-using iText.Kernel.Font;
-using iText.IO.Font.Constants;
-using iText.Layout.Properties;
+using System.Globalization;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
+
+
 
 
 
@@ -217,6 +215,24 @@ namespace FormCreationMission
 
         }
 
+        private string Nettoyer(string input)
+        {
+            if (string.IsNullOrEmpty(input)) return "";
+
+            string normalise = input.Normalize(System.Text.NormalizationForm.FormD);
+            var sb = new StringBuilder();
+
+            foreach (char c in normalise)
+            {
+                var uc = System.Globalization.CharUnicodeInfo.GetUnicodeCategory(c);
+                if (uc != System.Globalization.UnicodeCategory.NonSpacingMark && c <= 127)
+                {
+                    sb.Append(c);
+                }
+            }
+
+            return sb.ToString();
+        }
         private void dgvEngins_KeyPress(object sender, KeyPressEventArgs e)
         {
             e.Handled=true;
@@ -227,98 +243,96 @@ namespace FormCreationMission
             e.Handled = true;
         }
 
+        
         private void btnRapport_Click(object sender, EventArgs e)
         {
             try
             {
-                string nFichier = "Rapport_Mission.pdf";
-                string chemin = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), nFichier);
+                string nomFichier = "Rapport_Mission.pdf";
+                string chemin = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), nomFichier);
 
-                // Supprimer le fichier existant
                 if (File.Exists(chemin))
                 {
                     File.Delete(chemin);
                 }
 
-                using (PdfWriter writer = new PdfWriter(chemin))
-                using (PdfDocument pdf = new PdfDocument(writer))
-                using (Document doc = new Document(pdf))
+                // Création du document PDF avec iTextSharp
+                Document document = new Document(PageSize.A4, 50, 50, 25, 25);
+                PdfWriter.GetInstance(document, new FileStream(chemin, FileMode.Create));
+                document.Open();
+
+                // Titre
+                var titreFont = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 18);
+                var titre = new Paragraph("RAPPORT DE MISSION", titreFont);
+                titre.Alignment = Element.ALIGN_CENTER;
+                document.Add(titre);
+                document.Add(new Paragraph("\n"));
+
+                // Informations mission
+                document.Add(new Paragraph("Numero de mission : " + Nettoyer(lblId.Text)));
+                document.Add(new Paragraph("Date declenchement : " + Nettoyer(lblDateDeclanchee.Text)));
+                document.Add(new Paragraph("Nature du sinistre : " + Nettoyer(cbNatureSinistre.Text)));
+                document.Add(new Paragraph("Caserne : " + Nettoyer(cbCaserneImmobiliser.Text)));
+                document.Add(new Paragraph("Adresse : " + Nettoyer(txtRue.Text + ", " + txtCodePostale.Text + " " + txtVille.Text)));
+                document.Add(new Paragraph("Description : " + Nettoyer(txtMotif.Text)));
+
+                document.Add(new Paragraph("\n-----------------------------\n"));
+
+                // Engins mobilisés
+                document.Add(new Paragraph("Engins mobilises :"));
+                if (dgvEngins.Rows.Count == 0)
                 {
-                    // Titre du rapport
-                    doc.Add(new Paragraph("RAPPORT DE MISSION")
-                        .SetFontSize(18)
-                        .SetTextAlignment(TextAlignment.CENTER));
-
-                    doc.Add(new Paragraph(""));
-
-                    // Infos mission
-                    doc.Add(new Paragraph("Numero de mission : " + (lblId.Text ?? "N/A")));
-                    doc.Add(new Paragraph("Date declenchement : " + (lblDateDeclanchee.Text ?? "N/A")));
-                    doc.Add(new Paragraph("Nature du sinistre : " + (cbNatureSinistre.Text ?? "N/A")));
-                    doc.Add(new Paragraph("Caserne : " + (cbCaserneImmobiliser.Text ?? "N/A")));
-                    doc.Add(new Paragraph("Adresse : " + txtRue.Text + ", " + txtCodePostale.Text + " " + txtVille.Text));
-                    doc.Add(new Paragraph("Description : " + txtMotif.Text));
-
-                    doc.Add(new Paragraph("--------------------------------------------------"));
-
-                    // Engins mobilisés
-                    doc.Add(new Paragraph("Engins mobilises :"));
-
-                    if (dgvEngins.Rows.Count == 0)
+                    document.Add(new Paragraph("- Aucun engin mobilise."));
+                }
+                else
+                {
+                    foreach (DataGridViewRow row in dgvEngins.Rows)
                     {
-                        doc.Add(new Paragraph("- Aucun engin mobilise."));
-                    }
-                    else
-                    {
-                        foreach (DataGridViewRow row in dgvEngins.Rows)
+                        if (!row.IsNewRow && row.Cells[0].Value != null)
                         {
-                            if (!row.IsNewRow && row.Cells[0].Value != null)
-                            {
-                                string type = row.Cells[0].Value?.ToString() ?? "Inconnu";
-                                string quantite = row.Cells.Count > 1 && row.Cells[1].Value != null ? row.Cells[1].Value.ToString() : "N/A";
-                                string equipage = row.Cells.Count > 2 && row.Cells[2].Value != null ? row.Cells[2].Value.ToString() : "N/A";
+                            string type = Nettoyer(row.Cells[0].Value?.ToString() ?? "Inconnu");
+                            string quantite = row.Cells.Count > 1 && row.Cells[1].Value != null ? Nettoyer(row.Cells[1].Value.ToString()) : "N/A";
+                            string equipage = row.Cells.Count > 2 && row.Cells[2].Value != null ? Nettoyer(row.Cells[2].Value.ToString()) : "N/A";
 
-                                doc.Add(new Paragraph("- " + type + " : " + quantite + " engin(s), " + equipage + " pompier(s) par engin"));
-                            }
+                            document.Add(new Paragraph("- " + type + " : " + quantite + " engin(s), " + equipage + " pompier(s) par engin"));
                         }
                     }
-
-                    doc.Add(new Paragraph(""));
-
-                    // Pompiers mobilisés
-                    doc.Add(new Paragraph("Pompiers mobilises :"));
-
-                    if (dgvPompiers.Rows.Count == 0)
-                    {
-                        doc.Add(new Paragraph("- Aucun pompier affecte."));
-                    }
-                    else
-                    {
-                        foreach (DataGridViewRow row in dgvPompiers.Rows)
-                        {
-                            if (!row.IsNewRow && row.Cells[0].Value != null)
-                            {
-                                string nom = row.Cells.Count > 1 ? row.Cells[1].Value?.ToString() ?? "Nom" : "Nom";
-                                string prenom = row.Cells.Count > 2 ? row.Cells[2].Value?.ToString() ?? "Prenom" : "Prenom";
-                                string engin = row.Cells.Count > 3 ? row.Cells[3].Value?.ToString() ?? "?" : "?";
-
-                                doc.Add(new Paragraph("- " + prenom + " " + nom + " (engin : " + engin + ")"));
-                            }
-                        }
-                    }
-
-                    doc.Add(new Paragraph(""));
-                    doc.Add(new Paragraph("Rapport genere le " + DateTime.Now.ToString("dd/MM/yyyy HH:mm")));
                 }
 
-                MessageBox.Show("Rapport PDF genere avec succes sur le bureau !");
+                // Pompiers mobilisés
+                document.Add(new Paragraph("\nPompiers mobilises :"));
+                if (dgvPompiers.Rows.Count == 0)
+                {
+                    document.Add(new Paragraph("- Aucun pompier affecte."));
+                }
+                else
+                {
+                    foreach (DataGridViewRow row in dgvPompiers.Rows)
+                    {
+                        if (!row.IsNewRow && row.Cells[0].Value != null)
+                        {
+                            string nom = row.Cells.Count > 1 ? Nettoyer(row.Cells[1].Value?.ToString() ?? "Nom") : "Nom";
+                            string prenom = row.Cells.Count > 2 ? Nettoyer(row.Cells[2].Value?.ToString() ?? "Prenom") : "Prenom";
+                            string engin = row.Cells.Count > 3 ? Nettoyer(row.Cells[3].Value?.ToString() ?? "?") : "?";
+
+                            document.Add(new Paragraph("- " + prenom + " " + nom + " (engin : " + engin + ")"));
+                        }
+                    }
+                }
+
+                document.Add(new Paragraph("\nRapport genere le : " + DateTime.Now.ToString("dd/MM/yyyy HH:mm")));
+                document.Close();
+
+                MessageBox.Show("PDF genere avec succes sur le bureau !");
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Erreur PDF : " + ex.Message);
             }
-
-
         }
+
+
+
     }
 }
+

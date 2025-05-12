@@ -73,5 +73,7 @@ C:\OMAR\S2\SAE-D21\FormCreationMission\bin\Debug\System.Numerics.Vectors.xml
 C:\OMAR\S2\SAE-D21\FormCreationMission\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
 C:\OMAR\S2\SAE-D21\FormCreationMission\bin\Debug\System.Threading.Tasks.Extensions.xml
 C:\OMAR\S2\SAE-D21\FormCreationMission\bin\Debug\System.ValueTuple.xml
-C:\OMAR\S2\SAE-D21\FormCreationMission\obj\Debug\FormCreationMission.csproj.SuggestedBindingRedirects.cache
-C:\OMAR\S2\SAE-D21\FormCreationMission\obj\Debug\FormCreationMission.exe.config
+C:\OMAR\S2\SAE-D21\FormCreationMission\bin\Debug\BouncyCastle.Cryptography.dll
+C:\OMAR\S2\SAE-D21\FormCreationMission\bin\Debug\itextsharp.dll
+C:\OMAR\S2\SAE-D21\FormCreationMission\bin\Debug\BouncyCastle.Cryptography.xml
+C:\OMAR\S2\SAE-D21\FormCreationMission\bin\Debug\itextsharp.xml
