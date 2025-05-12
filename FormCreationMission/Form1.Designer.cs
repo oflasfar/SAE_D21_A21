@@ -55,6 +55,7 @@
             this.dgvPompiers = new System.Windows.Forms.DataGridView();
             this.dgvEngins = new System.Windows.Forms.DataGridView();
             this.btnRapport = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.gbInformationsUsager.SuspendLayout();
             this.gbDecisionRegulateur.SuspendLayout();
             this.gbMobilisation.SuspendLayout();
@@ -338,12 +339,23 @@
             this.btnRapport.UseVisualStyleBackColor = true;
             this.btnRapport.Click += new System.EventHandler(this.btnRapport_Click);
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(803, 677);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(119, 23);
+            this.button1.TabIndex = 21;
+            this.button1.Text = "Personnelle";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DarkRed;
             this.ClientSize = new System.Drawing.Size(1174, 738);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.btnRapport);
             this.Controls.Add(this.gbMobilisation);
             this.Controls.Add(this.gbDecisionRegulateur);
@@ -397,6 +409,7 @@
         private System.Windows.Forms.DataGridView dgvPompiers;
         private System.Windows.Forms.DataGridView dgvEngins;
         private System.Windows.Forms.Button btnRapport;
+        private System.Windows.Forms.Button button1;
     }
 }
 
