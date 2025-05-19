@@ -37,6 +37,16 @@
             this.label1 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.gbInformationCarriere = new System.Windows.Forms.GroupBox();
+            this.lstAffectationsPassees = new System.Windows.Forms.ListBox();
+            this.lstHabilitations = new System.Windows.Forms.ListBox();
+            this.txtCaserneRattachement = new System.Windows.Forms.TextBox();
+            this.btnMettreaJour = new System.Windows.Forms.Button();
+            this.chbConge = new System.Windows.Forms.CheckBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.BtnPlusInformation = new System.Windows.Forms.Button();
             this.lblEmbauche = new System.Windows.Forms.Label();
             this.lblDateNaissance = new System.Windows.Forms.Label();
             this.rdbVolontaire = new System.Windows.Forms.RadioButton();
@@ -61,28 +71,20 @@
             this.lblMatricule = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.pbGrade = new System.Windows.Forms.PictureBox();
-            this.BtnPlusInformation = new System.Windows.Forms.Button();
-            this.gbInformationCarriere = new System.Windows.Forms.GroupBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
-            this.chbConge = new System.Windows.Forms.CheckBox();
-            this.btnMettreaJour = new System.Windows.Forms.Button();
-            this.txtCaserneRattachement = new System.Windows.Forms.TextBox();
-            this.lstHabilitations = new System.Windows.Forms.ListBox();
-            this.lstAffectationsPassees = new System.Windows.Forms.ListBox();
+            this.btnAjoutPompiers = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
+            this.gbInformationCarriere.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbGrade)).BeginInit();
-            this.gbInformationCarriere.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.DarkRed;
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.btnAjoutPompiers);
             this.panel1.Controls.Add(this.btnQuitter);
             this.panel1.Controls.Add(this.cbPompiers);
             this.panel1.Controls.Add(this.cbCaserne);
@@ -96,9 +98,9 @@
             // 
             // btnQuitter
             // 
-            this.btnQuitter.Location = new System.Drawing.Point(57, 568);
+            this.btnQuitter.Location = new System.Drawing.Point(57, 604);
             this.btnQuitter.Name = "btnQuitter";
-            this.btnQuitter.Size = new System.Drawing.Size(75, 23);
+            this.btnQuitter.Size = new System.Drawing.Size(203, 23);
             this.btnQuitter.TabIndex = 7;
             this.btnQuitter.Text = "Quitter";
             this.btnQuitter.UseVisualStyleBackColor = true;
@@ -179,6 +181,105 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(747, 670);
             this.panel2.TabIndex = 1;
+            // 
+            // gbInformationCarriere
+            // 
+            this.gbInformationCarriere.Controls.Add(this.lstAffectationsPassees);
+            this.gbInformationCarriere.Controls.Add(this.lstHabilitations);
+            this.gbInformationCarriere.Controls.Add(this.txtCaserneRattachement);
+            this.gbInformationCarriere.Controls.Add(this.btnMettreaJour);
+            this.gbInformationCarriere.Controls.Add(this.chbConge);
+            this.gbInformationCarriere.Controls.Add(this.label12);
+            this.gbInformationCarriere.Controls.Add(this.label10);
+            this.gbInformationCarriere.Controls.Add(this.label4);
+            this.gbInformationCarriere.Location = new System.Drawing.Point(60, 400);
+            this.gbInformationCarriere.Name = "gbInformationCarriere";
+            this.gbInformationCarriere.Size = new System.Drawing.Size(593, 252);
+            this.gbInformationCarriere.TabIndex = 23;
+            this.gbInformationCarriere.TabStop = false;
+            this.gbInformationCarriere.Text = "Information Carriere";
+            // 
+            // lstAffectationsPassees
+            // 
+            this.lstAffectationsPassees.FormattingEnabled = true;
+            this.lstAffectationsPassees.ItemHeight = 16;
+            this.lstAffectationsPassees.Location = new System.Drawing.Point(16, 144);
+            this.lstAffectationsPassees.Name = "lstAffectationsPassees";
+            this.lstAffectationsPassees.Size = new System.Drawing.Size(420, 52);
+            this.lstAffectationsPassees.TabIndex = 29;
+            // 
+            // lstHabilitations
+            // 
+            this.lstHabilitations.FormattingEnabled = true;
+            this.lstHabilitations.ItemHeight = 16;
+            this.lstHabilitations.Location = new System.Drawing.Point(16, 75);
+            this.lstHabilitations.Name = "lstHabilitations";
+            this.lstHabilitations.Size = new System.Drawing.Size(420, 52);
+            this.lstHabilitations.TabIndex = 28;
+            // 
+            // txtCaserneRattachement
+            // 
+            this.txtCaserneRattachement.Location = new System.Drawing.Point(191, 24);
+            this.txtCaserneRattachement.Name = "txtCaserneRattachement";
+            this.txtCaserneRattachement.Size = new System.Drawing.Size(195, 22);
+            this.txtCaserneRattachement.TabIndex = 24;
+            this.txtCaserneRattachement.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCaserneRattachement_KeyPress);
+            // 
+            // btnMettreaJour
+            // 
+            this.btnMettreaJour.Location = new System.Drawing.Point(453, 205);
+            this.btnMettreaJour.Name = "btnMettreaJour";
+            this.btnMettreaJour.Size = new System.Drawing.Size(134, 23);
+            this.btnMettreaJour.TabIndex = 24;
+            this.btnMettreaJour.Text = "Mettre à jour";
+            this.btnMettreaJour.UseVisualStyleBackColor = true;
+            // 
+            // chbConge
+            // 
+            this.chbConge.AutoSize = true;
+            this.chbConge.Location = new System.Drawing.Point(16, 205);
+            this.chbConge.Name = "chbConge";
+            this.chbConge.Size = new System.Drawing.Size(86, 20);
+            this.chbConge.TabIndex = 27;
+            this.chbConge.Text = "En congé";
+            this.chbConge.UseVisualStyleBackColor = true;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(13, 125);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(139, 16);
+            this.label12.TabIndex = 26;
+            this.label12.Text = "Affectations Passées :";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(13, 56);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(80, 16);
+            this.label10.TabIndex = 25;
+            this.label10.Text = "Habilitation :";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(13, 30);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(163, 16);
+            this.label4.TabIndex = 24;
+            this.label4.Text = "Caserne de rattachement :";
+            // 
+            // BtnPlusInformation
+            // 
+            this.BtnPlusInformation.Location = new System.Drawing.Point(513, 368);
+            this.BtnPlusInformation.Name = "BtnPlusInformation";
+            this.BtnPlusInformation.Size = new System.Drawing.Size(140, 23);
+            this.BtnPlusInformation.TabIndex = 2;
+            this.BtnPlusInformation.Text = "Plud d\'information";
+            this.BtnPlusInformation.UseVisualStyleBackColor = true;
+            this.BtnPlusInformation.Click += new System.EventHandler(this.BtnPlusInformation_Click);
             // 
             // lblEmbauche
             // 
@@ -406,104 +507,15 @@
             this.pbGrade.TabIndex = 7;
             this.pbGrade.TabStop = false;
             // 
-            // BtnPlusInformation
+            // btnAjoutPompiers
             // 
-            this.BtnPlusInformation.Location = new System.Drawing.Point(513, 368);
-            this.BtnPlusInformation.Name = "BtnPlusInformation";
-            this.BtnPlusInformation.Size = new System.Drawing.Size(140, 23);
-            this.BtnPlusInformation.TabIndex = 2;
-            this.BtnPlusInformation.Text = "Plud d\'information";
-            this.BtnPlusInformation.UseVisualStyleBackColor = true;
-            this.BtnPlusInformation.Click += new System.EventHandler(this.BtnPlusInformation_Click);
-            // 
-            // gbInformationCarriere
-            // 
-            this.gbInformationCarriere.Controls.Add(this.lstAffectationsPassees);
-            this.gbInformationCarriere.Controls.Add(this.lstHabilitations);
-            this.gbInformationCarriere.Controls.Add(this.txtCaserneRattachement);
-            this.gbInformationCarriere.Controls.Add(this.btnMettreaJour);
-            this.gbInformationCarriere.Controls.Add(this.chbConge);
-            this.gbInformationCarriere.Controls.Add(this.label12);
-            this.gbInformationCarriere.Controls.Add(this.label10);
-            this.gbInformationCarriere.Controls.Add(this.label4);
-            this.gbInformationCarriere.Location = new System.Drawing.Point(60, 400);
-            this.gbInformationCarriere.Name = "gbInformationCarriere";
-            this.gbInformationCarriere.Size = new System.Drawing.Size(593, 252);
-            this.gbInformationCarriere.TabIndex = 23;
-            this.gbInformationCarriere.TabStop = false;
-            this.gbInformationCarriere.Text = "Information Carriere";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(13, 30);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(163, 16);
-            this.label4.TabIndex = 24;
-            this.label4.Text = "Caserne de rattachement :";
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(13, 56);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(80, 16);
-            this.label10.TabIndex = 25;
-            this.label10.Text = "Habilitation :";
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(13, 125);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(139, 16);
-            this.label12.TabIndex = 26;
-            this.label12.Text = "Affectations Passées :";
-            // 
-            // chbConge
-            // 
-            this.chbConge.AutoSize = true;
-            this.chbConge.Location = new System.Drawing.Point(16, 205);
-            this.chbConge.Name = "chbConge";
-            this.chbConge.Size = new System.Drawing.Size(86, 20);
-            this.chbConge.TabIndex = 27;
-            this.chbConge.Text = "En congé";
-            this.chbConge.UseVisualStyleBackColor = true;
-            // 
-            // btnMettreaJour
-            // 
-            this.btnMettreaJour.Location = new System.Drawing.Point(453, 205);
-            this.btnMettreaJour.Name = "btnMettreaJour";
-            this.btnMettreaJour.Size = new System.Drawing.Size(134, 23);
-            this.btnMettreaJour.TabIndex = 24;
-            this.btnMettreaJour.Text = "Mettre à jour";
-            this.btnMettreaJour.UseVisualStyleBackColor = true;
-            // 
-            // txtCaserneRattachement
-            // 
-            this.txtCaserneRattachement.Location = new System.Drawing.Point(191, 24);
-            this.txtCaserneRattachement.Name = "txtCaserneRattachement";
-            this.txtCaserneRattachement.Size = new System.Drawing.Size(195, 22);
-            this.txtCaserneRattachement.TabIndex = 24;
-            this.txtCaserneRattachement.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCaserneRattachement_KeyPress);
-            // 
-            // lstHabilitations
-            // 
-            this.lstHabilitations.FormattingEnabled = true;
-            this.lstHabilitations.ItemHeight = 16;
-            this.lstHabilitations.Location = new System.Drawing.Point(16, 75);
-            this.lstHabilitations.Name = "lstHabilitations";
-            this.lstHabilitations.Size = new System.Drawing.Size(420, 52);
-            this.lstHabilitations.TabIndex = 28;
-            // 
-            // lstAffectationsPassees
-            // 
-            this.lstAffectationsPassees.FormattingEnabled = true;
-            this.lstAffectationsPassees.ItemHeight = 16;
-            this.lstAffectationsPassees.Location = new System.Drawing.Point(16, 144);
-            this.lstAffectationsPassees.Name = "lstAffectationsPassees";
-            this.lstAffectationsPassees.Size = new System.Drawing.Size(420, 52);
-            this.lstAffectationsPassees.TabIndex = 29;
+            this.btnAjoutPompiers.Location = new System.Drawing.Point(57, 455);
+            this.btnAjoutPompiers.Name = "btnAjoutPompiers";
+            this.btnAjoutPompiers.Size = new System.Drawing.Size(203, 56);
+            this.btnAjoutPompiers.TabIndex = 8;
+            this.btnAjoutPompiers.Text = "Ajouter Pompiers";
+            this.btnAjoutPompiers.UseVisualStyleBackColor = true;
+            this.btnAjoutPompiers.Click += new System.EventHandler(this.btnAjoutPompiers_Click);
             // 
             // Form2
             // 
@@ -520,11 +532,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            this.gbInformationCarriere.ResumeLayout(false);
+            this.gbInformationCarriere.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbGrade)).EndInit();
-            this.gbInformationCarriere.ResumeLayout(false);
-            this.gbInformationCarriere.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -573,5 +585,6 @@
         private System.Windows.Forms.TextBox txtCaserneRattachement;
         private System.Windows.Forms.ListBox lstHabilitations;
         private System.Windows.Forms.ListBox lstAffectationsPassees;
+        private System.Windows.Forms.Button btnAjoutPompiers;
     }
 }

@@ -375,5 +375,11 @@ WHERE P.matricule = @mat";
         {
             e.Handled = true; // Ignore key press events
         }
+
+        private void btnAjoutPompiers_Click(object sender, EventArgs e)
+        {
+            Form3 formAjout = new Form3();
+            formAjout.ShowDialog();
+        }
     }
 }
