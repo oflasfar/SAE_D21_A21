@@ -56,6 +56,7 @@
             this.dgvEngins = new System.Windows.Forms.DataGridView();
             this.btnRapport = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
+            this.btnMAJ = new System.Windows.Forms.Button();
             this.gbInformationsUsager.SuspendLayout();
             this.gbDecisionRegulateur.SuspendLayout();
             this.gbMobilisation.SuspendLayout();
@@ -307,11 +308,14 @@
             // 
             // dgvPompiers
             // 
+            this.dgvPompiers.AllowUserToAddRows = false;
+            this.dgvPompiers.AllowUserToDeleteRows = false;
             this.dgvPompiers.BackgroundColor = System.Drawing.SystemColors.ActiveBorder;
             this.dgvPompiers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvPompiers.GridColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.dgvPompiers.Location = new System.Drawing.Point(411, 52);
+            this.dgvPompiers.Location = new System.Drawing.Point(429, 52);
             this.dgvPompiers.Name = "dgvPompiers";
+            this.dgvPompiers.ReadOnly = true;
             this.dgvPompiers.RowHeadersWidth = 51;
             this.dgvPompiers.RowTemplate.Height = 24;
             this.dgvPompiers.Size = new System.Drawing.Size(566, 238);
@@ -323,10 +327,12 @@
             this.dgvEngins.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvEngins.Location = new System.Drawing.Point(6, 52);
             this.dgvEngins.Name = "dgvEngins";
+            this.dgvEngins.ReadOnly = true;
             this.dgvEngins.RowHeadersWidth = 51;
             this.dgvEngins.RowTemplate.Height = 24;
-            this.dgvEngins.Size = new System.Drawing.Size(399, 238);
+            this.dgvEngins.Size = new System.Drawing.Size(417, 238);
             this.dgvEngins.TabIndex = 0;
+            this.dgvEngins.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvEngins_CellContentClick);
             this.dgvEngins.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.dgvEngins_KeyPress);
             // 
             // btnRapport
@@ -349,12 +355,23 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // btnMAJ
+            // 
+            this.btnMAJ.Location = new System.Drawing.Point(660, 675);
+            this.btnMAJ.Name = "btnMAJ";
+            this.btnMAJ.Size = new System.Drawing.Size(119, 23);
+            this.btnMAJ.TabIndex = 22;
+            this.btnMAJ.Text = "Mettre à jour";
+            this.btnMAJ.UseVisualStyleBackColor = true;
+            this.btnMAJ.Click += new System.EventHandler(this.btnMAJ_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DarkRed;
             this.ClientSize = new System.Drawing.Size(1174, 738);
+            this.Controls.Add(this.btnMAJ);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.btnRapport);
             this.Controls.Add(this.gbMobilisation);
@@ -410,6 +427,7 @@
         private System.Windows.Forms.DataGridView dgvEngins;
         private System.Windows.Forms.Button btnRapport;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnMAJ;
     }
 }
 

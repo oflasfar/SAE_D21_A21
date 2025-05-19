@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 
 namespace FormCreationMission
 {
@@ -22,6 +23,7 @@ namespace FormCreationMission
 
         private void Form2_Load(object sender, EventArgs e)
         {
+            gbInformationCarriere.Visible = false; // Masquer le groupe d'informations de carrière au départ
             cbGradeNouveau.Visible = false;
             if (Connexion.Connec.State != ConnectionState.Open)
                 Connexion.Connec.Open();
@@ -70,7 +72,8 @@ namespace FormCreationMission
 
         private void btnQuitter_Click(object sender, EventArgs e)
         {
-            Application.Exit();
+            this.Close();
+
         }
 
         private void cbCaserne_SelectedIndexChanged_1(object sender, EventArgs e)
@@ -131,13 +134,12 @@ namespace FormCreationMission
                         Connexion.Connec.Open();
 
                     string sql = @"
-        SELECT P.nom, P.prenom, P.sexe, P.dateNaissance, P.type, 
-               P.portable, P.bip, P.dateEmbauche, P.codeGrade,
-               G.libelle AS gradeLibelle
-        FROM Pompier P
-        LEFT JOIN Grade G ON P.codeGrade = G.code
-        WHERE P.matricule = @mat";
-
+SELECT P.nom, P.prenom, P.sexe, P.dateNaissance, P.type, 
+       P.portable, P.bip, P.dateEmbauche, P.codeGrade,
+       G.libelle AS gradeLibelle
+FROM Pompier P
+LEFT JOIN Grade G ON P.codeGrade = G.code
+WHERE P.matricule = @mat";
 
                     using (var cmd = new SQLiteCommand(sql, Connexion.Connec))
                     {
@@ -158,13 +160,24 @@ namespace FormCreationMission
                                 txtGrade.Text = reader["gradeLibelle"].ToString();
 
                                 string type = reader["type"].ToString().Trim().ToLower();
-
                                 if (type == "p")
                                     rdbProfessionnel.Checked = true;
                                 else if (type == "v")
                                     rdbVolontaire.Checked = true;
+
+                                // ✅ Affichage de l’image du grade
+                                string codeGrade = reader["codeGrade"].ToString();
+                                string imagePath = Path.Combine(@"C:\OMAR\S2\SAE-D21\ImagesGrades", codeGrade + ".png");
+
+                                if (File.Exists(imagePath))
+                                {
+                                    pbGrade.Image = Image.FromFile(imagePath);
+                                    pbGrade.SizeMode = PictureBoxSizeMode.StretchImage;
+                                }
                                 else
-                                    MessageBox.Show("⚠ Type inconnu : " + type);
+                                {
+                                    pbGrade.Image = null;
+                                }
                             }
                         }
                     }
@@ -184,11 +197,25 @@ namespace FormCreationMission
             {
                 if (cbGradeNouveau.Visible)
                 {
-                    // ✅ Déjà visible → on copie juste le texte sélectionné dans le TextBox
+                    // ✅ Déjà visible → on copie le texte + image du grade
                     if (cbGradeNouveau.SelectedItem is DataRowView selectedRow)
                     {
                         string libelleGrade = selectedRow["libelle"].ToString();
+                        string codeGrade = selectedRow["code"].ToString();
+
                         txtGrade.Text = libelleGrade;
+
+                        // ✅ Affichage de l’image correspondant au grade
+                        string imagePath = Path.Combine(@"C:\OMAR\S2\SAE-D21\ImagesGrades", codeGrade + ".png");
+                        if (File.Exists(imagePath))
+                        {
+                            pbGrade.Image = Image.FromFile(imagePath);
+                            pbGrade.SizeMode = PictureBoxSizeMode.StretchImage;
+                        }
+                        else
+                        {
+                            pbGrade.Image = null;
+                        }
                     }
 
                     cbGradeNouveau.Visible = false; // cacher après sélection
@@ -220,6 +247,131 @@ namespace FormCreationMission
         }
 
         private void txtGrade_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true; // Ignore key press events
+        }
+
+        private void BtnPlusInformation_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (!gbInformationCarriere.Visible)
+                {
+                    gbInformationCarriere.Visible = true;
+
+                    if (cbPompiers.SelectedItem is DataRowView row)
+                    {
+                        int matricule = Convert.ToInt32(row["matricule"]);
+
+                        if (Connexion.Connec.State != ConnectionState.Open)
+                            Connexion.Connec.Open();
+
+                        // 🔹 1. Caserne actuelle
+                        string sqlCaserne = @"SELECT C.nom FROM Caserne C JOIN Affectation A ON C.id = A.idCaserne WHERE A.matriculePompier = @mat AND A.dateFin IS NULL";
+
+                        using (var cmd1 = new SQLiteCommand(sqlCaserne, Connexion.Connec))
+                        {
+                            cmd1.Parameters.AddWithValue("@mat", matricule);
+                            var caserne = cmd1.ExecuteScalar();
+                            if (caserne != null)
+                                txtCaserneRattachement.Text = caserne.ToString();
+                        }
+
+                        // 🔹 2. Habilitations du pompier
+                        string sqlHabilitations = @"SELECT H.libelle FROM Habilitation H JOIN Passer P ON H.id = P.idHabilitation WHERE P.matriculePompier = @mat";
+
+                        using (var cmd2 = new SQLiteCommand(sqlHabilitations, Connexion.Connec))
+                        {
+                            cmd2.Parameters.AddWithValue("@mat", matricule);
+                            using (var reader = cmd2.ExecuteReader())
+                            {
+                                lstHabilitations.Items.Clear();
+                                while (reader.Read())
+                                {
+                                    lstHabilitations.Items.Add(reader["libelle"].ToString());
+                                }
+                            }
+                        }
+                        ////////////////////////////////
+                        ///
+
+                        lstAffectationsPassees.Items.Clear();
+
+                        // 🔴 En-tête pour les affectations en cours
+                        lstAffectationsPassees.Items.Add("🟢 Affectations en cours :");
+
+                        string sqlEnCours = @"SELECT A.dateA, C.nom FROM Affectation A JOIN Caserne C ON A.idCaserne = C.id WHERE A.matriculePompier = @mat AND A.dateFin IS NULL ORDER BY A.dateA DESC";
+
+                        using (var cmd1 = new SQLiteCommand(sqlEnCours, Connexion.Connec))
+                        {
+                            cmd1.Parameters.AddWithValue("@mat", matricule);
+
+                            using (var reader = cmd1.ExecuteReader())
+                            {
+                                bool aDesAffectations = false;
+
+                                while (reader.Read())
+                                {
+                                    aDesAffectations = true;
+                                    string dateDebut = reader["dateA"].ToString();
+                                    string nomCaserne = reader["nom"].ToString();
+                                    lstAffectationsPassees.Items.Add($"→ {dateDebut} à aujourd’hui : {nomCaserne}");
+                                }
+
+                                if (!aDesAffectations)
+                                    lstAffectationsPassees.Items.Add("Aucune affectation en cours.");
+                            }
+                        }
+
+                        // 🔵 Séparateur
+                        lstAffectationsPassees.Items.Add("");
+                        lstAffectationsPassees.Items.Add("📘 Affectations passées :");
+
+                        string sqlPassees = @"SELECT A.dateA, A.dateFin, C.nom FROM Affectation A JOIN Caserne C ON A.idCaserne = C.id WHERE A.matriculePompier = @mat AND A.dateFin IS NOT NULL ORDER BY A.dateA DESC";
+
+                        using (var cmd2 = new SQLiteCommand(sqlPassees, Connexion.Connec))
+                        {
+                            cmd2.Parameters.AddWithValue("@mat", matricule);
+
+                            using (var reader = cmd2.ExecuteReader())
+                            {
+                                bool aDesAnciennes = false;
+
+                                while (reader.Read())
+                                {
+                                    aDesAnciennes = true;
+                                    string dateDebut = reader["dateA"].ToString();
+                                    string dateFin = reader["dateFin"].ToString();
+                                    string nomCaserne = reader["nom"].ToString();
+                                    lstAffectationsPassees.Items.Add($"→ {dateDebut} à {dateFin} : {nomCaserne}");
+                                }
+
+                                if (!aDesAnciennes)
+                                    lstAffectationsPassees.Items.Add("Aucune affectation passée.");
+                            }
+                        }
+
+
+                    }
+                }
+                else
+                {
+                    // 🔽 Si déjà visible, on la masque
+                    gbInformationCarriere.Visible = false;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("❌ Erreur lors du chargement des informations supplémentaires : " + ex.Message);
+            }
+        }
+
+        private void txtCaserneRattachement_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true; // Ignore key press events
+        }
+
+        private void txtAffectationsPassees_KeyPress(object sender, KeyPressEventArgs e)
         {
             e.Handled = true; // Ignore key press events
         }

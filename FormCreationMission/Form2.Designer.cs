@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form2));
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnQuitter = new System.Windows.Forms.Button();
             this.cbPompiers = new System.Windows.Forms.ComboBox();
@@ -41,6 +42,7 @@
             this.rdbVolontaire = new System.Windows.Forms.RadioButton();
             this.rdbProfessionnel = new System.Windows.Forms.RadioButton();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.cbGradeNouveau = new System.Windows.Forms.ComboBox();
             this.txtGrade = new System.Windows.Forms.TextBox();
             this.btnChanger = new System.Windows.Forms.Button();
             this.label14 = new System.Windows.Forms.Label();
@@ -59,12 +61,22 @@
             this.lblMatricule = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.pbGrade = new System.Windows.Forms.PictureBox();
-            this.cbGradeNouveau = new System.Windows.Forms.ComboBox();
+            this.BtnPlusInformation = new System.Windows.Forms.Button();
+            this.gbInformationCarriere = new System.Windows.Forms.GroupBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.chbConge = new System.Windows.Forms.CheckBox();
+            this.btnMettreaJour = new System.Windows.Forms.Button();
+            this.txtCaserneRattachement = new System.Windows.Forms.TextBox();
+            this.lstHabilitations = new System.Windows.Forms.ListBox();
+            this.lstAffectationsPassees = new System.Windows.Forms.ListBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbGrade)).BeginInit();
+            this.gbInformationCarriere.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -134,6 +146,8 @@
             // 
             // pictureBox1
             // 
+            this.pictureBox1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.BackgroundImage")));
+            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pictureBox1.Location = new System.Drawing.Point(120, 31);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(83, 79);
@@ -143,6 +157,8 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.gbInformationCarriere);
+            this.panel2.Controls.Add(this.BtnPlusInformation);
             this.panel2.Controls.Add(this.lblEmbauche);
             this.panel2.Controls.Add(this.lblDateNaissance);
             this.panel2.Controls.Add(this.rdbVolontaire);
@@ -167,7 +183,7 @@
             // lblEmbauche
             // 
             this.lblEmbauche.AutoSize = true;
-            this.lblEmbauche.Location = new System.Drawing.Point(207, 327);
+            this.lblEmbauche.Location = new System.Drawing.Point(192, 228);
             this.lblEmbauche.Name = "lblEmbauche";
             this.lblEmbauche.Size = new System.Drawing.Size(51, 16);
             this.lblEmbauche.TabIndex = 22;
@@ -176,7 +192,7 @@
             // lblDateNaissance
             // 
             this.lblDateNaissance.AutoSize = true;
-            this.lblDateNaissance.Location = new System.Drawing.Point(207, 272);
+            this.lblDateNaissance.Location = new System.Drawing.Point(192, 199);
             this.lblDateNaissance.Name = "lblDateNaissance";
             this.lblDateNaissance.Size = new System.Drawing.Size(51, 16);
             this.lblDateNaissance.TabIndex = 21;
@@ -185,7 +201,7 @@
             // rdbVolontaire
             // 
             this.rdbVolontaire.AutoSize = true;
-            this.rdbVolontaire.Location = new System.Drawing.Point(184, 217);
+            this.rdbVolontaire.Location = new System.Drawing.Point(188, 155);
             this.rdbVolontaire.Name = "rdbVolontaire";
             this.rdbVolontaire.Size = new System.Drawing.Size(89, 20);
             this.rdbVolontaire.TabIndex = 20;
@@ -196,7 +212,7 @@
             // rdbProfessionnel
             // 
             this.rdbProfessionnel.AutoSize = true;
-            this.rdbProfessionnel.Location = new System.Drawing.Point(55, 217);
+            this.rdbProfessionnel.Location = new System.Drawing.Point(57, 155);
             this.rdbProfessionnel.Name = "rdbProfessionnel";
             this.rdbProfessionnel.Size = new System.Drawing.Size(110, 20);
             this.rdbProfessionnel.TabIndex = 19;
@@ -214,12 +230,20 @@
             this.groupBox1.Controls.Add(this.lblPortable);
             this.groupBox1.Controls.Add(this.label11);
             this.groupBox1.Controls.Add(this.lblBip);
-            this.groupBox1.Location = new System.Drawing.Point(60, 379);
+            this.groupBox1.Location = new System.Drawing.Point(60, 264);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(593, 98);
             this.groupBox1.TabIndex = 18;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Carriére";
+            // 
+            // cbGradeNouveau
+            // 
+            this.cbGradeNouveau.FormattingEnabled = true;
+            this.cbGradeNouveau.Location = new System.Drawing.Point(236, 35);
+            this.cbGradeNouveau.Name = "cbGradeNouveau";
+            this.cbGradeNouveau.Size = new System.Drawing.Size(150, 24);
+            this.cbGradeNouveau.TabIndex = 23;
             // 
             // txtGrade
             // 
@@ -287,7 +311,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(57, 327);
+            this.label7.Location = new System.Drawing.Point(57, 228);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(120, 16);
             this.label7.TabIndex = 17;
@@ -296,7 +320,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(55, 272);
+            this.label5.Location = new System.Drawing.Point(57, 196);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(129, 16);
             this.label5.TabIndex = 16;
@@ -305,7 +329,7 @@
             // lblSexe
             // 
             this.lblSexe.AutoSize = true;
-            this.lblSexe.Location = new System.Drawing.Point(142, 176);
+            this.lblSexe.Location = new System.Drawing.Point(126, 125);
             this.lblSexe.Name = "lblSexe";
             this.lblSexe.Size = new System.Drawing.Size(51, 16);
             this.lblSexe.TabIndex = 15;
@@ -314,7 +338,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(55, 176);
+            this.label9.Location = new System.Drawing.Point(57, 125);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(44, 16);
             this.label9.TabIndex = 14;
@@ -323,7 +347,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(57, 95);
+            this.label8.Location = new System.Drawing.Point(57, 74);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(42, 16);
             this.label8.TabIndex = 13;
@@ -332,7 +356,7 @@
             // lblNom
             // 
             this.lblNom.AutoSize = true;
-            this.lblNom.Location = new System.Drawing.Point(142, 95);
+            this.lblNom.Location = new System.Drawing.Point(126, 74);
             this.lblNom.Name = "lblNom";
             this.lblNom.Size = new System.Drawing.Size(44, 16);
             this.lblNom.TabIndex = 12;
@@ -341,7 +365,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(57, 135);
+            this.label6.Location = new System.Drawing.Point(57, 100);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(60, 16);
             this.label6.TabIndex = 11;
@@ -350,7 +374,7 @@
             // lblPrenom
             // 
             this.lblPrenom.AutoSize = true;
-            this.lblPrenom.Location = new System.Drawing.Point(142, 135);
+            this.lblPrenom.Location = new System.Drawing.Point(123, 100);
             this.lblPrenom.Name = "lblPrenom";
             this.lblPrenom.Size = new System.Drawing.Size(44, 16);
             this.lblPrenom.TabIndex = 10;
@@ -376,19 +400,110 @@
             // 
             // pbGrade
             // 
-            this.pbGrade.Location = new System.Drawing.Point(557, 85);
+            this.pbGrade.Location = new System.Drawing.Point(557, 64);
             this.pbGrade.Name = "pbGrade";
             this.pbGrade.Size = new System.Drawing.Size(96, 95);
             this.pbGrade.TabIndex = 7;
             this.pbGrade.TabStop = false;
             // 
-            // cbGradeNouveau
+            // BtnPlusInformation
             // 
-            this.cbGradeNouveau.FormattingEnabled = true;
-            this.cbGradeNouveau.Location = new System.Drawing.Point(236, 35);
-            this.cbGradeNouveau.Name = "cbGradeNouveau";
-            this.cbGradeNouveau.Size = new System.Drawing.Size(150, 24);
-            this.cbGradeNouveau.TabIndex = 23;
+            this.BtnPlusInformation.Location = new System.Drawing.Point(513, 368);
+            this.BtnPlusInformation.Name = "BtnPlusInformation";
+            this.BtnPlusInformation.Size = new System.Drawing.Size(140, 23);
+            this.BtnPlusInformation.TabIndex = 2;
+            this.BtnPlusInformation.Text = "Plud d\'information";
+            this.BtnPlusInformation.UseVisualStyleBackColor = true;
+            this.BtnPlusInformation.Click += new System.EventHandler(this.BtnPlusInformation_Click);
+            // 
+            // gbInformationCarriere
+            // 
+            this.gbInformationCarriere.Controls.Add(this.lstAffectationsPassees);
+            this.gbInformationCarriere.Controls.Add(this.lstHabilitations);
+            this.gbInformationCarriere.Controls.Add(this.txtCaserneRattachement);
+            this.gbInformationCarriere.Controls.Add(this.btnMettreaJour);
+            this.gbInformationCarriere.Controls.Add(this.chbConge);
+            this.gbInformationCarriere.Controls.Add(this.label12);
+            this.gbInformationCarriere.Controls.Add(this.label10);
+            this.gbInformationCarriere.Controls.Add(this.label4);
+            this.gbInformationCarriere.Location = new System.Drawing.Point(60, 400);
+            this.gbInformationCarriere.Name = "gbInformationCarriere";
+            this.gbInformationCarriere.Size = new System.Drawing.Size(593, 252);
+            this.gbInformationCarriere.TabIndex = 23;
+            this.gbInformationCarriere.TabStop = false;
+            this.gbInformationCarriere.Text = "Information Carriere";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(13, 30);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(163, 16);
+            this.label4.TabIndex = 24;
+            this.label4.Text = "Caserne de rattachement :";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(13, 56);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(80, 16);
+            this.label10.TabIndex = 25;
+            this.label10.Text = "Habilitation :";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(13, 125);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(139, 16);
+            this.label12.TabIndex = 26;
+            this.label12.Text = "Affectations Passées :";
+            // 
+            // chbConge
+            // 
+            this.chbConge.AutoSize = true;
+            this.chbConge.Location = new System.Drawing.Point(16, 205);
+            this.chbConge.Name = "chbConge";
+            this.chbConge.Size = new System.Drawing.Size(86, 20);
+            this.chbConge.TabIndex = 27;
+            this.chbConge.Text = "En congé";
+            this.chbConge.UseVisualStyleBackColor = true;
+            // 
+            // btnMettreaJour
+            // 
+            this.btnMettreaJour.Location = new System.Drawing.Point(453, 205);
+            this.btnMettreaJour.Name = "btnMettreaJour";
+            this.btnMettreaJour.Size = new System.Drawing.Size(134, 23);
+            this.btnMettreaJour.TabIndex = 24;
+            this.btnMettreaJour.Text = "Mettre à jour";
+            this.btnMettreaJour.UseVisualStyleBackColor = true;
+            // 
+            // txtCaserneRattachement
+            // 
+            this.txtCaserneRattachement.Location = new System.Drawing.Point(191, 24);
+            this.txtCaserneRattachement.Name = "txtCaserneRattachement";
+            this.txtCaserneRattachement.Size = new System.Drawing.Size(195, 22);
+            this.txtCaserneRattachement.TabIndex = 24;
+            this.txtCaserneRattachement.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCaserneRattachement_KeyPress);
+            // 
+            // lstHabilitations
+            // 
+            this.lstHabilitations.FormattingEnabled = true;
+            this.lstHabilitations.ItemHeight = 16;
+            this.lstHabilitations.Location = new System.Drawing.Point(16, 75);
+            this.lstHabilitations.Name = "lstHabilitations";
+            this.lstHabilitations.Size = new System.Drawing.Size(420, 52);
+            this.lstHabilitations.TabIndex = 28;
+            // 
+            // lstAffectationsPassees
+            // 
+            this.lstAffectationsPassees.FormattingEnabled = true;
+            this.lstAffectationsPassees.ItemHeight = 16;
+            this.lstAffectationsPassees.Location = new System.Drawing.Point(16, 144);
+            this.lstAffectationsPassees.Name = "lstAffectationsPassees";
+            this.lstAffectationsPassees.Size = new System.Drawing.Size(420, 52);
+            this.lstAffectationsPassees.TabIndex = 29;
             // 
             // Form2
             // 
@@ -408,6 +523,8 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbGrade)).EndInit();
+            this.gbInformationCarriere.ResumeLayout(false);
+            this.gbInformationCarriere.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -446,5 +563,15 @@
         private System.Windows.Forms.Button btnQuitter;
         private System.Windows.Forms.Label lblEmbauche;
         private System.Windows.Forms.ComboBox cbGradeNouveau;
+        private System.Windows.Forms.Button BtnPlusInformation;
+        private System.Windows.Forms.GroupBox gbInformationCarriere;
+        private System.Windows.Forms.Button btnMettreaJour;
+        private System.Windows.Forms.CheckBox chbConge;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox txtCaserneRattachement;
+        private System.Windows.Forms.ListBox lstHabilitations;
+        private System.Windows.Forms.ListBox lstAffectationsPassees;
     }
 }

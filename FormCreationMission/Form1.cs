@@ -20,7 +20,7 @@ using iTextSharp.text.pdf;
 
 namespace FormCreationMission
 {
-    public partial class Form1: Form
+    public partial class Form1 : Form
     {
         public Form1()
         {
@@ -43,7 +43,10 @@ namespace FormCreationMission
                 SQLiteDataAdapter da = new SQLiteDataAdapter(sql, Connexion.Connec);
                 da.Fill(MesDatas.DsGlobal, ntable);
             }
+
             MessageBox.Show(xx);
+
+
             lblId.Text = (MesDatas.DsGlobal.Tables.Count + 1).ToString();
             lblDateDeclanchee.Text = DateTime.Now.ToString();
             //Premiere comboBox : NatureSinistre
@@ -73,25 +76,25 @@ namespace FormCreationMission
 
         private void gbMobilisation_Enter(object sender, EventArgs e)
         {
-            
+
         }
 
         private bool estEnMission(int matricule)
         {
-            var mobilisations = MesDatas.DsGlobal.Tables["Mobiliser"]
-                .Select($"matriculePompier = {matricule}");
+            DataRow[] mobilisations = MesDatas.DsGlobal.Tables["Mobiliser"].Select("matriculePompier = " + matricule);
 
-            foreach (var mobilisation in mobilisations)
+            foreach (DataRow mobilisation in mobilisations)
             {
                 int idMission = Convert.ToInt32(mobilisation["idMission"]);
 
                 DataRow[] mission = MesDatas.DsGlobal.Tables["Mission"]
-                    .Select($"id = {idMission} AND terminee = 0");
+                    .Select("id = " + idMission + " AND terminee = 0");
 
                 if (mission.Length > 0)
+                {
                     return true;
+                }
             }
-
             return false;
         }
 
@@ -112,7 +115,7 @@ namespace FormCreationMission
             // 1. Récupération des valeurs depuis les ComboBox
             int idNatureSinistre = Convert.ToInt32(cbNatureSinistre.SelectedValue);
             int idCaserne = Convert.ToInt32(cbCaserneImmobiliser.SelectedValue);
-            MessageBox.Show("ID caserne sélectionnée : " + idCaserne);
+
 
             // 2. Recherche des engins nécessaires pour ce type de sinistre
             foreach (DataRow row in MesDatas.DsGlobal.Tables["Necessiter"].Select("idNatureSinistre = " + idNatureSinistre))
@@ -120,10 +123,8 @@ namespace FormCreationMission
                 string type = row["codeTypeEngin"].ToString();
                 int nb = Convert.ToInt32(row["nombre"]);
 
-                var enginsDispoDansCaserne = MesDatas.DsGlobal.Tables["Engin"].Select(
-                    $"codeTypeEngin = '{type}' AND idCaserne = {idCaserne} AND enMission = 0 AND enPanne = 0"
-                );
-
+                // On prend les engins qui sont dispo dans la caserne
+                DataRow[] enginsDispoDansCaserne = MesDatas.DsGlobal.Tables["Engin"].Select("codeTypeEngin = '" + type + "' AND idCaserne = " + idCaserne + " AND enMission = 0 AND enPanne = 0");
                 if (enginsDispoDansCaserne.Length >= nb)
                 {
                     enginsNecessaires.Add((type, nb));
@@ -165,32 +166,49 @@ namespace FormCreationMission
 
             foreach (var (typeEngin, nombre) in enginsNecessaires)
             {
-                var habilitations = MesDatas.DsGlobal.Tables["Embarquer"]
-                    .Select($"codeTypeEngin = '{typeEngin}'")
-                    .Select(row => Convert.ToInt32(row["idHabilitation"]))
-                    .Distinct();
+                List<int> habilitations = new List<int>();
+                DataRow[] rowsEmbarquer = MesDatas.DsGlobal.Tables["Embarquer"].Select(
+                    "codeTypeEngin = '" + typeEngin + "'"
+                );
+
+                foreach (DataRow row in rowsEmbarquer)
+                {
+                    int idHab = Convert.ToInt32(row["idHabilitation"]);
+                    if (!habilitations.Contains(idHab))
+                    {
+                        habilitations.Add(idHab);
+                    }
+                }
+
 
                 List<DataRow> pompiersEligibles = new List<DataRow>();
 
                 foreach (int idHab in habilitations)
                 {
-                    var rowsPasser = MesDatas.DsGlobal.Tables["Passer"]
-                        .Select($"idHabilitation = {idHab}");
+                    DataRow[] rowsPasser = MesDatas.DsGlobal.Tables["Passer"]
+                        .Select("idHabilitation = " + idHab);
 
-                    foreach (var passerRow in rowsPasser)
+                    foreach (DataRow passerRow in rowsPasser)
                     {
                         int matricule = Convert.ToInt32(passerRow["matriculePompier"]);
-                        DataRow pompier = MesDatas.DsGlobal.Tables["Pompier"]
-                            .Select($"matricule = {matricule}")
-                            .FirstOrDefault();
+                        DataRow[] result = MesDatas.DsGlobal.Tables["Pompier"].Select("matricule = " + matricule);
+                        DataRow pompier = null;
+
+                        if (result.Length > 0)
+                        {
+                            pompier = result[0];
+                        }
 
                         if (pompier != null && !estEnMission(matricule) && !estEnConge(pompier))
                         {
                             if (!pompiersEligibles.Contains(pompier))
+                            {
                                 pompiersEligibles.Add(pompier);
+                            }
                         }
                     }
                 }
+
 
                 // Récupérer nombre d’équipiers requis pour cet engin
                 int equipage = 0;
@@ -235,7 +253,7 @@ namespace FormCreationMission
         }
         private void dgvEngins_KeyPress(object sender, KeyPressEventArgs e)
         {
-            e.Handled=true;
+            e.Handled = true;
         }
 
         private void dgvPompiers_KeyPress(object sender, KeyPressEventArgs e)
@@ -243,7 +261,7 @@ namespace FormCreationMission
             e.Handled = true;
         }
 
-        
+
         private void btnRapport_Click(object sender, EventArgs e)
         {
             try
@@ -329,37 +347,6 @@ namespace FormCreationMission
             {
                 MessageBox.Show("Erreur PDF : " + ex.Message);
             }
-
-            try
-            {
-                string sql = "INSERT INTO Mission (id, dateHeureDepart, motifAppel, adresse, cp, ville, terminee, idNatureSinistre, idCaserne) " +
-             "VALUES (@id, @date, @motif, @adresse, @cp, @ville, 0, @nature, @caserne)";
-
-
-                using (var cmd = new SQLiteCommand(sql, Connexion.Connec))
-                {
-                    cmd.Parameters.AddWithValue("@id", Convert.ToInt32(lblId.Text)); // ou ne pas l'inclure si id est AUTOINCREMENT
-                    cmd.Parameters.AddWithValue("@date", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
-                    cmd.Parameters.AddWithValue("@motif", txtMotif.Text);
-                    cmd.Parameters.AddWithValue("@adresse", txtRue.Text);
-                    cmd.Parameters.AddWithValue("@cp", txtCodePostale.Text);
-                    cmd.Parameters.AddWithValue("@ville", txtVille.Text);
-                    cmd.Parameters.AddWithValue("@nature", Convert.ToInt32(cbNatureSinistre.SelectedValue));
-                    cmd.Parameters.AddWithValue("@caserne", Convert.ToInt32(cbCaserneImmobiliser.SelectedValue));
-
-                    
-
-                    int lignes = cmd.ExecuteNonQuery(); // ← SI ERREUR ICI, ELLE SERA ATTRAPÉE
-                    MessageBox.Show("✅ Mission insérée avec succès !");
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("❌ Erreur SQL : " + ex.Message);
-            }
-
-
-
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -367,6 +354,95 @@ namespace FormCreationMission
             Form2 f2 = new Form2();
             f2.ShowDialog();
         }
-    }
-}
 
+        private void dgvEngins_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void btnMAJ_Click(object sender, EventArgs e)
+        {
+            DataTable dtMission = MesDatas.DsGlobal.Tables["Mission"];
+            DataTable dtEngin = MesDatas.DsGlobal.Tables["Engin"];
+            DataTable dtPompier = MesDatas.DsGlobal.Tables["Pompier"];
+
+            DateTime date = DateTime.Now;
+            DataRow nouvelleMission = dtMission.NewRow();
+            nouvelleMission["motifAppel"] = txtMotif.Text;
+            nouvelleMission["adresse"] = txtRue.Text;
+            nouvelleMission["cp"] = txtCodePostale.Text;
+            nouvelleMission["ville"] = txtVille.Text;
+            nouvelleMission["dateHeureDepart"] = date;
+            nouvelleMission["id"] = lblId.Text;
+            nouvelleMission["idCaserne"] = Convert.ToInt32(cbCaserneImmobiliser.SelectedValue);
+            nouvelleMission["idNatureSinistre"] = Convert.ToInt32(cbNatureSinistre.SelectedValue);
+            dtMission.Rows.Add(nouvelleMission);
+
+            //update dataset global
+
+
+            //mettre les pompiers en mission dans le dataset
+            foreach (DataGridViewRow row in dgvPompiers.Rows)
+            {
+                if (row.Cells["Matricule"].Value != null)
+                {
+                    int matricule = Convert.ToInt32(row.Cells["Matricule"].Value);
+                    DataRow[] pompierRow = dtPompier.Select($"matricule = {matricule}");
+                    if (pompierRow.Length > 0)
+                    {
+                        pompierRow[0]["enMission"] = 1;
+                    }
+                }
+            }
+
+            //metre les engins en mission dans le dataset
+            foreach (DataGridViewRow row in dgvEngins.Rows)
+            {
+                if (row.Cells["typeEngin"].Value != null)
+                {
+                    string codeEngin = row.Cells["typeEngin"].Value.ToString();
+                    DataRow[] enginRow = dtEngin.Select($"codeTypeEngin = '{codeEngin}'");
+                    if (enginRow.Length > 0)
+                    {
+                        enginRow[0]["enMission"] = 1;
+                    }
+                }
+            }
+
+            ///
+            // Vider les champs texte
+            txtMotif.Text = "";
+            txtRue.Text = "";
+            txtVille.Text = "";
+            txtCodePostale.Text = "";
+
+            // Réinitialiser les combo box
+            cbNatureSinistre.SelectedIndex = -1;
+            cbCaserneImmobiliser.SelectedIndex = -1;
+
+            // Vider les DataGridView
+            dgvEngins.Rows.Clear();
+            dgvPompiers.Rows.Clear();
+
+            // Réinitialiser l'affichage de la mission suivante
+            int prochainId = 1;
+            if (MesDatas.DsGlobal.Tables["Mission"].Rows.Count > 0)
+            {
+                // On récupère le dernier ID et on incrémente (en mode étudiant)
+                var lastRow = MesDatas.DsGlobal.Tables["Mission"].Rows[MesDatas.DsGlobal.Tables["Mission"].Rows.Count - 1];
+                int lastId = Convert.ToInt32(lastRow["id"]);
+                prochainId = lastId + 1;
+            }
+
+            lblId.Text = prochainId.ToString();
+
+            MesDatas.DsGlobal.AcceptChanges();
+
+            // Message de confirmation
+            MessageBox.Show("✅ Mission enregistrée et formulaire réinitialisé !");
+
+
+        }
+    }
+
+}
