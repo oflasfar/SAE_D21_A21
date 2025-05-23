@@ -48,11 +48,57 @@ namespace FormCreationMission
             {
                 MessageBox.Show("Erreur lors de la génération du matricule : " + ex.Message);
             }
+            //Chercher les bips déjà utilisés
+            string sqlBip = "SELECT bip FROM Pompier";
+            SQLiteCommand cmdBip = new SQLiteCommand(sqlBip, Connexion.Connec);
+            SQLiteDataReader reader = cmdBip.ExecuteReader();
+
+            HashSet<int> bipsUtilises = new HashSet<int>();
+            while (reader.Read())
+            {
+                if (!reader.IsDBNull(0))
+                {
+                    bipsUtilises.Add(reader.GetInt32(0));
+                }
+            }
+            reader.Close();
+
+            //Chercher le plus petit bip libre
+            int bipAttribue = 1;
+            while (bipsUtilises.Contains(bipAttribue))
+            {
+                bipAttribue++;
+            }
+
+            txtBip.Text = bipAttribue.ToString();
+
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             SQLiteTransaction transaction = null;
+            if (string.IsNullOrWhiteSpace(txtNom.Text) ||
+                string.IsNullOrWhiteSpace(txtPrenom.Text) ||
+                string.IsNullOrWhiteSpace(txtPortable.Text) ||
+                string.IsNullOrWhiteSpace(txtBip.Text) ||
+                (!rbM.Checked && !rbF.Checked) ||
+                (!rbPro.Checked && !rbVo.Checked) ||
+                cbGrade.SelectedIndex == -1 ||
+                cbCaserne.SelectedIndex == -1)
+            {
+                MessageBox.Show("❌ Veuillez remplir tous les champs obligatoires.", "Champs manquants", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return; // On bloque ici
+            }
+
+            DateTime naissance = dtpNaissance.Value;
+            int age = DateTime.Now.Year - naissance.Year;
+            if (naissance > DateTime.Now.AddYears(-age)) age--;
+
+            if (age < 19)
+            {
+                MessageBox.Show("❌ Le pompier doit avoir au moins 19 ans.", "Âge insuffisant", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
 
             try
             {
@@ -73,7 +119,7 @@ namespace FormCreationMission
                 cmd.Parameters.AddWithValue("@dateNaissance", dtpNaissance.Value.ToString("yyyy-MM-dd"));
                 cmd.Parameters.AddWithValue("@type", rbPro.Checked ? "p" : "v");
                 cmd.Parameters.AddWithValue("@portable", txtPortable.Text);
-                cmd.Parameters.AddWithValue("@bip", int.Parse(txtBip.Text));
+                cmd.Parameters.AddWithValue("@bip", txtBip.Text);
                 cmd.Parameters.AddWithValue("@codeGrade", cbGrade.SelectedValue.ToString());
                 cmd.Parameters.AddWithValue("@dateEmbauche", DateTime.Now.ToString("yyyy-MM-dd"));
 
@@ -114,6 +160,48 @@ namespace FormCreationMission
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnQuitter_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void txtBip_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;
+        }
+
+        private void rbPro_CheckedChanged(object sender, EventArgs e)
+        {
+            if(rbVo.Checked)
+            {
+                rbVo.Checked = false;
+            }
+        }
+
+        private void rbVo_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rbPro.Checked)
+            {
+                rbPro.Checked = false;
+            }
+        }
+
+        private void rbM_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rbF.Checked)
+            {
+                rbF.Checked = false;
+            }
+        }
+
+        private void rbF_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rbM.Checked)
+            {
+                rbM.Checked = false;
+            }
         }
     }
 }

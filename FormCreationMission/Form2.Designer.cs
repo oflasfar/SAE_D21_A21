@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form2));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnAjoutPompiers = new System.Windows.Forms.Button();
             this.btnQuitter = new System.Windows.Forms.Button();
             this.cbPompiers = new System.Windows.Forms.ComboBox();
             this.cbCaserne = new System.Windows.Forms.ComboBox();
@@ -38,9 +39,9 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.gbInformationCarriere = new System.Windows.Forms.GroupBox();
+            this.cbCaserneRattachement = new System.Windows.Forms.ComboBox();
             this.lstAffectationsPassees = new System.Windows.Forms.ListBox();
             this.lstHabilitations = new System.Windows.Forms.ListBox();
-            this.txtCaserneRattachement = new System.Windows.Forms.TextBox();
             this.btnMettreaJour = new System.Windows.Forms.Button();
             this.chbConge = new System.Windows.Forms.CheckBox();
             this.label12 = new System.Windows.Forms.Label();
@@ -71,7 +72,6 @@
             this.lblMatricule = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.pbGrade = new System.Windows.Forms.PictureBox();
-            this.btnAjoutPompiers = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
@@ -93,8 +93,18 @@
             this.panel1.Controls.Add(this.pictureBox1);
             this.panel1.Location = new System.Drawing.Point(30, 26);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(343, 671);
+            this.panel1.Size = new System.Drawing.Size(343, 709);
             this.panel1.TabIndex = 0;
+            // 
+            // btnAjoutPompiers
+            // 
+            this.btnAjoutPompiers.Location = new System.Drawing.Point(57, 455);
+            this.btnAjoutPompiers.Name = "btnAjoutPompiers";
+            this.btnAjoutPompiers.Size = new System.Drawing.Size(203, 56);
+            this.btnAjoutPompiers.TabIndex = 8;
+            this.btnAjoutPompiers.Text = "Ajouter Pompiers";
+            this.btnAjoutPompiers.UseVisualStyleBackColor = true;
+            this.btnAjoutPompiers.Click += new System.EventHandler(this.btnAjoutPompiers_Click);
             // 
             // btnQuitter
             // 
@@ -179,14 +189,14 @@
             this.panel2.Controls.Add(this.pbGrade);
             this.panel2.Location = new System.Drawing.Point(415, 26);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(747, 670);
+            this.panel2.Size = new System.Drawing.Size(747, 709);
             this.panel2.TabIndex = 1;
             // 
             // gbInformationCarriere
             // 
+            this.gbInformationCarriere.Controls.Add(this.cbCaserneRattachement);
             this.gbInformationCarriere.Controls.Add(this.lstAffectationsPassees);
             this.gbInformationCarriere.Controls.Add(this.lstHabilitations);
-            this.gbInformationCarriere.Controls.Add(this.txtCaserneRattachement);
             this.gbInformationCarriere.Controls.Add(this.btnMettreaJour);
             this.gbInformationCarriere.Controls.Add(this.chbConge);
             this.gbInformationCarriere.Controls.Add(this.label12);
@@ -194,10 +204,19 @@
             this.gbInformationCarriere.Controls.Add(this.label4);
             this.gbInformationCarriere.Location = new System.Drawing.Point(60, 400);
             this.gbInformationCarriere.Name = "gbInformationCarriere";
-            this.gbInformationCarriere.Size = new System.Drawing.Size(593, 252);
+            this.gbInformationCarriere.Size = new System.Drawing.Size(593, 297);
             this.gbInformationCarriere.TabIndex = 23;
             this.gbInformationCarriere.TabStop = false;
             this.gbInformationCarriere.Text = "Information Carriere";
+            // 
+            // cbCaserneRattachement
+            // 
+            this.cbCaserneRattachement.FormattingEnabled = true;
+            this.cbCaserneRattachement.Location = new System.Drawing.Point(182, 27);
+            this.cbCaserneRattachement.Name = "cbCaserneRattachement";
+            this.cbCaserneRattachement.Size = new System.Drawing.Size(254, 24);
+            this.cbCaserneRattachement.TabIndex = 30;
+            this.cbCaserneRattachement.SelectedIndexChanged += new System.EventHandler(this.cbCaserneRattachement_SelectedIndexChanged);
             // 
             // lstAffectationsPassees
             // 
@@ -205,8 +224,9 @@
             this.lstAffectationsPassees.ItemHeight = 16;
             this.lstAffectationsPassees.Location = new System.Drawing.Point(16, 144);
             this.lstAffectationsPassees.Name = "lstAffectationsPassees";
-            this.lstAffectationsPassees.Size = new System.Drawing.Size(420, 52);
+            this.lstAffectationsPassees.Size = new System.Drawing.Size(420, 116);
             this.lstAffectationsPassees.TabIndex = 29;
+            this.lstAffectationsPassees.SelectedIndexChanged += new System.EventHandler(this.lstAffectationsPassees_SelectedIndexChanged);
             // 
             // lstHabilitations
             // 
@@ -216,33 +236,28 @@
             this.lstHabilitations.Name = "lstHabilitations";
             this.lstHabilitations.Size = new System.Drawing.Size(420, 52);
             this.lstHabilitations.TabIndex = 28;
-            // 
-            // txtCaserneRattachement
-            // 
-            this.txtCaserneRattachement.Location = new System.Drawing.Point(191, 24);
-            this.txtCaserneRattachement.Name = "txtCaserneRattachement";
-            this.txtCaserneRattachement.Size = new System.Drawing.Size(195, 22);
-            this.txtCaserneRattachement.TabIndex = 24;
-            this.txtCaserneRattachement.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCaserneRattachement_KeyPress);
+            this.lstHabilitations.SelectedIndexChanged += new System.EventHandler(this.lstHabilitations_SelectedIndexChanged);
             // 
             // btnMettreaJour
             // 
-            this.btnMettreaJour.Location = new System.Drawing.Point(453, 205);
+            this.btnMettreaJour.Location = new System.Drawing.Point(459, 268);
             this.btnMettreaJour.Name = "btnMettreaJour";
             this.btnMettreaJour.Size = new System.Drawing.Size(134, 23);
             this.btnMettreaJour.TabIndex = 24;
             this.btnMettreaJour.Text = "Mettre à jour";
             this.btnMettreaJour.UseVisualStyleBackColor = true;
+            this.btnMettreaJour.Click += new System.EventHandler(this.btnMettreaJour_Click);
             // 
             // chbConge
             // 
             this.chbConge.AutoSize = true;
-            this.chbConge.Location = new System.Drawing.Point(16, 205);
+            this.chbConge.Location = new System.Drawing.Point(16, 271);
             this.chbConge.Name = "chbConge";
             this.chbConge.Size = new System.Drawing.Size(86, 20);
             this.chbConge.TabIndex = 27;
             this.chbConge.Text = "En congé";
             this.chbConge.UseVisualStyleBackColor = true;
+            this.chbConge.CheckedChanged += new System.EventHandler(this.chbConge_CheckedChanged);
             // 
             // label12
             // 
@@ -345,6 +360,7 @@
             this.cbGradeNouveau.Name = "cbGradeNouveau";
             this.cbGradeNouveau.Size = new System.Drawing.Size(150, 24);
             this.cbGradeNouveau.TabIndex = 23;
+            this.cbGradeNouveau.SelectedIndexChanged += new System.EventHandler(this.cbGradeNouveau_SelectedIndexChanged);
             // 
             // txtGrade
             // 
@@ -507,16 +523,6 @@
             this.pbGrade.TabIndex = 7;
             this.pbGrade.TabStop = false;
             // 
-            // btnAjoutPompiers
-            // 
-            this.btnAjoutPompiers.Location = new System.Drawing.Point(57, 455);
-            this.btnAjoutPompiers.Name = "btnAjoutPompiers";
-            this.btnAjoutPompiers.Size = new System.Drawing.Size(203, 56);
-            this.btnAjoutPompiers.TabIndex = 8;
-            this.btnAjoutPompiers.Text = "Ajouter Pompiers";
-            this.btnAjoutPompiers.UseVisualStyleBackColor = true;
-            this.btnAjoutPompiers.Click += new System.EventHandler(this.btnAjoutPompiers_Click);
-            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -582,9 +588,9 @@
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox txtCaserneRattachement;
         private System.Windows.Forms.ListBox lstHabilitations;
         private System.Windows.Forms.ListBox lstAffectationsPassees;
         private System.Windows.Forms.Button btnAjoutPompiers;
+        private System.Windows.Forms.ComboBox cbCaserneRattachement;
     }
 }

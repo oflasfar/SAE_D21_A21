@@ -55,7 +55,6 @@
             this.dgvPompiers = new System.Windows.Forms.DataGridView();
             this.dgvEngins = new System.Windows.Forms.DataGridView();
             this.btnRapport = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
             this.btnMAJ = new System.Windows.Forms.Button();
             this.gbInformationsUsager.SuspendLayout();
             this.gbDecisionRegulateur.SuspendLayout();
@@ -116,38 +115,38 @@
             this.gbInformationsUsager.Controls.Add(this.lblAdresseSinistre);
             this.gbInformationsUsager.Controls.Add(this.lblMotif);
             this.gbInformationsUsager.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.gbInformationsUsager.Location = new System.Drawing.Point(56, 57);
+            this.gbInformationsUsager.Location = new System.Drawing.Point(56, 66);
             this.gbInformationsUsager.Name = "gbInformationsUsager";
-            this.gbInformationsUsager.Size = new System.Drawing.Size(1001, 161);
+            this.gbInformationsUsager.Size = new System.Drawing.Size(1265, 161);
             this.gbInformationsUsager.TabIndex = 4;
             this.gbInformationsUsager.TabStop = false;
             this.gbInformationsUsager.Text = "Informations Usager";
             // 
             // txtMotif
             // 
-            this.txtMotif.Location = new System.Drawing.Point(65, 38);
+            this.txtMotif.Location = new System.Drawing.Point(140, 38);
             this.txtMotif.Multiline = true;
             this.txtMotif.Name = "txtMotif";
-            this.txtMotif.Size = new System.Drawing.Size(219, 101);
+            this.txtMotif.Size = new System.Drawing.Size(312, 101);
             this.txtMotif.TabIndex = 14;
             // 
             // txtVille
             // 
-            this.txtVille.Location = new System.Drawing.Point(451, 117);
+            this.txtVille.Location = new System.Drawing.Point(823, 117);
             this.txtVille.Name = "txtVille";
             this.txtVille.Size = new System.Drawing.Size(182, 22);
             this.txtVille.TabIndex = 13;
             // 
             // txtCodePostale
             // 
-            this.txtCodePostale.Location = new System.Drawing.Point(451, 77);
+            this.txtCodePostale.Location = new System.Drawing.Point(823, 77);
             this.txtCodePostale.Name = "txtCodePostale";
             this.txtCodePostale.Size = new System.Drawing.Size(182, 22);
             this.txtCodePostale.TabIndex = 12;
             // 
             // txtRue
             // 
-            this.txtRue.Location = new System.Drawing.Point(451, 40);
+            this.txtRue.Location = new System.Drawing.Point(823, 40);
             this.txtRue.Name = "txtRue";
             this.txtRue.Size = new System.Drawing.Size(182, 22);
             this.txtRue.TabIndex = 10;
@@ -155,7 +154,7 @@
             // lblVille
             // 
             this.lblVille.AutoSize = true;
-            this.lblVille.Location = new System.Drawing.Point(350, 123);
+            this.lblVille.Location = new System.Drawing.Point(722, 123);
             this.lblVille.Name = "lblVille";
             this.lblVille.Size = new System.Drawing.Size(39, 16);
             this.lblVille.TabIndex = 9;
@@ -164,7 +163,7 @@
             // lblRue
             // 
             this.lblRue.AutoSize = true;
-            this.lblRue.Location = new System.Drawing.Point(350, 46);
+            this.lblRue.Location = new System.Drawing.Point(722, 46);
             this.lblRue.Name = "lblRue";
             this.lblRue.Size = new System.Drawing.Size(38, 16);
             this.lblRue.TabIndex = 8;
@@ -173,7 +172,7 @@
             // lblCodePostale
             // 
             this.lblCodePostale.AutoSize = true;
-            this.lblCodePostale.Location = new System.Drawing.Point(350, 83);
+            this.lblCodePostale.Location = new System.Drawing.Point(722, 83);
             this.lblCodePostale.Name = "lblCodePostale";
             this.lblCodePostale.Size = new System.Drawing.Size(95, 16);
             this.lblCodePostale.TabIndex = 7;
@@ -182,7 +181,7 @@
             // lblAdresseSinistre
             // 
             this.lblAdresseSinistre.AutoSize = true;
-            this.lblAdresseSinistre.Location = new System.Drawing.Point(484, 18);
+            this.lblAdresseSinistre.Location = new System.Drawing.Point(856, 18);
             this.lblAdresseSinistre.Name = "lblAdresseSinistre";
             this.lblAdresseSinistre.Size = new System.Drawing.Size(105, 16);
             this.lblAdresseSinistre.TabIndex = 6;
@@ -206,9 +205,9 @@
             this.gbDecisionRegulateur.Controls.Add(this.label1);
             this.gbDecisionRegulateur.Controls.Add(this.label2);
             this.gbDecisionRegulateur.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.gbDecisionRegulateur.Location = new System.Drawing.Point(56, 235);
+            this.gbDecisionRegulateur.Location = new System.Drawing.Point(56, 251);
             this.gbDecisionRegulateur.Name = "gbDecisionRegulateur";
-            this.gbDecisionRegulateur.Size = new System.Drawing.Size(1001, 96);
+            this.gbDecisionRegulateur.Size = new System.Drawing.Size(1265, 172);
             this.gbDecisionRegulateur.TabIndex = 15;
             this.gbDecisionRegulateur.TabStop = false;
             this.gbDecisionRegulateur.Text = "Décision du regulateur";
@@ -216,7 +215,7 @@
             // btnConstituerEquipe
             // 
             this.btnConstituerEquipe.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.btnConstituerEquipe.Location = new System.Drawing.Point(557, 67);
+            this.btnConstituerEquipe.Location = new System.Drawing.Point(435, 100);
             this.btnConstituerEquipe.Name = "btnConstituerEquipe";
             this.btnConstituerEquipe.Size = new System.Drawing.Size(131, 23);
             this.btnConstituerEquipe.TabIndex = 17;
@@ -236,7 +235,7 @@
             // btnQuitter
             // 
             this.btnQuitter.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.btnQuitter.Location = new System.Drawing.Point(431, 67);
+            this.btnQuitter.Location = new System.Drawing.Point(589, 100);
             this.btnQuitter.Name = "btnQuitter";
             this.btnQuitter.Size = new System.Drawing.Size(120, 23);
             this.btnQuitter.TabIndex = 16;
@@ -278,9 +277,9 @@
             this.gbMobilisation.Controls.Add(this.dgvPompiers);
             this.gbMobilisation.Controls.Add(this.dgvEngins);
             this.gbMobilisation.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.gbMobilisation.Location = new System.Drawing.Point(56, 348);
+            this.gbMobilisation.Location = new System.Drawing.Point(56, 453);
             this.gbMobilisation.Name = "gbMobilisation";
-            this.gbMobilisation.Size = new System.Drawing.Size(1001, 321);
+            this.gbMobilisation.Size = new System.Drawing.Size(1265, 290);
             this.gbMobilisation.TabIndex = 16;
             this.gbMobilisation.TabStop = false;
             this.gbMobilisation.Text = "Mobilisation des engins et des pompiers";
@@ -300,7 +299,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label5.Location = new System.Drawing.Point(627, 33);
+            this.label5.Location = new System.Drawing.Point(707, 33);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(126, 16);
             this.label5.TabIndex = 18;
@@ -313,53 +312,43 @@
             this.dgvPompiers.BackgroundColor = System.Drawing.SystemColors.ActiveBorder;
             this.dgvPompiers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvPompiers.GridColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.dgvPompiers.Location = new System.Drawing.Point(429, 52);
+            this.dgvPompiers.Location = new System.Drawing.Point(639, 63);
             this.dgvPompiers.Name = "dgvPompiers";
             this.dgvPompiers.ReadOnly = true;
             this.dgvPompiers.RowHeadersWidth = 51;
             this.dgvPompiers.RowTemplate.Height = 24;
-            this.dgvPompiers.Size = new System.Drawing.Size(566, 238);
+            this.dgvPompiers.Size = new System.Drawing.Size(580, 193);
             this.dgvPompiers.TabIndex = 1;
             this.dgvPompiers.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.dgvPompiers_KeyPress);
             // 
             // dgvEngins
             // 
             this.dgvEngins.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvEngins.Location = new System.Drawing.Point(6, 52);
+            this.dgvEngins.Location = new System.Drawing.Point(9, 63);
             this.dgvEngins.Name = "dgvEngins";
             this.dgvEngins.ReadOnly = true;
             this.dgvEngins.RowHeadersWidth = 51;
             this.dgvEngins.RowTemplate.Height = 24;
-            this.dgvEngins.Size = new System.Drawing.Size(417, 238);
+            this.dgvEngins.Size = new System.Drawing.Size(600, 193);
             this.dgvEngins.TabIndex = 0;
             this.dgvEngins.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvEngins_CellContentClick);
             this.dgvEngins.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.dgvEngins_KeyPress);
             // 
             // btnRapport
             // 
-            this.btnRapport.Location = new System.Drawing.Point(944, 675);
+            this.btnRapport.Location = new System.Drawing.Point(756, 759);
             this.btnRapport.Name = "btnRapport";
-            this.btnRapport.Size = new System.Drawing.Size(113, 26);
+            this.btnRapport.Size = new System.Drawing.Size(160, 62);
             this.btnRapport.TabIndex = 20;
             this.btnRapport.Text = "Rapport";
             this.btnRapport.UseVisualStyleBackColor = true;
             this.btnRapport.Click += new System.EventHandler(this.btnRapport_Click);
             // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(803, 677);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(119, 23);
-            this.button1.TabIndex = 21;
-            this.button1.Text = "Personnelle";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
             // btnMAJ
             // 
-            this.btnMAJ.Location = new System.Drawing.Point(660, 675);
+            this.btnMAJ.Location = new System.Drawing.Point(962, 749);
             this.btnMAJ.Name = "btnMAJ";
-            this.btnMAJ.Size = new System.Drawing.Size(119, 23);
+            this.btnMAJ.Size = new System.Drawing.Size(157, 62);
             this.btnMAJ.TabIndex = 22;
             this.btnMAJ.Text = "Mettre à jour";
             this.btnMAJ.UseVisualStyleBackColor = true;
@@ -370,9 +359,8 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DarkRed;
-            this.ClientSize = new System.Drawing.Size(1174, 738);
+            this.ClientSize = new System.Drawing.Size(1331, 756);
             this.Controls.Add(this.btnMAJ);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.btnRapport);
             this.Controls.Add(this.gbMobilisation);
             this.Controls.Add(this.gbDecisionRegulateur);
@@ -426,7 +414,6 @@
         private System.Windows.Forms.DataGridView dgvPompiers;
         private System.Windows.Forms.DataGridView dgvEngins;
         private System.Windows.Forms.Button btnRapport;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button btnMAJ;
     }
 }

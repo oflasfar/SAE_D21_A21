@@ -79,3 +79,11 @@ C:\OMAR\S2\SAE-D21\FormCreationMission\bin\Debug\BouncyCastle.Cryptography.xml
 C:\OMAR\S2\SAE-D21\FormCreationMission\bin\Debug\itextsharp.xml
 C:\OMAR\S2\SAE-D21\FormCreationMission\obj\Debug\FormCreationMission.Form2.resources
 C:\OMAR\S2\SAE-D21\FormCreationMission\obj\Debug\FormCreationMission.Form3.resources
+C:\OMAR\S2\SAE-D21\FormCreationMission\bin\Debug\UCMenue.dll
+C:\OMAR\S2\SAE-D21\FormCreationMission\bin\Debug\UCRecapitulMission.dll
+C:\OMAR\S2\SAE-D21\FormCreationMission\bin\Debug\UCMenue.pdb
+C:\OMAR\S2\SAE-D21\FormCreationMission\bin\Debug\UCRecapitulMission.pdb
+C:\OMAR\S2\SAE-D21\FormCreationMission\obj\Debug\FormCreationMission.Form4.resources
+C:\OMAR\S2\SAE-D21\FormCreationMission\obj\Debug\FormCreationMission.UCCreerMission.resources
+C:\OMAR\S2\SAE-D21\FormCreationMission\obj\Debug\FormCreationMission.UCPersonnel.resources
+C:\OMAR\S2\SAE-D21\FormCreationMission\obj\Debug\FormCreationMission.FormConn.resources
