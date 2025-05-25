@@ -121,12 +121,12 @@
             this.dgvPompiers.BackgroundColor = System.Drawing.SystemColors.ActiveBorder;
             this.dgvPompiers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvPompiers.GridColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.dgvPompiers.Location = new System.Drawing.Point(642, 61);
+            this.dgvPompiers.Location = new System.Drawing.Point(642, 63);
             this.dgvPompiers.Name = "dgvPompiers";
             this.dgvPompiers.ReadOnly = true;
             this.dgvPompiers.RowHeadersWidth = 51;
             this.dgvPompiers.RowTemplate.Height = 24;
-            this.dgvPompiers.Size = new System.Drawing.Size(560, 213);
+            this.dgvPompiers.Size = new System.Drawing.Size(608, 211);
             this.dgvPompiers.TabIndex = 1;
             // 
             // dgvEngins
@@ -137,7 +137,7 @@
             this.dgvEngins.ReadOnly = true;
             this.dgvEngins.RowHeadersWidth = 51;
             this.dgvEngins.RowTemplate.Height = 24;
-            this.dgvEngins.Size = new System.Drawing.Size(600, 211);
+            this.dgvEngins.Size = new System.Drawing.Size(625, 211);
             this.dgvEngins.TabIndex = 0;
             // 
             // label1
