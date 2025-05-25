@@ -13,6 +13,7 @@ using iTextSharp.text;
 using iTextSharp.text.pdf;
 using static System.Net.Mime.MediaTypeNames;
 using System.Data.SQLite;
+using SAEPageMission;
 
 namespace UCRecapitulMission
 {
@@ -30,7 +31,7 @@ namespace UCRecapitulMission
         {
             
             InitializeComponent();
-            lblId.Text = "ID Mission : " + id.ToString();
+            lblID2.Text =id.ToString();
             foreach (DataRow row in dsi.Tables["Mission"].Rows)
             {
                 if (id == Convert.ToInt32(row["id"]))
@@ -56,13 +57,14 @@ namespace UCRecapitulMission
             }
             this.cx = cxi;
             this.ds = dsi;
-
         }
 
         private void UserControl1_Load(object sender, EventArgs e)
         {
 
         }
+
+
         private void btnCloturer_Click(object sender, EventArgs e)
         {
             if (!string.IsNullOrWhiteSpace(this.dateRetour))
@@ -80,58 +82,105 @@ namespace UCRecapitulMission
 
             try
             {
-                // 1. Extraire ID
-                string[] parts = lblId.Text.Split(':');
-                string idStr = parts.Length > 1 ? parts[1].Trim() : "";
-                if (!int.TryParse(idStr, out int id))
+                // 🔹 Récupérer l’ID directement depuis lblID2
+                if (!int.TryParse(lblID2.Text.Trim(), out int id))
                 {
-                    MessageBox.Show("❌ ID invalide.");
+                    MessageBox.Show("❌ L'ID de mission est invalide.");
                     return;
                 }
 
-                // 2. Générer l’heure actuelle
+                MessageBox.Show("ID de mission : " + id);
+
                 string dateHeureActuelle = DateTime.Now.ToString("yyyy-MM-dd HH:mm");
 
-                // 3. Faire l’UPDATE direct dans la base
-                string sql = "UPDATE Mission SET dateHeureRetour = @retour WHERE id = @id";
-                using (SQLiteCommand cmd = new SQLiteCommand(sql, this.cx))
+                // 🔹 Mettre à jour dans le DataSet
+                DataTable dt = this.ds.Tables["Mission"];
+                DataRow[] rows = dt.Select($"id = {id}");
+                if (rows.Length == 0)
                 {
-                    if (this.cx.State != ConnectionState.Open)
-                        this.cx.Open();
+                    MessageBox.Show("❌ Mission non trouvée dans le DataSet.");
+                    return;
+                }
 
-                    cmd.Parameters.AddWithValue("@retour", dateHeureActuelle);
-                    cmd.Parameters.AddWithValue("@id", id);
+                DataRow mission = rows[0];
+                mission["dateHeureRetour"] = dateHeureActuelle;
+                mission["terminee"] = 1;
+                this.dateRetour = dateHeureActuelle;
 
-                    int lignes = cmd.ExecuteNonQuery();
-                    if (lignes > 0)
+                // 🔹 Vérifier si la mission est dans la base
+                string sqlCheck = "SELECT COUNT(*) FROM Mission";
+                using (var checkCmd = new SQLiteCommand(sqlCheck, Connexion.Connec))
+                {
+                    if (Connexion.Connec.State != ConnectionState.Open)
+                        Connexion.Connec.Open();
+
+                    
+                    int count = Convert.ToInt32(checkCmd.ExecuteScalar());
+                    
+                    if (count > id)
                     {
-                        this.dateRetour = dateHeureActuelle;
-                        MessageBox.Show("✅ Mission clôturée avec succès !");
+                        MessageBox.Show("count : "+count+"//id : "+id);
+                        MessageBox.Show("✅ update");
+                        // 🔁 UPDATE
+                        string sqlUpdate = @"UPDATE Mission SET 
+                    motifAppel = @motif,
+                    adresse = @adresse,
+                    cp = @cp,
+                    ville = @ville,
+                    dateHeureDepart = @depart,
+                    dateHeureRetour = @retour,
+                    idCaserne = @caserne,
+                    idNatureSinistre = @nature,
+                    terminee = @terminee
+                    WHERE id = @id";
+
+                        using (var cmd = new SQLiteCommand(sqlUpdate, Connexion.Connec))
+                        {
+                            cmd.Parameters.AddWithValue("@id", mission["id"]);
+                            cmd.Parameters.AddWithValue("@motif", mission["motifAppel"]);
+                            cmd.Parameters.AddWithValue("@adresse", mission["adresse"]);
+                            cmd.Parameters.AddWithValue("@cp", mission["cp"]);
+                            cmd.Parameters.AddWithValue("@ville", mission["ville"]);
+                            cmd.Parameters.AddWithValue("@depart", mission["dateHeureDepart"]);
+                            cmd.Parameters.AddWithValue("@retour", mission["dateHeureRetour"]);
+                            cmd.Parameters.AddWithValue("@caserne", mission["idCaserne"]);
+                            cmd.Parameters.AddWithValue("@nature", mission["idNatureSinistre"]);
+                            cmd.Parameters.AddWithValue("@terminee", 1);
+                            cmd.ExecuteNonQuery();
+                        }
                     }
                     else
                     {
-                        MessageBox.Show("❌ Aucune ligne affectée. Vérifie l’ID.");
+                        MessageBox.Show("✅ insert");
+                        // 🆕 INSERT
+                        string sqlInsert = @"INSERT INTO Mission 
+                    (id, motifAppel, adresse, cp, ville, dateHeureDepart, dateHeureRetour, idCaserne, idNatureSinistre, terminee) 
+                    VALUES (@id, @motif, @adresse, @cp, @ville, @depart, @retour, @caserne, @nature, @terminee)";
+
+                        using (var cmd = new SQLiteCommand(sqlInsert, Connexion.Connec))
+                        {
+                            cmd.Parameters.AddWithValue("@id", id);
+                            cmd.Parameters.AddWithValue("@motif", mission["motifAppel"]);
+                            cmd.Parameters.AddWithValue("@adresse", mission["adresse"]);
+                            cmd.Parameters.AddWithValue("@cp", mission["cp"]);
+                            cmd.Parameters.AddWithValue("@ville", mission["ville"]);
+                            cmd.Parameters.AddWithValue("@depart", mission["dateHeureDepart"]);
+                            cmd.Parameters.AddWithValue("@retour", mission["dateHeureRetour"]);
+                            cmd.Parameters.AddWithValue("@caserne", mission["idCaserne"]);
+                            cmd.Parameters.AddWithValue("@nature", mission["idNatureSinistre"]);
+                            cmd.Parameters.AddWithValue("@terminee", 1);
+                            cmd.ExecuteNonQuery();
+                        }
                     }
                 }
 
-                // 4. Met à jour aussi dans le DataSet si tu veux rester synchro
-                DataTable dt = this.ds.Tables["Mission"];
-                DataRow[] rows = dt.Select($"id = {id}");
-                if (rows.Length > 0)
-                {
-                    rows[0]["dateHeureRetour"] = dateHeureActuelle;
-                    dt.AcceptChanges(); // pas indispensable ici
-                }
+                MessageBox.Show("✅ Mission clôturée et bien enregistrée dans la base !");
             }
             catch (Exception ex)
             {
-                MessageBox.Show("❌ Erreur SQL :\n" + ex.Message, "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("❌ Erreur lors de la clôture ou l'ajout :\n" + ex.Message, "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
-
-
-
 
 
 
@@ -311,6 +360,11 @@ namespace UCRecapitulMission
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void lblId_Click(object sender, EventArgs e)
         {
 
         }

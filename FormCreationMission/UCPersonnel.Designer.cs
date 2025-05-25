@@ -39,13 +39,13 @@
             this.label12 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.BtnPlusInformation = new System.Windows.Forms.Button();
             this.lblEmbauche = new System.Windows.Forms.Label();
             this.lblDateNaissance = new System.Windows.Forms.Label();
             this.rdbVolontaire = new System.Windows.Forms.RadioButton();
             this.rdbProfessionnel = new System.Windows.Forms.RadioButton();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.cbGradeNouveau = new System.Windows.Forms.ComboBox();
+            this.BtnPlusInformation = new System.Windows.Forms.Button();
             this.txtGrade = new System.Windows.Forms.TextBox();
             this.btnChanger = new System.Windows.Forms.Button();
             this.label14 = new System.Windows.Forms.Label();
@@ -195,17 +195,6 @@
             this.label4.TabIndex = 24;
             this.label4.Text = "Caserne de rattachement :";
             // 
-            // BtnPlusInformation
-            // 
-            this.BtnPlusInformation.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnPlusInformation.Location = new System.Drawing.Point(559, 97);
-            this.BtnPlusInformation.Name = "BtnPlusInformation";
-            this.BtnPlusInformation.Size = new System.Drawing.Size(184, 39);
-            this.BtnPlusInformation.TabIndex = 2;
-            this.BtnPlusInformation.Text = "Plud d\'information";
-            this.BtnPlusInformation.UseVisualStyleBackColor = true;
-            this.BtnPlusInformation.Click += new System.EventHandler(this.BtnPlusInformation_Click_1);
-            // 
             // lblEmbauche
             // 
             this.lblEmbauche.AutoSize = true;
@@ -277,6 +266,17 @@
             this.cbGradeNouveau.Size = new System.Drawing.Size(203, 33);
             this.cbGradeNouveau.TabIndex = 23;
             this.cbGradeNouveau.SelectedIndexChanged += new System.EventHandler(this.cbGradeNouveau_SelectedIndexChanged);
+            // 
+            // BtnPlusInformation
+            // 
+            this.BtnPlusInformation.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnPlusInformation.Location = new System.Drawing.Point(328, 97);
+            this.BtnPlusInformation.Name = "BtnPlusInformation";
+            this.BtnPlusInformation.Size = new System.Drawing.Size(415, 39);
+            this.BtnPlusInformation.TabIndex = 2;
+            this.BtnPlusInformation.Text = "Plud d\'information";
+            this.BtnPlusInformation.UseVisualStyleBackColor = true;
+            this.BtnPlusInformation.Click += new System.EventHandler(this.BtnPlusInformation_Click_1);
             // 
             // txtGrade
             // 
@@ -492,7 +492,7 @@
             this.cbPompiers.FormattingEnabled = true;
             this.cbPompiers.Location = new System.Drawing.Point(17, 340);
             this.cbPompiers.Name = "cbPompiers";
-            this.cbPompiers.Size = new System.Drawing.Size(299, 33);
+            this.cbPompiers.Size = new System.Drawing.Size(310, 33);
             this.cbPompiers.TabIndex = 6;
             this.cbPompiers.SelectedIndexChanged += new System.EventHandler(this.cbPompiers_SelectedIndexChanged_1);
             // 

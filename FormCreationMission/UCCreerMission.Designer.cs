@@ -68,7 +68,7 @@
             this.cbNatureSinistre.FormattingEnabled = true;
             this.cbNatureSinistre.Location = new System.Drawing.Point(237, 27);
             this.cbNatureSinistre.Name = "cbNatureSinistre";
-            this.cbNatureSinistre.Size = new System.Drawing.Size(265, 33);
+            this.cbNatureSinistre.Size = new System.Drawing.Size(421, 33);
             this.cbNatureSinistre.TabIndex = 18;
             // 
             // label2
@@ -88,9 +88,9 @@
             this.gbMobilisation.Controls.Add(this.dgvEngins);
             this.gbMobilisation.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gbMobilisation.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.gbMobilisation.Location = new System.Drawing.Point(83, 474);
+            this.gbMobilisation.Location = new System.Drawing.Point(87, 429);
             this.gbMobilisation.Name = "gbMobilisation";
-            this.gbMobilisation.Size = new System.Drawing.Size(1265, 290);
+            this.gbMobilisation.Size = new System.Drawing.Size(1265, 300);
             this.gbMobilisation.TabIndex = 29;
             this.gbMobilisation.TabStop = false;
             this.gbMobilisation.Text = "Mobilisation des engins et des pompiers";
@@ -121,23 +121,23 @@
             this.dgvPompiers.BackgroundColor = System.Drawing.SystemColors.ActiveBorder;
             this.dgvPompiers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvPompiers.GridColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.dgvPompiers.Location = new System.Drawing.Point(642, 81);
+            this.dgvPompiers.Location = new System.Drawing.Point(642, 61);
             this.dgvPompiers.Name = "dgvPompiers";
             this.dgvPompiers.ReadOnly = true;
             this.dgvPompiers.RowHeadersWidth = 51;
             this.dgvPompiers.RowTemplate.Height = 24;
-            this.dgvPompiers.Size = new System.Drawing.Size(580, 193);
+            this.dgvPompiers.Size = new System.Drawing.Size(560, 213);
             this.dgvPompiers.TabIndex = 1;
             // 
             // dgvEngins
             // 
             this.dgvEngins.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvEngins.Location = new System.Drawing.Point(11, 81);
+            this.dgvEngins.Location = new System.Drawing.Point(11, 63);
             this.dgvEngins.Name = "dgvEngins";
             this.dgvEngins.ReadOnly = true;
             this.dgvEngins.RowHeadersWidth = 51;
             this.dgvEngins.RowTemplate.Height = 24;
-            this.dgvEngins.Size = new System.Drawing.Size(600, 193);
+            this.dgvEngins.Size = new System.Drawing.Size(600, 211);
             this.dgvEngins.TabIndex = 0;
             // 
             // label1
@@ -151,31 +151,31 @@
             // 
             // txtMotif
             // 
-            this.txtMotif.Location = new System.Drawing.Point(140, 38);
+            this.txtMotif.Location = new System.Drawing.Point(89, 38);
             this.txtMotif.Multiline = true;
             this.txtMotif.Name = "txtMotif";
-            this.txtMotif.Size = new System.Drawing.Size(393, 101);
+            this.txtMotif.Size = new System.Drawing.Size(444, 101);
             this.txtMotif.TabIndex = 14;
             // 
             // txtVille
             // 
             this.txtVille.Location = new System.Drawing.Point(823, 117);
             this.txtVille.Name = "txtVille";
-            this.txtVille.Size = new System.Drawing.Size(283, 30);
+            this.txtVille.Size = new System.Drawing.Size(379, 30);
             this.txtVille.TabIndex = 13;
             // 
             // txtCodePostale
             // 
             this.txtCodePostale.Location = new System.Drawing.Point(823, 77);
             this.txtCodePostale.Name = "txtCodePostale";
-            this.txtCodePostale.Size = new System.Drawing.Size(283, 30);
+            this.txtCodePostale.Size = new System.Drawing.Size(379, 30);
             this.txtCodePostale.TabIndex = 12;
             // 
             // txtRue
             // 
             this.txtRue.Location = new System.Drawing.Point(823, 40);
             this.txtRue.Name = "txtRue";
-            this.txtRue.Size = new System.Drawing.Size(283, 30);
+            this.txtRue.Size = new System.Drawing.Size(379, 30);
             this.txtRue.TabIndex = 10;
             // 
             // lblVille
@@ -217,7 +217,7 @@
             // btnMAJ
             // 
             this.btnMAJ.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnMAJ.Location = new System.Drawing.Point(1191, 770);
+            this.btnMAJ.Location = new System.Drawing.Point(1195, 735);
             this.btnMAJ.Name = "btnMAJ";
             this.btnMAJ.Size = new System.Drawing.Size(157, 62);
             this.btnMAJ.TabIndex = 31;
@@ -237,9 +237,9 @@
             // btnConstituerEquipe
             // 
             this.btnConstituerEquipe.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.btnConstituerEquipe.Location = new System.Drawing.Point(996, 107);
+            this.btnConstituerEquipe.Location = new System.Drawing.Point(911, 107);
             this.btnConstituerEquipe.Name = "btnConstituerEquipe";
-            this.btnConstituerEquipe.Size = new System.Drawing.Size(168, 32);
+            this.btnConstituerEquipe.Size = new System.Drawing.Size(291, 32);
             this.btnConstituerEquipe.TabIndex = 17;
             this.btnConstituerEquipe.Text = "Constituer Equipe";
             this.btnConstituerEquipe.UseVisualStyleBackColor = true;
@@ -250,13 +250,13 @@
             this.cbCaserneImmobiliser.FormattingEnabled = true;
             this.cbCaserneImmobiliser.Location = new System.Drawing.Point(911, 27);
             this.cbCaserneImmobiliser.Name = "cbCaserneImmobiliser";
-            this.cbCaserneImmobiliser.Size = new System.Drawing.Size(253, 33);
+            this.cbCaserneImmobiliser.Size = new System.Drawing.Size(291, 33);
             this.cbCaserneImmobiliser.TabIndex = 19;
             // 
             // btnRapport
             // 
             this.btnRapport.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRapport.Location = new System.Drawing.Point(1012, 770);
+            this.btnRapport.Location = new System.Drawing.Point(1015, 735);
             this.btnRapport.Name = "btnRapport";
             this.btnRapport.Size = new System.Drawing.Size(160, 62);
             this.btnRapport.TabIndex = 30;
@@ -274,7 +274,7 @@
             this.gbDecisionRegulateur.Controls.Add(this.label2);
             this.gbDecisionRegulateur.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gbDecisionRegulateur.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.gbDecisionRegulateur.Location = new System.Drawing.Point(83, 272);
+            this.gbDecisionRegulateur.Location = new System.Drawing.Point(87, 237);
             this.gbDecisionRegulateur.Name = "gbDecisionRegulateur";
             this.gbDecisionRegulateur.Size = new System.Drawing.Size(1265, 172);
             this.gbDecisionRegulateur.TabIndex = 28;
@@ -284,7 +284,7 @@
             // btnQuitter
             // 
             this.btnQuitter.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.btnQuitter.Location = new System.Drawing.Point(823, 107);
+            this.btnQuitter.Location = new System.Drawing.Point(524, 107);
             this.btnQuitter.Name = "btnQuitter";
             this.btnQuitter.Size = new System.Drawing.Size(134, 32);
             this.btnQuitter.TabIndex = 16;
@@ -304,7 +304,7 @@
             this.gbInformationsUsager.Controls.Add(this.lblMotif);
             this.gbInformationsUsager.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gbInformationsUsager.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.gbInformationsUsager.Location = new System.Drawing.Point(83, 87);
+            this.gbInformationsUsager.Location = new System.Drawing.Point(87, 52);
             this.gbInformationsUsager.Name = "gbInformationsUsager";
             this.gbInformationsUsager.Size = new System.Drawing.Size(1265, 161);
             this.gbInformationsUsager.TabIndex = 27;
@@ -316,7 +316,7 @@
             this.lblDateDeclanchee.AutoSize = true;
             this.lblDateDeclanchee.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblDateDeclanchee.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.lblDateDeclanchee.Location = new System.Drawing.Point(757, 48);
+            this.lblDateDeclanchee.Location = new System.Drawing.Point(761, 13);
             this.lblDateDeclanchee.Name = "lblDateDeclanchee";
             this.lblDateDeclanchee.Size = new System.Drawing.Size(64, 25);
             this.lblDateDeclanchee.TabIndex = 26;
@@ -327,7 +327,7 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label3.Location = new System.Drawing.Point(589, 48);
+            this.label3.Location = new System.Drawing.Point(593, 13);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(152, 25);
             this.label3.TabIndex = 25;
@@ -338,18 +338,19 @@
             this.lblId.AutoSize = true;
             this.lblId.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblId.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.lblId.Location = new System.Drawing.Point(255, 48);
+            this.lblId.Location = new System.Drawing.Point(259, 13);
             this.lblId.Name = "lblId";
             this.lblId.Size = new System.Drawing.Size(64, 25);
             this.lblId.TabIndex = 24;
             this.lblId.Text = "label2";
+            this.lblId.Click += new System.EventHandler(this.lblId_Click);
             // 
             // lblIdMission
             // 
             this.lblIdMission.AutoSize = true;
             this.lblIdMission.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblIdMission.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.lblIdMission.Location = new System.Drawing.Point(138, 48);
+            this.lblIdMission.Location = new System.Drawing.Point(142, 13);
             this.lblIdMission.Name = "lblIdMission";
             this.lblIdMission.Size = new System.Drawing.Size(111, 25);
             this.lblIdMission.TabIndex = 23;

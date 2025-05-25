@@ -3,32 +3,26 @@
   "WorkspaceRootPath": "C:\\OMAR\\S2\\SAE-D21\\FormCreationMission\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{8A63E9D9-5BF8-4633-963C-F87589628EF1}|FormCreationMission.csproj|C:\\OMAR\\S2\\SAE-D21\\FormCreationMission\\ucpersonnel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8A63E9D9-5BF8-4633-963C-F87589628EF1}|FormCreationMission.csproj|solutionrelative:ucpersonnel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{8A63E9D9-5BF8-4633-963C-F87589628EF1}|FormCreationMission.csproj|c:\\omar\\s2\\sae-d21\\formcreationmission\\connexion.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8A63E9D9-5BF8-4633-963C-F87589628EF1}|FormCreationMission.csproj|solutionrelative:connexion.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8A63E9D9-5BF8-4633-963C-F87589628EF1}|FormCreationMission.csproj|C:\\OMAR\\S2\\SAE-D21\\FormCreationMission\\ucpersonnel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{8A63E9D9-5BF8-4633-963C-F87589628EF1}|FormCreationMission.csproj|solutionrelative:ucpersonnel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{8A63E9D9-5BF8-4633-963C-F87589628EF1}|FormCreationMission.csproj|C:\\OMAR\\S2\\SAE-D21\\FormCreationMission\\uccreermission.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8A63E9D9-5BF8-4633-963C-F87589628EF1}|FormCreationMission.csproj|solutionrelative:uccreermission.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8A63E9D9-5BF8-4633-963C-F87589628EF1}|FormCreationMission.csproj|c:\\omar\\s2\\sae-d21\\formcreationmission\\uccreermission.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{052EC707-C522-457D-92D1-3594170E866B}|..\\UCRecapitulMission\\UCRecapitulMission.csproj|c:\\omar\\s2\\sae-d21\\ucrecapitulmission\\usercontrol1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{052EC707-C522-457D-92D1-3594170E866B}|..\\UCRecapitulMission\\UCRecapitulMission.csproj|c:\\omar\\s2\\sae-d21\\ucrecapitulmission\\usercontrol1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8A63E9D9-5BF8-4633-963C-F87589628EF1}|FormCreationMission.csproj|C:\\OMAR\\S2\\SAE-D21\\FormCreationMission\\uccreermission.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{8A63E9D9-5BF8-4633-963C-F87589628EF1}|FormCreationMission.csproj|solutionrelative:uccreermission.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8A63E9D9-5BF8-4633-963C-F87589628EF1}|FormCreationMission.csproj|C:\\OMAR\\S2\\SAE-D21\\FormCreationMission\\formconn.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{8A63E9D9-5BF8-4633-963C-F87589628EF1}|FormCreationMission.csproj|solutionrelative:formconn.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
       "AbsoluteMoniker": "D:0:0:{8A63E9D9-5BF8-4633-963C-F87589628EF1}|FormCreationMission.csproj|C:\\OMAR\\S2\\SAE-D21\\FormCreationMission\\form4.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{8A63E9D9-5BF8-4633-963C-F87589628EF1}|FormCreationMission.csproj|solutionrelative:form4.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8A63E9D9-5BF8-4633-963C-F87589628EF1}|FormCreationMission.csproj|c:\\omar\\s2\\sae-d21\\formcreationmission\\formconn.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8A63E9D9-5BF8-4633-963C-F87589628EF1}|FormCreationMission.csproj|solutionrelative:formconn.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8A63E9D9-5BF8-4633-963C-F87589628EF1}|FormCreationMission.csproj|c:\\omar\\s2\\sae-d21\\formcreationmission\\uccreermission.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8A63E9D9-5BF8-4633-963C-F87589628EF1}|FormCreationMission.csproj|solutionrelative:uccreermission.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{8A63E9D9-5BF8-4633-963C-F87589628EF1}|FormCreationMission.csproj|C:\\OMAR\\S2\\SAE-D21\\FormCreationMission\\form4.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -42,99 +36,87 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "UCCreerMission.cs",
-              "DocumentMoniker": "C:\\OMAR\\S2\\SAE-D21\\FormCreationMission\\UCCreerMission.cs",
-              "RelativeDocumentMoniker": "UCCreerMission.cs",
-              "ToolTip": "C:\\OMAR\\S2\\SAE-D21\\FormCreationMission\\UCCreerMission.cs",
-              "RelativeToolTip": "UCCreerMission.cs",
-              "ViewState": "AgIAAJsBAAAAAAAAAAD4v6oBAAAJAAAAAAAAAA==",
+              "DocumentIndex": 0,
+              "Title": "Connexion.cs",
+              "DocumentMoniker": "C:\\OMAR\\S2\\SAE-D21\\FormCreationMission\\Connexion.cs",
+              "RelativeDocumentMoniker": "Connexion.cs",
+              "ToolTip": "C:\\OMAR\\S2\\SAE-D21\\FormCreationMission\\Connexion.cs",
+              "RelativeToolTip": "Connexion.cs",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAAwB4AAAA+AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-23T21:07:40.961Z",
+              "WhenOpened": "2025-05-25T11:39:35.974Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
+              "Title": "UserControl1.cs [Design]",
+              "DocumentMoniker": "C:\\OMAR\\S2\\SAE-D21\\UCRecapitulMission\\UserControl1.cs",
+              "RelativeDocumentMoniker": "..\\UCRecapitulMission\\UserControl1.cs",
+              "ToolTip": "C:\\OMAR\\S2\\SAE-D21\\UCRecapitulMission\\UserControl1.cs [Design]",
+              "RelativeToolTip": "..\\UCRecapitulMission\\UserControl1.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-25T11:07:12.917Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "UCCreerMission.cs",
+              "DocumentMoniker": "C:\\OMAR\\S2\\SAE-D21\\FormCreationMission\\UCCreerMission.cs",
+              "RelativeDocumentMoniker": "UCCreerMission.cs",
+              "ToolTip": "C:\\OMAR\\S2\\SAE-D21\\FormCreationMission\\UCCreerMission.cs",
+              "RelativeToolTip": "UCCreerMission.cs",
+              "ViewState": "AgIAANMBAAAAAAAAAAAwwKsBAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-25T07:57:01.084Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
               "Title": "UCCreerMission.cs [Design]",
               "DocumentMoniker": "C:\\OMAR\\S2\\SAE-D21\\FormCreationMission\\UCCreerMission.cs",
               "RelativeDocumentMoniker": "UCCreerMission.cs",
               "ToolTip": "C:\\OMAR\\S2\\SAE-D21\\FormCreationMission\\UCCreerMission.cs [Design]",
               "RelativeToolTip": "UCCreerMission.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-23T21:07:28.239Z",
+              "WhenOpened": "2025-05-25T07:56:59.433Z",
               "EditorCaption": " [Design]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "UCPersonnel.cs",
-              "DocumentMoniker": "C:\\OMAR\\S2\\SAE-D21\\FormCreationMission\\UCPersonnel.cs",
-              "RelativeDocumentMoniker": "UCPersonnel.cs",
-              "ToolTip": "C:\\OMAR\\S2\\SAE-D21\\FormCreationMission\\UCPersonnel.cs",
-              "RelativeToolTip": "UCPersonnel.cs",
-              "ViewState": "AgIAAKgCAAAAAAAAAAApwL8CAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-23T19:16:57.058Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "UCPersonnel.cs [Design]",
-              "DocumentMoniker": "C:\\OMAR\\S2\\SAE-D21\\FormCreationMission\\UCPersonnel.cs",
-              "RelativeDocumentMoniker": "UCPersonnel.cs",
-              "ToolTip": "C:\\OMAR\\S2\\SAE-D21\\FormCreationMission\\UCPersonnel.cs [Design]",
-              "RelativeToolTip": "UCPersonnel.cs [Design]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-23T19:16:55.659Z",
-              "EditorCaption": " [Design]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "FormConn.cs",
-              "DocumentMoniker": "C:\\OMAR\\S2\\SAE-D21\\FormCreationMission\\FormConn.cs",
-              "RelativeDocumentMoniker": "FormConn.cs",
-              "ToolTip": "C:\\OMAR\\S2\\SAE-D21\\FormCreationMission\\FormConn.cs",
-              "RelativeToolTip": "FormConn.cs",
-              "ViewState": "AgIAACMAAAAAAAAAAAAqwCYAAABDAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-23T19:15:01.836Z",
-              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "FormConn.cs [Design]",
-              "DocumentMoniker": "C:\\OMAR\\S2\\SAE-D21\\FormCreationMission\\FormConn.cs",
-              "RelativeDocumentMoniker": "FormConn.cs",
-              "ToolTip": "C:\\OMAR\\S2\\SAE-D21\\FormCreationMission\\FormConn.cs [Design]",
-              "RelativeToolTip": "FormConn.cs [Design]",
+              "Title": "UserControl1.cs",
+              "DocumentMoniker": "C:\\OMAR\\S2\\SAE-D21\\UCRecapitulMission\\UserControl1.cs",
+              "RelativeDocumentMoniker": "..\\UCRecapitulMission\\UserControl1.cs",
+              "ToolTip": "C:\\OMAR\\S2\\SAE-D21\\UCRecapitulMission\\UserControl1.cs",
+              "RelativeToolTip": "..\\UCRecapitulMission\\UserControl1.cs",
+              "ViewState": "AgIAAGoAAAAAAAAAAAAAwG4AAAA/AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-23T19:11:42.986Z",
-              "EditorCaption": " [Design]"
+              "WhenOpened": "2025-05-24T19:13:20.196Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 6,
               "Title": "Form4.cs",
               "DocumentMoniker": "C:\\OMAR\\S2\\SAE-D21\\FormCreationMission\\Form4.cs",
               "RelativeDocumentMoniker": "Form4.cs",
               "ToolTip": "C:\\OMAR\\S2\\SAE-D21\\FormCreationMission\\Form4.cs",
               "RelativeToolTip": "Form4.cs",
-              "ViewState": "AgIAABkAAAAAAAAAAIAwwCMAAAA5AAAAAAAAAA==",
+              "ViewState": "AgIAAGQBAAAAAAAAAAAMwGABAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-05-22T08:04:12.908Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "Form4.cs [Design]",
               "DocumentMoniker": "C:\\OMAR\\S2\\SAE-D21\\FormCreationMission\\Form4.cs",
               "RelativeDocumentMoniker": "Form4.cs",

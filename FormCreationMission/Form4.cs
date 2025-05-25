@@ -103,7 +103,7 @@ namespace FormCreationMission
             try
             {
                 pnlAffichage.Controls.Clear();
-                var uc = new UCCreerMission(this);
+                UCCreerMission uc = new UCCreerMission(this);
                 uc.Dock = DockStyle.Fill;
                 pnlAffichage.Controls.Add(uc);
                 uc.BringToFront();
@@ -112,7 +112,6 @@ namespace FormCreationMission
             {
                 MessageBox.Show("Erreur : " + ex.Message);
             }
-
         }
 
         public void AfficherPersonnel()
@@ -120,7 +119,7 @@ namespace FormCreationMission
             try
             {
                 pnlAffichage.Controls.Clear();
-                var userc = new UCPersonnel(this);
+                UCPersonnel userc = new UCPersonnel(this);
                 userc.Dock = DockStyle.Fill;
                 pnlAffichage.Controls.Add(userc);
                 userc.BringToFront();
@@ -156,7 +155,6 @@ namespace FormCreationMission
         {
             String descriptionDetaille = recapTableMission(idMission);
             descriptionDetaille = recapTableMobiliser(idMission);
-
             return descriptionDetaille;
         }
         private string recapTableMission(string idMission)
@@ -168,7 +166,6 @@ namespace FormCreationMission
                 {
                     retour += "Adresse de la mission : " + row["adresse"].ToString() + " " + row["cp"].ToString() + " " + row["ville"].ToString() + "\n";
                     retour += "Compte rendue: " + row["compteRendu"].ToString() + "\n\n";
-
                 }
             }
             return retour;
@@ -181,9 +178,7 @@ namespace FormCreationMission
             {
                 if (row["idMission"].ToString() == idMission)
                 {
-
                     retour += recapTablePompier(row["matriculePompier"].ToString()) + recapTableHabilitation(row["idHabilitation"].ToString()) + "\n";
-
                 }
             }
             return retour;
@@ -387,11 +382,11 @@ namespace FormCreationMission
                         wrapper.Controls.Add(uCRecapitulMission);
                         uCRecapitulMission.Left = (wrapper.Width - uCRecapitulMission.Width) / 2;
                         uCRecapitulMission.Top = 0;
-                        // 🔥 Important : positionne verticalement le wrapper
+                        //Important : positionne verticalement le wrapper
                         wrapper.Top = y;
                         wrapper.Left = 0;
                         pnlAffichage.Controls.Add(wrapper);
-                        // 🔼 Incrémentation pour la prochaine mission
+                        //Incrémentation pour la prochaine mission
                         y += wrapper.Height + 10;
                     }
                 }

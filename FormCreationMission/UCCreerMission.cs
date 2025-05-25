@@ -435,9 +435,7 @@ namespace FormCreationMission
                 DataTable dtMission = MesDatas.DsGlobal.Tables["Mission"];
                 DataTable dtEngin = MesDatas.DsGlobal.Tables["Engin"];
                 DataTable dtPompier = MesDatas.DsGlobal.Tables["Pompier"];
-
                 DateTime date = DateTime.Now;
-
                 // --- Création de la nouvelle ligne en mémoire
                 DataRow nouvelleMission = dtMission.NewRow();
                 nouvelleMission["motifAppel"] = txtMotif.Text.Trim();
@@ -445,7 +443,7 @@ namespace FormCreationMission
                 nouvelleMission["cp"] = txtCodePostale.Text.Trim();
                 nouvelleMission["ville"] = txtVille.Text.Trim();
                 nouvelleMission["dateHeureDepart"] = date;
-
+                nouvelleMission["terminee"] = 0; // Mission non terminée par défaut
                 // --- Vérification ID mission
                 if (string.IsNullOrWhiteSpace(lblId.Text))
                 {
@@ -467,28 +465,6 @@ namespace FormCreationMission
 
                 // --- Ajout dans le DataSet
                 dtMission.Rows.Add(nouvelleMission);
-
-                // --- Ajout dans la base de données
-                string sql = @"INSERT INTO Mission 
-        (id, motifAppel, adresse, cp, ville, dateHeureDepart, idCaserne, idNatureSinistre) 
-        VALUES (@id, @motif, @adresse, @cp, @ville, @depart, @caserne, @nature)";
-
-                using (SQLiteCommand cmd = new SQLiteCommand(sql, Connexion.Connec))
-                {
-                    if (Connexion.Connec.State != ConnectionState.Open)
-                        Connexion.Connec.Open();
-
-                    cmd.Parameters.AddWithValue("@id", id);
-                    cmd.Parameters.AddWithValue("@motif", nouvelleMission["motifAppel"]);
-                    cmd.Parameters.AddWithValue("@adresse", nouvelleMission["adresse"]);
-                    cmd.Parameters.AddWithValue("@cp", nouvelleMission["cp"]);
-                    cmd.Parameters.AddWithValue("@ville", nouvelleMission["ville"]);
-                    cmd.Parameters.AddWithValue("@depart", date.ToString("yyyy-MM-dd HH:mm"));
-                    cmd.Parameters.AddWithValue("@caserne", nouvelleMission["idCaserne"]);
-                    cmd.Parameters.AddWithValue("@nature", nouvelleMission["idNatureSinistre"]);
-
-                    cmd.ExecuteNonQuery();
-                }
 
                 // --- Mise à jour enMission pour les pompiers
                 foreach (DataGridViewRow row in dgvPompiers.Rows)
@@ -543,7 +519,7 @@ namespace FormCreationMission
                 MesDatas.DsGlobal.AcceptChanges();
 
                 // --- Message final
-                MessageBox.Show("✅ Mission enregistrée dans la base et le DataSet !");
+                MessageBox.Show("✅ Mission enregistrée dans le DataSet !");
 
                 // --- Rafraîchir tableau de bord
                 if (tableauDeBord != null)
@@ -646,6 +622,11 @@ namespace FormCreationMission
             {
                 MessageBox.Show("Erreur PDF : " + ex.Message);
             }
+        }
+
+        private void lblId_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
