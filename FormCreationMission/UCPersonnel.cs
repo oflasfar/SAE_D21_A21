@@ -16,6 +16,7 @@ namespace FormCreationMission
     {
         Form4 f;
         private bool chargementTermine = false;
+        private bool estAdmin;
         public UCPersonnel(Form4 x)
         {
             InitializeComponent();
@@ -24,6 +25,7 @@ namespace FormCreationMission
 
         private void UCPersonnel_Load(object sender, EventArgs e)
         {
+            estAdmin = false; // Indique si l'utilisateur est admin
             gbInformationCarriere.Visible = false; // Masquer le groupe d'informations de carrière au départ
             cbGradeNouveau.Visible = false;
             if (Connexion.Connec.State != ConnectionState.Open)
@@ -702,14 +704,26 @@ namespace FormCreationMission
 
         private void btnAjoutPompiers_Click_1(object sender, EventArgs e)
         {
-            FormConn formConnexion = new FormConn();
-            formConnexion.ShowDialog();
 
-            if (formConnexion.EstConnecte)
+            if(estAdmin)
             {
-                // Connexion réussie → ouvre le formulaire de création du pompier
+                // Si l'utilisateur est admin, on ouvre directement le formulaire de création
                 Form3 formCreer = new Form3();
                 formCreer.ShowDialog();
+            }
+            else
+            {
+                FormConn formConnexion = new FormConn();
+                formConnexion.ShowDialog();
+
+                if (formConnexion.EstConnecte)
+                {
+                    estAdmin = true; // L'utilisateur est maintenant admin
+                    // Connexion réussie → ouvre le formulaire de création du pompier
+                    Form3 formCreer = new Form3();
+                    formCreer.ShowDialog();
+                }
+                
             }
         }
 
@@ -720,212 +734,444 @@ namespace FormCreationMission
 
         private void btnChanger_Click_1(object sender, EventArgs e)
         {
-            try
+            if(estAdmin)
             {
-                if (cbGradeNouveau.Visible)
+                try
                 {
-                    // Déjà visible → on copie le texte + image du grade
-                    if (cbGradeNouveau.SelectedItem is DataRowView selectedRow)
+                    if (cbGradeNouveau.Visible)
                     {
-                        string libelleGrade = selectedRow["libelle"].ToString();
-                        string codeGrade = selectedRow["code"].ToString();
-                        int matricule = Convert.ToInt32(lblMatricule.Text); // récupère le matricule
-
-                        // 🔁 Mise à jour du grade dans la base avec transaction
-                        using (SQLiteTransaction transaction = Connexion.Connec.BeginTransaction())
+                        // Déjà visible → on copie le texte + image du grade
+                        if (cbGradeNouveau.SelectedItem is DataRowView selectedRow)
                         {
-                            try
+                            string libelleGrade = selectedRow["libelle"].ToString();
+                            string codeGrade = selectedRow["code"].ToString();
+                            int matricule = Convert.ToInt32(lblMatricule.Text); // récupère le matricule
+
+                            // 🔁 Mise à jour du grade dans la base avec transaction
+                            using (SQLiteTransaction transaction = Connexion.Connec.BeginTransaction())
                             {
-                                using (SQLiteCommand cmd = Connexion.Connec.CreateCommand())
+                                try
                                 {
-                                    cmd.Transaction = transaction;
-                                    cmd.CommandText = "UPDATE Pompier SET codeGrade = @codeGrade WHERE matricule = @matricule";
-                                    cmd.Parameters.AddWithValue("@codeGrade", codeGrade);
-                                    cmd.Parameters.AddWithValue("@matricule", matricule);
-                                    cmd.ExecuteNonQuery();
+                                    using (SQLiteCommand cmd = Connexion.Connec.CreateCommand())
+                                    {
+                                        cmd.Transaction = transaction;
+                                        cmd.CommandText = "UPDATE Pompier SET codeGrade = @codeGrade WHERE matricule = @matricule";
+                                        cmd.Parameters.AddWithValue("@codeGrade", codeGrade);
+                                        cmd.Parameters.AddWithValue("@matricule", matricule);
+                                        cmd.ExecuteNonQuery();
+                                    }
+
+                                    transaction.Commit();
+
+                                    //Mise à jour visuelle (affichage)
+                                    txtGrade.Text = libelleGrade;
+
+                                    string imagePath = Path.Combine(@"C:\OMAR\S2\SAE-D21\ImagesGrades", codeGrade + ".png");
+                                    if (File.Exists(imagePath))
+                                    {
+                                        pbGrade.Image = Image.FromFile(imagePath);
+                                        pbGrade.SizeMode = PictureBoxSizeMode.StretchImage;
+                                    }
+                                    else
+                                    {
+                                        pbGrade.Image = null;
+                                    }
                                 }
-
-                                transaction.Commit();
-
-                                //Mise à jour visuelle (affichage)
-                                txtGrade.Text = libelleGrade;
-
-                                string imagePath = Path.Combine(@"C:\OMAR\S2\SAE-D21\ImagesGrades", codeGrade + ".png");
-                                if (File.Exists(imagePath))
+                                catch (Exception ex)
                                 {
-                                    pbGrade.Image = Image.FromFile(imagePath);
-                                    pbGrade.SizeMode = PictureBoxSizeMode.StretchImage;
+                                    transaction.Rollback();
+                                    MessageBox.Show("❌ Erreur pendant la mise à jour du grade : " + ex.Message);
                                 }
-                                else
-                                {
-                                    pbGrade.Image = null;
-                                }
-                            }
-                            catch (Exception ex)
-                            {
-                                transaction.Rollback();
-                                MessageBox.Show("❌ Erreur pendant la mise à jour du grade : " + ex.Message);
                             }
                         }
+
+                        cbGradeNouveau.Visible = false; // cacher après sélection
                     }
-
-                    cbGradeNouveau.Visible = false; // cacher après sélection
-                }
-                else
-                {
-                    //Première fois : on affiche et on remplit la ComboBox
-                    if (Connexion.Connec.State != ConnectionState.Open)
-                        Connexion.Connec.Open();
-
-                    string sqlGrade = "SELECT code, libelle FROM Grade";
-                    using (var cmdGrade = new SQLiteCommand(sqlGrade, Connexion.Connec))
-                    using (var reader = cmdGrade.ExecuteReader())
+                    else
                     {
-                        DataTable dtGrades = new DataTable();
-                        dtGrades.Load(reader);
-                        cbGradeNouveau.DataSource = dtGrades;
-                        cbGradeNouveau.DisplayMember = "libelle";
-                        cbGradeNouveau.ValueMember = "code";
-                    }
+                        //Première fois : on affiche et on remplit la ComboBox
+                        if (Connexion.Connec.State != ConnectionState.Open)
+                            Connexion.Connec.Open();
 
-                    cbGradeNouveau.Visible = true;
+                        string sqlGrade = "SELECT code, libelle FROM Grade";
+                        using (var cmdGrade = new SQLiteCommand(sqlGrade, Connexion.Connec))
+                        using (var reader = cmdGrade.ExecuteReader())
+                        {
+                            DataTable dtGrades = new DataTable();
+                            dtGrades.Load(reader);
+                            cbGradeNouveau.DataSource = dtGrades;
+                            cbGradeNouveau.DisplayMember = "libelle";
+                            cbGradeNouveau.ValueMember = "code";
+                        }
+
+                        cbGradeNouveau.Visible = true;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("❌ Erreur : " + ex.Message);
                 }
             }
-            catch (Exception ex)
+            //Si c'est pas un admin on verifie
+            else
             {
-                MessageBox.Show("❌ Erreur : " + ex.Message);
+                FormConn formConnexion = new FormConn();
+                formConnexion.ShowDialog();
+                if(formConnexion.EstConnecte)
+                {
+                    estAdmin = true;
+                    // L'utilisateur est maintenant admin
+                    try
+                    {
+                        if (cbGradeNouveau.Visible)
+                        {
+                            // Déjà visible → on copie le texte + image du grade
+                            if (cbGradeNouveau.SelectedItem is DataRowView selectedRow)
+                            {
+                                string libelleGrade = selectedRow["libelle"].ToString();
+                                string codeGrade = selectedRow["code"].ToString();
+                                int matricule = Convert.ToInt32(lblMatricule.Text); // récupère le matricule
+
+                                // 🔁 Mise à jour du grade dans la base avec transaction
+                                using (SQLiteTransaction transaction = Connexion.Connec.BeginTransaction())
+                                {
+                                    try
+                                    {
+                                        using (SQLiteCommand cmd = Connexion.Connec.CreateCommand())
+                                        {
+                                            cmd.Transaction = transaction;
+                                            cmd.CommandText = "UPDATE Pompier SET codeGrade = @codeGrade WHERE matricule = @matricule";
+                                            cmd.Parameters.AddWithValue("@codeGrade", codeGrade);
+                                            cmd.Parameters.AddWithValue("@matricule", matricule);
+                                            cmd.ExecuteNonQuery();
+                                        }
+
+                                        transaction.Commit();
+
+                                        //Mise à jour visuelle (affichage)
+                                        txtGrade.Text = libelleGrade;
+
+                                        string imagePath = Path.Combine(@"C:\OMAR\S2\SAE-D21\ImagesGrades", codeGrade + ".png");
+                                        if (File.Exists(imagePath))
+                                        {
+                                            pbGrade.Image = Image.FromFile(imagePath);
+                                            pbGrade.SizeMode = PictureBoxSizeMode.StretchImage;
+                                        }
+                                        else
+                                        {
+                                            pbGrade.Image = null;
+                                        }
+                                    }
+                                    catch (Exception ex)
+                                    {
+                                        transaction.Rollback();
+                                        MessageBox.Show("❌ Erreur pendant la mise à jour du grade : " + ex.Message);
+                                    }
+                                }
+                            }
+
+                            cbGradeNouveau.Visible = false; // cacher après sélection
+                        }
+                        else
+                        {
+                            //Première fois : on affiche et on remplit la ComboBox
+                            if (Connexion.Connec.State != ConnectionState.Open)
+                                Connexion.Connec.Open();
+
+                            string sqlGrade = "SELECT code, libelle FROM Grade";
+                            using (var cmdGrade = new SQLiteCommand(sqlGrade, Connexion.Connec))
+                            using (var reader = cmdGrade.ExecuteReader())
+                            {
+                                DataTable dtGrades = new DataTable();
+                                dtGrades.Load(reader);
+                                cbGradeNouveau.DataSource = dtGrades;
+                                cbGradeNouveau.DisplayMember = "libelle";
+                                cbGradeNouveau.ValueMember = "code";
+                            }
+
+                            cbGradeNouveau.Visible = true;
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("❌ Erreur : " + ex.Message);
+                    }
+
+                }
             }
+            
         }
 
         private void BtnPlusInformation_Click_1(object sender, EventArgs e)
         {
-            try
+            if (!estAdmin)
             {
-                if (!gbInformationCarriere.Visible)
+                FormConn formConnexion = new FormConn();
+                formConnexion.ShowDialog();
+
+                if (formConnexion.EstConnecte)
                 {
-                    gbInformationCarriere.Visible = true;
-
-                    if (cbPompiers.SelectedItem is DataRowView row)
+                    estAdmin = true;
+                    try
                     {
-                        int matricule = Convert.ToInt32(row["matricule"]);
+                        if (!gbInformationCarriere.Visible)
+                        {
+                            gbInformationCarriere.Visible = true;
 
-                        if (Connexion.Connec.State != ConnectionState.Open)
-                            Connexion.Connec.Open();
+                            if (cbPompiers.SelectedItem is DataRowView row)
+                            {
+                                int matricule = Convert.ToInt32(row["matricule"]);
 
-                        // 🔹 1. Charger toutes les casernes dans la ComboBox (en mode connecté)
-                        string sqlToutesCaserne = "SELECT id, nom FROM Caserne";
-                        SQLiteDataAdapter da = new SQLiteDataAdapter(sqlToutesCaserne, Connexion.Connec);
-                        DataTable dtCaserne = new DataTable();
-                        da.Fill(dtCaserne);
+                                if (Connexion.Connec.State != ConnectionState.Open)
+                                    Connexion.Connec.Open();
 
-                        cbCaserneRattachement.DataSource = dtCaserne;
-                        cbCaserneRattachement.DisplayMember = "nom";
-                        cbCaserneRattachement.ValueMember = "id";
+                                // 🔹 1. Charger toutes les casernes dans la ComboBox (en mode connecté)
+                                string sqlToutesCaserne = "SELECT id, nom FROM Caserne";
+                                SQLiteDataAdapter da = new SQLiteDataAdapter(sqlToutesCaserne, Connexion.Connec);
+                                DataTable dtCaserne = new DataTable();
+                                da.Fill(dtCaserne);
 
-                        // 🔹 2. Récupérer l'ID de la caserne actuelle du pompier
-                        string sqlCaserneActuelle = @"
+                                cbCaserneRattachement.DataSource = dtCaserne;
+                                cbCaserneRattachement.DisplayMember = "nom";
+                                cbCaserneRattachement.ValueMember = "id";
+
+                                // 🔹 2. Récupérer l'ID de la caserne actuelle du pompier
+                                string sqlCaserneActuelle = @"
+                                SELECT idCaserne 
+                                FROM Affectation 
+                                WHERE matriculePompier = @mat AND dateFin IS NULL";
+
+                                using (var cmd = new SQLiteCommand(sqlCaserneActuelle, Connexion.Connec))
+                                {
+                                    cmd.Parameters.AddWithValue("@mat", matricule);
+                                    object idCaserne = cmd.ExecuteScalar();
+
+                                    if (idCaserne != null)
+                                    {
+                                        cbCaserneRattachement.SelectedValue = Convert.ToInt32(idCaserne);
+                                    }
+                                }
+
+                                // 🔹 2. Habilitations du pompier
+                                string sqlHabilitations = @"SELECT H.libelle FROM Habilitation H JOIN Passer P ON H.id = P.idHabilitation WHERE P.matriculePompier = @mat";
+
+                                using (var cmd2 = new SQLiteCommand(sqlHabilitations, Connexion.Connec))
+                                {
+                                    cmd2.Parameters.AddWithValue("@mat", matricule);
+                                    using (var reader = cmd2.ExecuteReader())
+                                    {
+                                        lstHabilitations.Items.Clear();
+                                        while (reader.Read())
+                                        {
+                                            lstHabilitations.Items.Add(reader["libelle"].ToString());
+                                        }
+                                    }
+                                }
+                                ////////////////////////////////
+                                ///
+
+                                lstAffectationsPassees.Items.Clear();
+
+                                // 🔴 En-tête pour les affectations en cours
+                                lstAffectationsPassees.Items.Add("🟢 Affectations en cours :");
+
+                                string sqlEnCours = @"SELECT A.dateA, C.nom FROM Affectation A JOIN Caserne C ON A.idCaserne = C.id WHERE A.matriculePompier = @mat AND A.dateFin IS NULL ORDER BY A.dateA DESC";
+
+                                using (var cmd1 = new SQLiteCommand(sqlEnCours, Connexion.Connec))
+                                {
+                                    cmd1.Parameters.AddWithValue("@mat", matricule);
+
+                                    using (var reader = cmd1.ExecuteReader())
+                                    {
+                                        bool aDesAffectations = false;
+
+                                        while (reader.Read())
+                                        {
+                                            aDesAffectations = true;
+                                            string dateDebut = reader["dateA"].ToString();
+                                            string nomCaserne = reader["nom"].ToString();
+                                            lstAffectationsPassees.Items.Add($"→ {dateDebut} à aujourd’hui : {nomCaserne}");
+                                        }
+
+                                        if (!aDesAffectations)
+                                            lstAffectationsPassees.Items.Add("Aucune affectation en cours.");
+                                    }
+                                }
+
+                                // 🔵 Séparateur
+                                lstAffectationsPassees.Items.Add("");
+                                lstAffectationsPassees.Items.Add("📘 Affectations passées :");
+
+                                string sqlPassees = @"SELECT A.dateA, A.dateFin, C.nom FROM Affectation A JOIN Caserne C ON A.idCaserne = C.id WHERE A.matriculePompier = @mat AND A.dateFin IS NOT NULL ORDER BY A.dateA DESC";
+
+                                using (var cmd2 = new SQLiteCommand(sqlPassees, Connexion.Connec))
+                                {
+                                    cmd2.Parameters.AddWithValue("@mat", matricule);
+
+                                    using (var reader = cmd2.ExecuteReader())
+                                    {
+                                        bool aDesAnciennes = false;
+
+                                        while (reader.Read())
+                                        {
+                                            aDesAnciennes = true;
+                                            string dateDebut = reader["dateA"].ToString();
+                                            string dateFin = reader["dateFin"].ToString();
+                                            string nomCaserne = reader["nom"].ToString();
+                                            lstAffectationsPassees.Items.Add($"→ {dateDebut} à {dateFin} : {nomCaserne}");
+                                        }
+
+                                        if (!aDesAnciennes)
+                                            lstAffectationsPassees.Items.Add("Aucune affectation passée.");
+                                    }
+                                }
+
+
+                            }
+                        }
+                        else
+                        {
+                            // 🔽 Si déjà visible, on la masque
+                            gbInformationCarriere.Visible = false;
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("❌ Erreur lors du chargement des informations supplémentaires : " + ex.Message);
+                    }
+                }
+            }
+            else
+            {
+
+                    try
+                    {
+                        if (!gbInformationCarriere.Visible)
+                        {
+                            gbInformationCarriere.Visible = true;
+
+                            if (cbPompiers.SelectedItem is DataRowView row)
+                            {
+                                int matricule = Convert.ToInt32(row["matricule"]);
+
+                                if (Connexion.Connec.State != ConnectionState.Open)
+                                    Connexion.Connec.Open();
+
+                                // 🔹 1. Charger toutes les casernes dans la ComboBox (en mode connecté)
+                                string sqlToutesCaserne = "SELECT id, nom FROM Caserne";
+                                SQLiteDataAdapter da = new SQLiteDataAdapter(sqlToutesCaserne, Connexion.Connec);
+                                DataTable dtCaserne = new DataTable();
+                                da.Fill(dtCaserne);
+
+                                cbCaserneRattachement.DataSource = dtCaserne;
+                                cbCaserneRattachement.DisplayMember = "nom";
+                                cbCaserneRattachement.ValueMember = "id";
+
+                                // 🔹 2. Récupérer l'ID de la caserne actuelle du pompier
+                                string sqlCaserneActuelle = @"
     SELECT idCaserne 
     FROM Affectation 
     WHERE matriculePompier = @mat AND dateFin IS NULL";
 
-                        using (var cmd = new SQLiteCommand(sqlCaserneActuelle, Connexion.Connec))
-                        {
-                            cmd.Parameters.AddWithValue("@mat", matricule);
-                            object idCaserne = cmd.ExecuteScalar();
-
-                            if (idCaserne != null)
-                            {
-                                cbCaserneRattachement.SelectedValue = Convert.ToInt32(idCaserne);
-                            }
-                        }
-
-                        // 🔹 2. Habilitations du pompier
-                        string sqlHabilitations = @"SELECT H.libelle FROM Habilitation H JOIN Passer P ON H.id = P.idHabilitation WHERE P.matriculePompier = @mat";
-
-                        using (var cmd2 = new SQLiteCommand(sqlHabilitations, Connexion.Connec))
-                        {
-                            cmd2.Parameters.AddWithValue("@mat", matricule);
-                            using (var reader = cmd2.ExecuteReader())
-                            {
-                                lstHabilitations.Items.Clear();
-                                while (reader.Read())
+                                using (var cmd = new SQLiteCommand(sqlCaserneActuelle, Connexion.Connec))
                                 {
-                                    lstHabilitations.Items.Add(reader["libelle"].ToString());
-                                }
-                            }
-                        }
-                        ////////////////////////////////
-                        ///
+                                    cmd.Parameters.AddWithValue("@mat", matricule);
+                                    object idCaserne = cmd.ExecuteScalar();
 
-                        lstAffectationsPassees.Items.Clear();
-
-                        // 🔴 En-tête pour les affectations en cours
-                        lstAffectationsPassees.Items.Add("🟢 Affectations en cours :");
-
-                        string sqlEnCours = @"SELECT A.dateA, C.nom FROM Affectation A JOIN Caserne C ON A.idCaserne = C.id WHERE A.matriculePompier = @mat AND A.dateFin IS NULL ORDER BY A.dateA DESC";
-
-                        using (var cmd1 = new SQLiteCommand(sqlEnCours, Connexion.Connec))
-                        {
-                            cmd1.Parameters.AddWithValue("@mat", matricule);
-
-                            using (var reader = cmd1.ExecuteReader())
-                            {
-                                bool aDesAffectations = false;
-
-                                while (reader.Read())
-                                {
-                                    aDesAffectations = true;
-                                    string dateDebut = reader["dateA"].ToString();
-                                    string nomCaserne = reader["nom"].ToString();
-                                    lstAffectationsPassees.Items.Add($"→ {dateDebut} à aujourd’hui : {nomCaserne}");
+                                    if (idCaserne != null)
+                                    {
+                                        cbCaserneRattachement.SelectedValue = Convert.ToInt32(idCaserne);
+                                    }
                                 }
 
-                                if (!aDesAffectations)
-                                    lstAffectationsPassees.Items.Add("Aucune affectation en cours.");
-                            }
-                        }
+                                // 🔹 2. Habilitations du pompier
+                                string sqlHabilitations = @"SELECT H.libelle FROM Habilitation H JOIN Passer P ON H.id = P.idHabilitation WHERE P.matriculePompier = @mat";
 
-                        // 🔵 Séparateur
-                        lstAffectationsPassees.Items.Add("");
-                        lstAffectationsPassees.Items.Add("📘 Affectations passées :");
-
-                        string sqlPassees = @"SELECT A.dateA, A.dateFin, C.nom FROM Affectation A JOIN Caserne C ON A.idCaserne = C.id WHERE A.matriculePompier = @mat AND A.dateFin IS NOT NULL ORDER BY A.dateA DESC";
-
-                        using (var cmd2 = new SQLiteCommand(sqlPassees, Connexion.Connec))
-                        {
-                            cmd2.Parameters.AddWithValue("@mat", matricule);
-
-                            using (var reader = cmd2.ExecuteReader())
-                            {
-                                bool aDesAnciennes = false;
-
-                                while (reader.Read())
+                                using (var cmd2 = new SQLiteCommand(sqlHabilitations, Connexion.Connec))
                                 {
-                                    aDesAnciennes = true;
-                                    string dateDebut = reader["dateA"].ToString();
-                                    string dateFin = reader["dateFin"].ToString();
-                                    string nomCaserne = reader["nom"].ToString();
-                                    lstAffectationsPassees.Items.Add($"→ {dateDebut} à {dateFin} : {nomCaserne}");
+                                    cmd2.Parameters.AddWithValue("@mat", matricule);
+                                    using (var reader = cmd2.ExecuteReader())
+                                    {
+                                        lstHabilitations.Items.Clear();
+                                        while (reader.Read())
+                                        {
+                                            lstHabilitations.Items.Add(reader["libelle"].ToString());
+                                        }
+                                    }
+                                }
+                                ////////////////////////////////
+                                ///
+
+                                lstAffectationsPassees.Items.Clear();
+
+                                // 🔴 En-tête pour les affectations en cours
+                                lstAffectationsPassees.Items.Add("🟢 Affectations en cours :");
+
+                                string sqlEnCours = @"SELECT A.dateA, C.nom FROM Affectation A JOIN Caserne C ON A.idCaserne = C.id WHERE A.matriculePompier = @mat AND A.dateFin IS NULL ORDER BY A.dateA DESC";
+
+                                using (var cmd1 = new SQLiteCommand(sqlEnCours, Connexion.Connec))
+                                {
+                                    cmd1.Parameters.AddWithValue("@mat", matricule);
+
+                                    using (var reader = cmd1.ExecuteReader())
+                                    {
+                                        bool aDesAffectations = false;
+
+                                        while (reader.Read())
+                                        {
+                                            aDesAffectations = true;
+                                            string dateDebut = reader["dateA"].ToString();
+                                            string nomCaserne = reader["nom"].ToString();
+                                            lstAffectationsPassees.Items.Add($"→ {dateDebut} à aujourd’hui : {nomCaserne}");
+                                        }
+
+                                        if (!aDesAffectations)
+                                            lstAffectationsPassees.Items.Add("Aucune affectation en cours.");
+                                    }
                                 }
 
-                                if (!aDesAnciennes)
-                                    lstAffectationsPassees.Items.Add("Aucune affectation passée.");
+                                // 🔵 Séparateur
+                                lstAffectationsPassees.Items.Add("");
+                                lstAffectationsPassees.Items.Add("📘 Affectations passées :");
+
+                                string sqlPassees = @"SELECT A.dateA, A.dateFin, C.nom FROM Affectation A JOIN Caserne C ON A.idCaserne = C.id WHERE A.matriculePompier = @mat AND A.dateFin IS NOT NULL ORDER BY A.dateA DESC";
+
+                                using (var cmd2 = new SQLiteCommand(sqlPassees, Connexion.Connec))
+                                {
+                                    cmd2.Parameters.AddWithValue("@mat", matricule);
+
+                                    using (var reader = cmd2.ExecuteReader())
+                                    {
+                                        bool aDesAnciennes = false;
+
+                                        while (reader.Read())
+                                        {
+                                            aDesAnciennes = true;
+                                            string dateDebut = reader["dateA"].ToString();
+                                            string dateFin = reader["dateFin"].ToString();
+                                            string nomCaserne = reader["nom"].ToString();
+                                            lstAffectationsPassees.Items.Add($"→ {dateDebut} à {dateFin} : {nomCaserne}");
+                                        }
+
+                                        if (!aDesAnciennes)
+                                            lstAffectationsPassees.Items.Add("Aucune affectation passée.");
+                                    }
+                                }
+
+
                             }
                         }
-
-
+                        else
+                        {
+                            // 🔽 Si déjà visible, on la masque
+                            gbInformationCarriere.Visible = false;
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("❌ Erreur lors du chargement des informations supplémentaires : " + ex.Message);
                     }
                 }
-                else
-                {
-                    // 🔽 Si déjà visible, on la masque
-                    gbInformationCarriere.Visible = false;
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("❌ Erreur lors du chargement des informations supplémentaires : " + ex.Message);
-            }
         }
 
         private void btnMettreaJour_Click_1(object sender, EventArgs e)
@@ -1083,6 +1329,11 @@ namespace FormCreationMission
         private void btnQuitter_Click_1(object sender, EventArgs e)
         {
             f.actualiser();
+        }
+
+        private void panel2_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

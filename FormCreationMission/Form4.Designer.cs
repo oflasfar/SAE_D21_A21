@@ -70,9 +70,10 @@
             // 
             // pnlAffichage
             // 
-            this.pnlAffichage.Location = new System.Drawing.Point(482, 100);
+            this.pnlAffichage.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlAffichage.Location = new System.Drawing.Point(458, 100);
             this.pnlAffichage.Name = "pnlAffichage";
-            this.pnlAffichage.Size = new System.Drawing.Size(1430, 891);
+            this.pnlAffichage.Size = new System.Drawing.Size(1454, 891);
             this.pnlAffichage.TabIndex = 4;
             // 
             // Form4

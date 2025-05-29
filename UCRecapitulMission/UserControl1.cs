@@ -15,6 +15,7 @@ using static System.Net.Mime.MediaTypeNames;
 using System.Data.SQLite;
 using SAEPageMission;
 
+
 namespace UCRecapitulMission
 {
 
@@ -175,6 +176,66 @@ namespace UCRecapitulMission
                 }
 
                 MessageBox.Show("✅ Mission clôturée et bien enregistrée dans la base !");
+                // ✅ Libérer les pompiers de la mission (enMission = 0)
+                try
+                {
+                    var dtMobiliser = this.ds.Tables["Mobiliser"];
+                    var dtPompier = this.ds.Tables["Pompier"];
+
+                    // 🔎 Récupérer tous les matricules des pompiers mobilisés dans cette mission
+                    var lignesMobilises = dtMobiliser.Select($"idMission = {id}");
+
+                    foreach (var ligne in lignesMobilises)
+                    {
+                        int matricule = Convert.ToInt32(ligne["matriculePompier"]);
+
+                        DataRow[] rowsPompier = dtPompier.Select($"matricule = {matricule}");
+                        if (rowsPompier.Length > 0)
+                        {
+                            rowsPompier[0]["enMission"] = 0; // ✅ Libérer le pompier
+                        }
+                    }
+
+                    MessageBox.Show("✅ Tous les pompiers de la mission ont été remis disponibles !");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("❌ Erreur lors de la libération des pompiers : " + ex.Message);
+                }
+                
+
+
+                // ✅ Libérer les engins de la mission (enMission = 0)
+                // On récupère les numéros d'engins mobilisés dans la mission
+                var partirAvec = this.ds.Tables["PartirAvec"];
+                var engins = this.ds.Tables["Engin"];
+
+                List<int> numeros = new List<int>();
+
+                foreach (DataRow row in partirAvec.Select($"idMission = {id}"))
+                {
+                    if (row.Table.Columns.Contains("numeroEngin") && row["numeroEngin"] != DBNull.Value)
+                    {
+                        int num;
+                        if (int.TryParse(row["numeroEngin"].ToString(), out num) && !numeros.Contains(num))
+                        {
+                            numeros.Add(num);
+                        }
+                    }
+                }
+
+                // ✅ Remettre enMission à 0 pour tous les engins concernés
+                foreach (int num in numeros)
+                {
+                    DataRow[] rowsx = engins.Select($"numero = {num}");
+                    foreach (var row in rowsx)
+                        row["enMission"] = 0;
+                }
+
+                MesDatas.DsGlobal.AcceptChanges();
+
+
+
             }
             catch (Exception ex)
             {

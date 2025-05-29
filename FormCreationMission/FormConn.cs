@@ -23,17 +23,6 @@ namespace FormCreationMission
         {
             string login = txtLogin.Text.Trim();
             string mdp = txtMDP.Text.Trim();
-
-            // ⚠️ Exemple simple : à remplacer par ton propre système de vérification
-            if (login == "admin" && mdp == "1234")
-            {
-                EstConnecte = true;
-                this.Close(); // Ferme la fenêtre
-            }
-            else
-            {
-                MessageBox.Show("Identifiants incorrects", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
         }
 
         private void btnConnexion_Click(object sender, EventArgs e)

@@ -285,6 +285,7 @@ namespace FormCreationMission
 
         private void BtnPlusInformation_Click(object sender, EventArgs e)
         {
+            
             try
             {
                 if (!gbInformationCarriere.Visible)
