@@ -46,7 +46,7 @@ namespace FormCreationMission
 
             //MessageBox.Show(xx);
 
-
+            // --- Initialisation des labels et comboBox
             lblId.Text = (MesDatas.DsGlobal.Tables["Mission"].Rows.Count + 1).ToString();
             lblDateDeclanchee.Text = DateTime.Now.ToString();
             //Premiere comboBox : NatureSinistre
@@ -88,7 +88,7 @@ namespace FormCreationMission
             // On récupère toutes les lignes de la table Mobiliser où le pompier est mobilisé
             DataRow[] mobilisations = MesDatas.DsGlobal.Tables["Mobiliser"]
                 .Select("matriculePompier = " + matricule);
-
+            //On parcoure chaque ligne de mobilisation pour vérifier si le pompier est en mission
             foreach (DataRow mobilisation in mobilisations)
             {
                 int idMission = Convert.ToInt32(mobilisation["idMission"]);
@@ -96,7 +96,7 @@ namespace FormCreationMission
                 // On vérifie si la mission correspondante n’est pas encore terminée
                 DataRow[] missions = MesDatas.DsGlobal.Tables["Mission"]
                     .Select("id = " + idMission + " AND terminee = 0");
-
+                //On regarde si il y a des missions actives
                 if (missions.Length > 0)
                 {
                     return true; // Le pompier est en mission
@@ -111,7 +111,7 @@ namespace FormCreationMission
             // On vérifie d'abord si la valeur est vide
             if (pompier["enConge"] == DBNull.Value)
                 return false;
-
+            //On transforme la valeur en boolean
             return Convert.ToBoolean(pompier["enConge"]);
         }
 
@@ -247,20 +247,20 @@ namespace FormCreationMission
 
         private string Nettoyer(string input)
         {
+            // Vérifie si la chaîne est vide ou nulle
             if (string.IsNullOrEmpty(input)) return "";
-
+            // Normalise la chaîne pour enlever les accents et caractères spéciaux
             string normalise = input.Normalize(System.Text.NormalizationForm.FormD);
-            var sb = new StringBuilder();
-
+            StringBuilder sb = new StringBuilder();
+            // Parcourt chaque caractère de la chaîne normalisée
             foreach (char c in normalise)
             {
-                var uc = System.Globalization.CharUnicodeInfo.GetUnicodeCategory(c);
+                System.Globalization.UnicodeCategory uc = System.Globalization.CharUnicodeInfo.GetUnicodeCategory(c);
                 if (uc != System.Globalization.UnicodeCategory.NonSpacingMark && c <= 127)
                 {
                     sb.Append(c);
                 }
             }
-
             return sb.ToString();
         }
         private void dgvEngins_KeyPress(object sender, KeyPressEventArgs e)
@@ -272,7 +272,6 @@ namespace FormCreationMission
         {
             e.Handled = true;
         }
-
 
         private void btnRapport_Click(object sender, EventArgs e)
         {
@@ -295,8 +294,6 @@ namespace FormCreationMission
             //
         }
 
-
-
         private void button2_Click(object sender, EventArgs e)
         {
             Form4 f4 = new Form4();
@@ -305,31 +302,33 @@ namespace FormCreationMission
 
         private void btnConstituerEquipe_Click_1(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(txtMotif.Text) || string.IsNullOrWhiteSpace(txtRue.Text) ||
-                string.IsNullOrWhiteSpace(txtCodePostale.Text) || string.IsNullOrWhiteSpace(txtVille.Text))
+            //Verifier si les champs sont remplis
+            if (string.IsNullOrWhiteSpace(txtMotif.Text) || string.IsNullOrWhiteSpace(txtRue.Text) || string.IsNullOrWhiteSpace(txtCodePostale.Text) || string.IsNullOrWhiteSpace(txtVille.Text))
             {
                 MessageBox.Show("❌ Veuillez remplir tous les champs avant de continuer.");
                 return;
             }
 
             gbMobilisation.Visible = true;
+            // Liste finale des engins nécessaires
             List<(string codeTypeEngin, int nombre)> enginsNecessaires = new List<(string, int)>();
-
+            // Récupération des valeurs depuis les ComboBox
             int idNatureSinistre = Convert.ToInt32(cbNatureSinistre.SelectedValue);
             int idCaserne = Convert.ToInt32(cbCaserneImmobiliser.SelectedValue);
-
+            //On parcoure la table Necessiter pour trouver les engins nécessaires
             foreach (DataRow row in MesDatas.DsGlobal.Tables["Necessiter"].Select("idNatureSinistre = " + idNatureSinistre))
             {
                 string type = row["codeTypeEngin"].ToString();
                 int nb = Convert.ToInt32(row["nombre"]);
-
+                //On part chercher maintenant dans la table des engins
                 DataRow[] enginsDispo = MesDatas.DsGlobal.Tables["Engin"]
                     .Select($"codeTypeEngin = '{type}' AND idCaserne = {idCaserne} AND enMission = 0 AND enPanne = 0");
-
+                //On regarde si on a assez d'engins disponibles
                 if (enginsDispo.Length >= nb)
+                    //On ajoute dans la liste des engins nécessaires
                     enginsNecessaires.Add((type, nb));
             }
-
+            //On prepare le datagreidview pour les engins
             dgvEngins.Rows.Clear();
             if (dgvEngins.Columns.Count == 0)
             {
@@ -337,8 +336,8 @@ namespace FormCreationMission
                 dgvEngins.Columns.Add("nombre", "Quantité requise");
                 dgvEngins.Columns.Add("equipage", "Équipage requis");
             }
-            
-            foreach (var (type, nb) in enginsNecessaires)
+
+            foreach ((string type, int nb) in enginsNecessaires)
             {
                 int equipage = 0;
                 DataRow[] rowType = MesDatas.DsGlobal.Tables["TypeEngin"].Select($"code = '{type}'");
@@ -348,6 +347,7 @@ namespace FormCreationMission
                 dgvEngins.Rows.Add(type, nb, equipage);
             }
 
+            //On prepare le datagridview pour les pompiers
             dgvPompiers.Rows.Clear();
             if (dgvPompiers.Columns.Count == 0)
             {
@@ -357,7 +357,7 @@ namespace FormCreationMission
                 dgvPompiers.Columns.Add("pourEngin", "Type Engin");
             }
 
-            foreach (var (typeEngin, nombre) in enginsNecessaires)
+            foreach ((string typeEngin, int nombre) in enginsNecessaires)
             {
                 List<int> habilitations = new List<int>();
                 DataRow[] rowsEmbarquer = MesDatas.DsGlobal.Tables["Embarquer"]
@@ -371,12 +371,13 @@ namespace FormCreationMission
                 }
 
                 List<DataRow> pompiersEligibles = new List<DataRow>();
-
+                // On parcoure les habilitations pour trouver les pompiers éligibles
                 foreach (int idHab in habilitations)
                 {
+                    // On récupère les pompiers ayant cette habilitation
                     DataRow[] rowsPasser = MesDatas.DsGlobal.Tables["Passer"]
                         .Select("idHabilitation = " + idHab);
-
+                    // On parcoure les lignes pour vérifier les pompiers
                     foreach (DataRow passerRow in rowsPasser)
                     {
                         int matricule = Convert.ToInt32(passerRow["matriculePompier"]);
@@ -395,16 +396,17 @@ namespace FormCreationMission
                         }
                     }
                 }
-
+                // On parcoure les pompiers éligibles pour les ajouter au DataGridView
                 int equipage = 0;
                 DataRow[] rowType = MesDatas.DsGlobal.Tables["TypeEngin"].Select($"code = '{typeEngin}'");
                 if (rowType.Length > 0)
                     equipage = Convert.ToInt32(rowType[0]["equipage"]);
 
                 int totalPompiers = equipage * nombre;
-                var selection = pompiersEligibles.Take(totalPompiers).ToList();
+                List<DataRow> selection = pompiersEligibles.Take(totalPompiers).ToList();
 
-                foreach (var p in selection)
+
+                foreach (DataRow p in selection)
                 {
                     dgvPompiers.Rows.Add(p["matricule"], p["nom"], p["prenom"], typeEngin);
                     //p["enMission"] = 1; // ✅ Mise à jour dans le DataSet
@@ -416,6 +418,7 @@ namespace FormCreationMission
 
         private void btnMAJ_Click_1(object sender, EventArgs e)
         {
+            //On verifie si les champs sont remplis
             if (string.IsNullOrWhiteSpace(txtMotif.Text) || string.IsNullOrWhiteSpace(txtRue.Text) || string.IsNullOrWhiteSpace(txtCodePostale.Text) || string.IsNullOrWhiteSpace(txtVille.Text))
             {
                 MessageBox.Show("❌ Veuillez remplir tous les champs avant de continuer.");
@@ -423,6 +426,7 @@ namespace FormCreationMission
             }
             try
             {
+                // --- Récupération des DataTables nécessaires
                 DataTable dtMission = MesDatas.DsGlobal.Tables["Mission"];
                 DataTable dtEngin = MesDatas.DsGlobal.Tables["Engin"];
                 DataTable dtPompier = MesDatas.DsGlobal.Tables["Pompier"];
@@ -441,20 +445,20 @@ namespace FormCreationMission
                     MessageBox.Show("❌ L'ID de la mission est vide.");
                     return;
                 }
+                //On nettoie l'ID pour éviter les espaces ou caractères indésirables
                 string id = lblId.Text.Trim();
                 nouvelleMission["id"] = id;
 
-                // --- Vérification comboBox
+                //Vérification comboBox
                 if (cbCaserneImmobiliser.SelectedValue == null || cbNatureSinistre.SelectedValue == null)
                 {
                     MessageBox.Show("❌ Veuillez sélectionner une caserne et une nature de sinistre.");
                     return;
                 }
-
+                //Ajout des valeurs sélectionnées dans les ComboBox
                 nouvelleMission["idCaserne"] = Convert.ToInt32(cbCaserneImmobiliser.SelectedValue);
                 nouvelleMission["idNatureSinistre"] = Convert.ToInt32(cbNatureSinistre.SelectedValue);
-
-                // --- Ajout dans le DataSet
+                //Ajout dans le DataSet
                 dtMission.Rows.Add(nouvelleMission);
                 // --- Ajouter les pompiers dans la table Mobiliser
                 DataTable dtMobiliser = MesDatas.DsGlobal.Tables["Mobiliser"];
@@ -466,8 +470,7 @@ namespace FormCreationMission
                     {
                         int matricule = Convert.ToInt32(row.Cells["matricule"].Value);
                         string codeTypeEngin = row.Cells["pourEngin"].Value.ToString();
-
-                        // 🔍 On récupère l'habilitation associée à ce type d'engin
+                        //On récupère l'habilitation associée à ce type d'engin
                         DataRow[] habRows = dtEmbarquer.Select($"codeTypeEngin = '{codeTypeEngin}'");
                         if (habRows.Length > 0)
                         {
@@ -484,7 +487,7 @@ namespace FormCreationMission
                 }
 
 
-                // --- Mise à jour enMission pour les pompiers
+                //Mise à jour enMission pour les pompiers
                 foreach (DataGridViewRow row in dgvPompiers.Rows)
                 {
                     if (row.Cells["Matricule"].Value != null)
@@ -498,7 +501,7 @@ namespace FormCreationMission
                     }
                 }
 
-                // --- Mise à jour enMission pour les engins
+                //Mise à jour enMission pour les engins
                 DataTable dtPartirAvec = MesDatas.DsGlobal.Tables["PartirAvec"];
                 int idMission = Convert.ToInt32(id); // déjà défini au-dessus
                 int idCaserne = Convert.ToInt32(cbCaserneImmobiliser.SelectedValue);
@@ -514,10 +517,10 @@ namespace FormCreationMission
 
                         foreach (DataRow engin in enginRow)
                         {
-                            // 1. Mettre à jour l'état dans le DataSet
+                            //Mettre à jour l'état dans le DataSet
                             engin["enMission"] = 1;
 
-                            // 2. Ajouter dans l’historique (PartirAvec)
+                            //Ajouter dans l’historique (PartirAvec)
                             DataRow ligne = dtPartirAvec.NewRow();
                             ligne["idMission"] = idMission;
                             ligne["idCaserne"] = idCaserne;
@@ -531,7 +534,7 @@ namespace FormCreationMission
                 }
 
 
-                // --- Nettoyage du formulaire
+                //Nettoyage du formulaire
                 txtMotif.Text = "";
                 txtRue.Text = "";
                 txtVille.Text = "";
@@ -542,7 +545,7 @@ namespace FormCreationMission
                 dgvEngins.Rows.Clear();
                 dgvPompiers.Rows.Clear();
 
-                // --- Prochain ID
+                //Prochain ID
                 int prochainId = 1;
                 if (dtMission.Rows.Count > 0)
                 {
@@ -555,8 +558,8 @@ namespace FormCreationMission
 
                 MesDatas.DsGlobal.AcceptChanges();
 
-                // --- Message final
-                MessageBox.Show("✅ Mission enregistrée dans le DataSet !");
+                //Message final
+                //MessageBox.Show("✅ Mission enregistrée dans le DataSet !");
 
                 // --- Rafraîchir tableau de bord
                 if (tableauDeBord != null)
