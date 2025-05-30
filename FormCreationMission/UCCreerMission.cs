@@ -407,7 +407,7 @@ namespace FormCreationMission
                 foreach (var p in selection)
                 {
                     dgvPompiers.Rows.Add(p["matricule"], p["nom"], p["prenom"], typeEngin);
-                    p["enMission"] = 1; // ✅ Mise à jour dans le DataSet
+                    //p["enMission"] = 1; // ✅ Mise à jour dans le DataSet
                 }
             }
         }
@@ -456,6 +456,33 @@ namespace FormCreationMission
 
                 // --- Ajout dans le DataSet
                 dtMission.Rows.Add(nouvelleMission);
+                // --- Ajouter les pompiers dans la table Mobiliser
+                DataTable dtMobiliser = MesDatas.DsGlobal.Tables["Mobiliser"];
+                DataTable dtEmbarquer = MesDatas.DsGlobal.Tables["Embarquer"];
+
+                foreach (DataGridViewRow row in dgvPompiers.Rows)
+                {
+                    if (row.Cells["matricule"].Value != null && row.Cells["pourEngin"].Value != null)
+                    {
+                        int matricule = Convert.ToInt32(row.Cells["matricule"].Value);
+                        string codeTypeEngin = row.Cells["pourEngin"].Value.ToString();
+
+                        // 🔍 On récupère l'habilitation associée à ce type d'engin
+                        DataRow[] habRows = dtEmbarquer.Select($"codeTypeEngin = '{codeTypeEngin}'");
+                        if (habRows.Length > 0)
+                        {
+                            int idHabilitation = Convert.ToInt32(habRows[0]["idHabilitation"]);
+
+                            // ➕ Nouvelle ligne dans Mobiliser
+                            DataRow ligneMobiliser = dtMobiliser.NewRow();
+                            ligneMobiliser["matriculePompier"] = matricule;
+                            ligneMobiliser["idMission"] = nouvelleMission["id"];
+                            ligneMobiliser["idHabilitation"] = idHabilitation;
+                            dtMobiliser.Rows.Add(ligneMobiliser);
+                        }
+                    }
+                }
+
 
                 // --- Mise à jour enMission pour les pompiers
                 foreach (DataGridViewRow row in dgvPompiers.Rows)
@@ -472,18 +499,37 @@ namespace FormCreationMission
                 }
 
                 // --- Mise à jour enMission pour les engins
+                DataTable dtPartirAvec = MesDatas.DsGlobal.Tables["PartirAvec"];
+                int idMission = Convert.ToInt32(id); // déjà défini au-dessus
+                int idCaserne = Convert.ToInt32(cbCaserneImmobiliser.SelectedValue);
+
                 foreach (DataGridViewRow row in dgvEngins.Rows)
                 {
                     if (row.Cells["typeEngin"].Value != null)
                     {
-                        string codeEngin = row.Cells["typeEngin"].Value.ToString();
-                        DataRow[] enginRow = dtEngin.Select($"codeTypeEngin = '{codeEngin}'");
-                        if (enginRow.Length > 0)
+                        string codeTypeEngin = row.Cells["typeEngin"].Value.ToString();
+
+                        // Trouver les engins disponibles de ce type dans cette caserne
+                        DataRow[] enginRow = dtEngin.Select($"codeTypeEngin = '{codeTypeEngin}' AND idCaserne = {idCaserne} AND enMission = 0");
+
+                        foreach (DataRow engin in enginRow)
                         {
-                            enginRow[0]["enMission"] = 1;
+                            // 1. Mettre à jour l'état dans le DataSet
+                            engin["enMission"] = 1;
+
+                            // 2. Ajouter dans l’historique (PartirAvec)
+                            DataRow ligne = dtPartirAvec.NewRow();
+                            ligne["idMission"] = idMission;
+                            ligne["idCaserne"] = idCaserne;
+                            ligne["codeTypeEngin"] = codeTypeEngin;
+                            ligne["numeroEngin"] = engin["numero"];
+                            ligne["reparationsEventuelles"] = DBNull.Value;
+
+                            dtPartirAvec.Rows.Add(ligne);
                         }
                     }
                 }
+
 
                 // --- Nettoyage du formulaire
                 txtMotif.Text = "";

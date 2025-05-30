@@ -14,6 +14,7 @@ using iTextSharp.text.pdf;
 using static System.Net.Mime.MediaTypeNames;
 using System.Data.SQLite;
 using SAEPageMission;
+using System.Reflection.Emit;
 
 
 namespace UCRecapitulMission
@@ -21,6 +22,8 @@ namespace UCRecapitulMission
 
     public partial class UCAffichageMission : UserControl
     {
+        private List<object[]> pompiersDeLaMission = new List<object[]>();
+        private List<object[]> enginsDeLaMission = new List<object[]>();
         private SQLiteConnection cx;
         private DataSet ds;
         private String dateRetour;
@@ -43,7 +46,6 @@ namespace UCRecapitulMission
                     lblTypeMission.Text  = row["motifAppel"].ToString();
 
                     string nature = row["idNatureSinistre"].ToString();
-
                     dateRetour = row["dateHeureRetour"].ToString();
 
                     foreach (DataRow naturerow in dsi.Tables["NatureSinistre"].Rows)
@@ -83,46 +85,51 @@ namespace UCRecapitulMission
 
             try
             {
-                // 🔹 Récupérer l’ID directement depuis lblID2
                 if (!int.TryParse(lblID2.Text.Trim(), out int id))
                 {
                     MessageBox.Show("❌ L'ID de mission est invalide.");
                     return;
                 }
 
-                MessageBox.Show("ID de mission : " + id);
-
                 string dateHeureActuelle = DateTime.Now.ToString("yyyy-MM-dd HH:mm");
 
-                // 🔹 Mettre à jour dans le DataSet
-                DataTable dt = this.ds.Tables["Mission"];
-                DataRow[] rows = dt.Select($"id = {id}");
-                if (rows.Length == 0)
+                DataTable dtMission = this.ds.Tables["Mission"];
+                DataRow[] rowsMission = dtMission.Select($"id = {id}");
+                if (rowsMission.Length == 0)
                 {
-                    MessageBox.Show("❌ Mission non trouvée dans le DataSet.");
+                    MessageBox.Show("❌ Mission non trouvée.");
                     return;
                 }
 
-                DataRow mission = rows[0];
+                DataRow mission = rowsMission[0];
                 mission["dateHeureRetour"] = dateHeureActuelle;
                 mission["terminee"] = 1;
                 this.dateRetour = dateHeureActuelle;
 
-                // 🔹 Vérifier si la mission est dans la base
+                // 🔸 SAUVEGARDE des données AVANT modification
+                var dtMobiliser = this.ds.Tables["Mobiliser"];
+                var lignesMobilises = dtMobiliser.Select($"idMission = {id}");
+                this.pompiersDeLaMission = lignesMobilises
+                    .Select(r => (object[])r.ItemArray.Clone())
+                    .ToList();
+
+                var dtPartirAvec = this.ds.Tables["PartirAvec"];
+                var lignesEngins = dtPartirAvec.Select($"idMission = {id}");
+                this.enginsDeLaMission = lignesEngins
+                    .Select(r => (object[])r.ItemArray.Clone())
+                    .ToList();
+
+                // 🔁 Mise à jour dans la base de données
                 string sqlCheck = "SELECT COUNT(*) FROM Mission";
                 using (var checkCmd = new SQLiteCommand(sqlCheck, Connexion.Connec))
                 {
                     if (Connexion.Connec.State != ConnectionState.Open)
                         Connexion.Connec.Open();
 
-                    
                     int count = Convert.ToInt32(checkCmd.ExecuteScalar());
-                    
+
                     if (count > id)
                     {
-                        MessageBox.Show("count : "+count+"//id : "+id);
-                        MessageBox.Show("✅ update");
-                        // 🔁 UPDATE
                         string sqlUpdate = @"UPDATE Mission SET 
                     motifAppel = @motif,
                     adresse = @adresse,
@@ -152,8 +159,6 @@ namespace UCRecapitulMission
                     }
                     else
                     {
-                        MessageBox.Show("✅ insert");
-                        // 🆕 INSERT
                         string sqlInsert = @"INSERT INTO Mission 
                     (id, motifAppel, adresse, cp, ville, dateHeureDepart, dateHeureRetour, idCaserne, idNatureSinistre, terminee) 
                     VALUES (@id, @motif, @adresse, @cp, @ville, @depart, @retour, @caserne, @nature, @terminee)";
@@ -175,73 +180,38 @@ namespace UCRecapitulMission
                     }
                 }
 
-                MessageBox.Show("✅ Mission clôturée et bien enregistrée dans la base !");
-                // ✅ Libérer les pompiers de la mission (enMission = 0)
-                try
+                // ✅ Libération des pompiers
+                var dtPompier = this.ds.Tables["Pompier"];
+                foreach (var ligne in lignesMobilises)
                 {
-                    var dtMobiliser = this.ds.Tables["Mobiliser"];
-                    var dtPompier = this.ds.Tables["Pompier"];
-
-                    // 🔎 Récupérer tous les matricules des pompiers mobilisés dans cette mission
-                    var lignesMobilises = dtMobiliser.Select($"idMission = {id}");
-
-                    foreach (var ligne in lignesMobilises)
-                    {
-                        int matricule = Convert.ToInt32(ligne["matriculePompier"]);
-
-                        DataRow[] rowsPompier = dtPompier.Select($"matricule = {matricule}");
-                        if (rowsPompier.Length > 0)
-                        {
-                            rowsPompier[0]["enMission"] = 0; // ✅ Libérer le pompier
-                        }
-                    }
-
-                    MessageBox.Show("✅ Tous les pompiers de la mission ont été remis disponibles !");
+                    int matricule = Convert.ToInt32(ligne["matriculePompier"]);
+                    DataRow[] rowsPompier = dtPompier.Select($"matricule = {matricule}");
+                    if (rowsPompier.Length > 0)
+                        rowsPompier[0]["enMission"] = 0;
                 }
-                catch (Exception ex)
+
+                // ✅ Libération des engins
+                var dtEngins = this.ds.Tables["Engin"];
+                foreach (var ligne in lignesEngins)
                 {
-                    MessageBox.Show("❌ Erreur lors de la libération des pompiers : " + ex.Message);
-                }
-                
-
-
-                // ✅ Libérer les engins de la mission (enMission = 0)
-                // On récupère les numéros d'engins mobilisés dans la mission
-                var partirAvec = this.ds.Tables["PartirAvec"];
-                var engins = this.ds.Tables["Engin"];
-
-                List<int> numeros = new List<int>();
-
-                foreach (DataRow row in partirAvec.Select($"idMission = {id}"))
-                {
-                    if (row.Table.Columns.Contains("numeroEngin") && row["numeroEngin"] != DBNull.Value)
+                    if (ligne["numeroEngin"] != DBNull.Value)
                     {
-                        int num;
-                        if (int.TryParse(row["numeroEngin"].ToString(), out num) && !numeros.Contains(num))
-                        {
-                            numeros.Add(num);
-                        }
+                        int num = Convert.ToInt32(ligne["numeroEngin"]);
+                        DataRow[] enginRows = dtEngins.Select($"numero = {num}");
+                        foreach (var r in enginRows)
+                            r["enMission"] = 0;
                     }
                 }
 
-                // ✅ Remettre enMission à 0 pour tous les engins concernés
-                foreach (int num in numeros)
-                {
-                    DataRow[] rowsx = engins.Select($"numero = {num}");
-                    foreach (var row in rowsx)
-                        row["enMission"] = 0;
-                }
-
-                MesDatas.DsGlobal.AcceptChanges();
-
-
-
+                this.ds.AcceptChanges();
+                MessageBox.Show("✅ Mission clôturée avec succès !");
             }
             catch (Exception ex)
             {
-                MessageBox.Show("❌ Erreur lors de la clôture ou l'ajout :\n" + ex.Message, "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("❌ Erreur lors de la clôture de la mission : " + ex.Message);
             }
         }
+
 
 
 
@@ -254,88 +224,129 @@ namespace UCRecapitulMission
 
         private void btnRapport_Click(object sender, EventArgs e)
         {
-            if (this.dateRetour != null && this.dateRetour != "")
+            if (!string.IsNullOrWhiteSpace(this.dateRetour))
             {
-                // Récupérer le chemin du dossier Téléchargements
-                string downloadsPath = Path.Combine(
-                Environment.GetFolderPath(Environment.SpecialFolder.UserProfile),
-                "Downloads",
-                "Rapport de mission"
+                string bureauPath = Path.Combine(
+                    Environment.GetFolderPath(Environment.SpecialFolder.Desktop),
+                    "Rapports Missions"
                 );
-                string id = lblId.Text.Split(':')[1].Trim();
-                string nomfichier = "mission" + id + ".pdf";
 
-                // Créer le dossier s’il n’existe pas
-                if (!Directory.Exists(downloadsPath))
-                {
-                    Directory.CreateDirectory(downloadsPath);
-                    MessageBox.Show("dossier creer");
-                }
+                string id = lblID2.Text.Trim();
+                string nomFichier = $"Mission_{id}.pdf";
 
-                // Chemin complet du fichier PDF à créer
-                string cheminPDF = Path.Combine(downloadsPath, nomfichier);
+                if (!Directory.Exists(bureauPath))
+                    Directory.CreateDirectory(bureauPath);
+
+                string cheminPDF = Path.Combine(bureauPath, nomFichier);
+
                 if (File.Exists(cheminPDF))
                 {
-                    MessageBox.Show("le pdf existe deja");
+                    MessageBox.Show("❗ Ce rapport existe déjà dans le Bureau.");
+                    return;
                 }
-                else
+
+                Document doc = new Document();
+
+                try
                 {
-                    Document doc = new Document();
-                    try
+                    PdfWriter.GetInstance(doc, new FileStream(cheminPDF, FileMode.Create));
+                    doc.Open();
+
+                    // 📝 TITRE
+                    iTextSharp.text.Font titreFont = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 18);
+                    doc.Add(new Paragraph($"RAPPORT DE MISSION N° {id}", titreFont));
+                    doc.Add(new Paragraph("\n"));
+
+                    // 📅 INFOS DE BASE
+                    string debut = lblDateDebut.Text.Split(':')[1].Trim();
+                    string type = lblTypeMission.Text;
+                    string description = lblDescription.Text;
+                    string caserne = lblCaserne.Text.Split(':')[1].Trim();
+
+                    doc.Add(new Paragraph($"📅 Début de mission : {debut}"));
+                    doc.Add(new Paragraph($"📅 Fin de mission   : {this.dateRetour}"));
+                    doc.Add(new Paragraph($"🏢 Caserne          : {caserne}"));
+                    doc.Add(new Paragraph($"📞 Motif d'appel    : {type}"));
+                    doc.Add(new Paragraph($"🔥 Nature sinistre  : {description}"));
+                    doc.Add(new Paragraph("\n-----------------------------\n"));
+
+                    // 🚒 ENGINS MOBILISÉS
+                    doc.Add(new Paragraph("🚒 Engins mobilisés :"));
+
+                    var lignesEngins = ds.Tables["PartirAvec"].Select($"idMission = {id}");
+                    var dtEngin = ds.Tables["Engin"];
+                    var dtTypeEngin = ds.Tables["TypeEngin"];
+
+                    if (lignesEngins.Length == 0)
                     {
-                        PdfWriter.GetInstance(doc, new FileStream(cheminPDF, FileMode.Create));
-                        doc.Open();
-
-                        // Ajout de contenu au PDF
-
-
-
-                        iTextSharp.text.Font titreFont = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 17);
-
-                        // Ajouter un paragraphe avec cette police
-                        doc.Add(new Paragraph("Rapport de mission N° " + id, titreFont));
-                        doc.Add(new Paragraph("\n\n"));
-
-                        string debut = lblDateDebut.Text.Split(':')[1].Trim();
-                        doc.Add(new Paragraph("Debut de mission: " + debut));
-
-
-                        
-                        doc.Add(new Paragraph("Fin de mission: " + this.dateRetour));
-
-                        doc.Add(new Paragraph(lblId.Text));
-
-                        string type = lblDescription.Text;
-                        doc.Add(new Paragraph("Type: " + type));
-
-                        string descrip = lblTypeMission.Text;
-                        doc.Add(new Paragraph("apeler pour: " + descrip));
-
-                        string paragraphe = remplirInfoPDF(id, lblCaserne.Text.Split(':')[1].Trim());
-                        doc.Add(new Paragraph(paragraphe));
-
-
-
-
-
-                        MessageBox.Show("PDF enregistré dans :\n" + cheminPDF, "Succès");
+                        doc.Add(new Paragraph("→ Aucun engin mobilisé."));
                     }
-                    catch (Exception ex)
+                    else
                     {
-                        MessageBox.Show("Erreur : " + ex.Message, "Erreur");
+                        foreach (var ligne in lignesEngins)
+                        {
+                            int num = Convert.ToInt32(ligne["numeroEngin"]);
+                            var engin = dtEngin.Select($"numero = {num}").FirstOrDefault();
+                            if (engin != null)
+                            {
+                                string typeCode = engin["codeTypeEngin"].ToString();
+                                // libelle = dtTypeEngin.Select($"code = '{typeCode}'").FirstOrDefault()?["libelle"]?.ToString() ?? typeCode;
+                                string libelleType = dtTypeEngin.Select($"code = '{typeCode}'").FirstOrDefault()?["nom"].ToString() ?? typeCode;
+
+                                doc.Add(new Paragraph($"→({libelleType})"));
+                            }
+                        }
                     }
-                    finally
+
+                    // 👨‍🚒 POMPIERS MOBILISÉS
+                    doc.Add(new Paragraph("\n👨‍🚒 Pompiers mobilisés :"));
+
+                    var lignesPompiers = ds.Tables["Mobiliser"].Select($"idMission = {id}");
+                    var dtPompier = ds.Tables["Pompier"];
+                    var dtGrade = ds.Tables["Grade"];
+                    var dtHabilitation = ds.Tables["Habilitation"];
+
+                    if (lignesPompiers.Length == 0)
                     {
-                        doc.Close();
+                        doc.Add(new Paragraph("→ Aucun pompier mobilisé."));
                     }
+                    else
+                    {
+                        foreach (var ligne in lignesPompiers)
+                        {
+                            int matricule = Convert.ToInt32(ligne["matriculePompier"]);
+                            int idHab = Convert.ToInt32(ligne["idHabilitation"]);
+
+                            var pompier = dtPompier.Select($"matricule = {matricule}").FirstOrDefault();
+                            if (pompier != null)
+                            {
+                                string nom = pompier["nom"].ToString();
+                                string prenom = pompier["prenom"].ToString();
+                                string grade = dtGrade.Select($"code = '{pompier["codeGrade"]}'").FirstOrDefault()?["libelle"].ToString() ?? "";
+                                string hab = dtHabilitation.Select($"id = {idHab}").FirstOrDefault()?["libelle"].ToString() ?? "";
+
+                                doc.Add(new Paragraph($"→ {grade} {prenom} {nom} (matricule : {matricule}) - {hab}"));
+                            }
+                        }
+                    }
+
+                    doc.Add(new Paragraph("\n📄 Rapport généré le : " + DateTime.Now.ToString("dd/MM/yyyy HH:mm")));
+                    doc.Close();
+                    MessageBox.Show("✅ Rapport PDF créé avec succès dans :\n" + cheminPDF, "Succès");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("❌ Erreur lors de la génération du rapport :\n" + ex.Message);
                 }
             }
             else
             {
-                MessageBox.Show("La mission doit d'abbord être terminé");
+                MessageBox.Show("❌ La mission doit d'abord être terminée pour générer le rapport.");
             }
-
         }
+
+
+
         private string remplirInfoPDF(string idMission, string idCaserne)
         {
             String descriptionDetaille = recapTableMission(idMission);

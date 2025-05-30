@@ -45,7 +45,8 @@ namespace FormCreationMission
             for (int i = 0; i < dt.Rows.Count; i++)
             {
                 string ntable = dt.Rows[i]["TABLE_NAME"].ToString();
-                xx += ntable + "\n";
+                //C est une liste pour savoir les tables de la base de données si ils sont tous chargées ou pas
+                //xx += ntable + "\n";
                 string sql = "SELECT * FROM " + ntable;
                 SQLiteDataAdapter da = new SQLiteDataAdapter(sql, Connexion.Connec);
                 da.Fill(MesDatas.DsGlobal, ntable);
@@ -142,7 +143,6 @@ namespace FormCreationMission
             }
             //MessageBox.Show(ds.Tables.Count.ToString() + " table(s) chargées !");
             //dtgvEX.DataSource = ds.Tables["Mission"];
-
         }
 
         //Fonction pour remplir les informations du PDF
@@ -153,7 +153,7 @@ namespace FormCreationMission
             return descriptionDetaille;
         }
 
-
+        //Pour avoir le récapitulatif de la mission (l'adresse)
         private string recapTableMission(string idMission)
         {
             string retour = "";
@@ -167,8 +167,6 @@ namespace FormCreationMission
             }
             return retour;
         }
-
-
 
         private string recapTableMobiliser(string idMission)
         {
@@ -201,7 +199,6 @@ namespace FormCreationMission
                 }
             }
             return retour;
-
         }
         private string recapTableGrade(string code)
         {
@@ -223,7 +220,6 @@ namespace FormCreationMission
                 if (row["id"].ToString() == idHabilitation)
                 {
                     retour = "mobiliser en tant que: " + row["libelle"].ToString() + "\n";
-
                 }
             }
             return retour;
@@ -345,7 +341,6 @@ namespace FormCreationMission
         public void btnActualiser_Click(object sender, EventArgs e)
         {
             actualiser();
-
         }
 
         private void chkbxEnCours_CheckedChanged_1(object sender, EventArgs e)
@@ -360,7 +355,6 @@ namespace FormCreationMission
                 //On nettoie le panel principale
                 pnlAffichage.Controls.Clear();
                 int y = 10; // Position de départ verticale
-
                 foreach (DataRow row in MesDatas.DsGlobal.Tables["Mission"].Rows)
                 {
                     if (row["terminee"].ToString() == "0")
