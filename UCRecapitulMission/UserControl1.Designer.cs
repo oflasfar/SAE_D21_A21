@@ -32,6 +32,7 @@
             this.btnRapport = new System.Windows.Forms.Button();
             this.btnCloturer = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.lblID2 = new System.Windows.Forms.Label();
             this.lblDescription = new System.Windows.Forms.Label();
             this.lblTypeMission = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
@@ -41,7 +42,6 @@
             this.lblIDMission = new System.Windows.Forms.Label();
             this.lblId = new System.Windows.Forms.Label();
             this.PBalarm = new System.Windows.Forms.PictureBox();
-            this.lblID2 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PBalarm)).BeginInit();
             this.SuspendLayout();
@@ -88,6 +88,15 @@
             this.panel1.Size = new System.Drawing.Size(745, 144);
             this.panel1.TabIndex = 6;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
+            // 
+            // lblID2
+            // 
+            this.lblID2.AutoSize = true;
+            this.lblID2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblID2.Location = new System.Drawing.Point(281, 26);
+            this.lblID2.Name = "lblID2";
+            this.lblID2.Size = new System.Drawing.Size(0, 25);
+            this.lblID2.TabIndex = 9;
             // 
             // lblDescription
             // 
@@ -177,15 +186,6 @@
             this.PBalarm.TabIndex = 0;
             this.PBalarm.TabStop = false;
             // 
-            // lblID2
-            // 
-            this.lblID2.AutoSize = true;
-            this.lblID2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblID2.Location = new System.Drawing.Point(281, 26);
-            this.lblID2.Name = "lblID2";
-            this.lblID2.Size = new System.Drawing.Size(0, 25);
-            this.lblID2.TabIndex = 9;
-            // 
             // UCAffichageMission
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -195,7 +195,7 @@
             this.Controls.Add(this.panel1);
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "UCAffichageMission";
-            this.Size = new System.Drawing.Size(810, 151);
+            this.Size = new System.Drawing.Size(837, 151);
             this.Load += new System.EventHandler(this.UserControl1_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
