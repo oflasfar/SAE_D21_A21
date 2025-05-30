@@ -49,7 +49,7 @@
             // 
             this.chkbxEnCours.AutoSize = true;
             this.chkbxEnCours.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkbxEnCours.Location = new System.Drawing.Point(597, 13);
+            this.chkbxEnCours.Location = new System.Drawing.Point(599, 20);
             this.chkbxEnCours.Margin = new System.Windows.Forms.Padding(4);
             this.chkbxEnCours.Name = "chkbxEnCours";
             this.chkbxEnCours.Size = new System.Drawing.Size(104, 24);
@@ -62,7 +62,7 @@
             // 
             this.btnActualiser.Location = new System.Drawing.Point(759, 15);
             this.btnActualiser.Name = "btnActualiser";
-            this.btnActualiser.Size = new System.Drawing.Size(131, 23);
+            this.btnActualiser.Size = new System.Drawing.Size(241, 28);
             this.btnActualiser.TabIndex = 0;
             this.btnActualiser.Text = "Actualiser";
             this.btnActualiser.UseVisualStyleBackColor = true;

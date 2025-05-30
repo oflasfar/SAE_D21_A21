@@ -32,7 +32,7 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.gbInformationCarriere = new System.Windows.Forms.GroupBox();
             this.cbCaserneRattachement = new System.Windows.Forms.ComboBox();
-            this.lstAffectationsPassees = new System.Windows.Forms.ListBox();
+            this.lstCaserneActuelle = new System.Windows.Forms.ListBox();
             this.lstHabilitations = new System.Windows.Forms.ListBox();
             this.btnMettreaJour = new System.Windows.Forms.Button();
             this.chbConge = new System.Windows.Forms.CheckBox();
@@ -72,6 +72,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.lstAffectationsPassees = new System.Windows.Forms.ListBox();
+            this.label15 = new System.Windows.Forms.Label();
             this.panel2.SuspendLayout();
             this.gbInformationCarriere.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -107,8 +109,10 @@
             // 
             // gbInformationCarriere
             // 
-            this.gbInformationCarriere.Controls.Add(this.cbCaserneRattachement);
+            this.gbInformationCarriere.Controls.Add(this.label15);
             this.gbInformationCarriere.Controls.Add(this.lstAffectationsPassees);
+            this.gbInformationCarriere.Controls.Add(this.cbCaserneRattachement);
+            this.gbInformationCarriere.Controls.Add(this.lstCaserneActuelle);
             this.gbInformationCarriere.Controls.Add(this.lstHabilitations);
             this.gbInformationCarriere.Controls.Add(this.btnMettreaJour);
             this.gbInformationCarriere.Controls.Add(this.chbConge);
@@ -118,7 +122,7 @@
             this.gbInformationCarriere.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gbInformationCarriere.Location = new System.Drawing.Point(136, 456);
             this.gbInformationCarriere.Name = "gbInformationCarriere";
-            this.gbInformationCarriere.Size = new System.Drawing.Size(743, 356);
+            this.gbInformationCarriere.Size = new System.Drawing.Size(900, 387);
             this.gbInformationCarriere.TabIndex = 23;
             this.gbInformationCarriere.TabStop = false;
             this.gbInformationCarriere.Text = "Information Carriere";
@@ -126,19 +130,19 @@
             // cbCaserneRattachement
             // 
             this.cbCaserneRattachement.FormattingEnabled = true;
-            this.cbCaserneRattachement.Location = new System.Drawing.Point(298, 27);
+            this.cbCaserneRattachement.Location = new System.Drawing.Point(193, 27);
             this.cbCaserneRattachement.Name = "cbCaserneRattachement";
-            this.cbCaserneRattachement.Size = new System.Drawing.Size(331, 33);
+            this.cbCaserneRattachement.Size = new System.Drawing.Size(685, 33);
             this.cbCaserneRattachement.TabIndex = 30;
             // 
-            // lstAffectationsPassees
+            // lstCaserneActuelle
             // 
-            this.lstAffectationsPassees.FormattingEnabled = true;
-            this.lstAffectationsPassees.ItemHeight = 25;
-            this.lstAffectationsPassees.Location = new System.Drawing.Point(16, 153);
-            this.lstAffectationsPassees.Name = "lstAffectationsPassees";
-            this.lstAffectationsPassees.Size = new System.Drawing.Size(613, 129);
-            this.lstAffectationsPassees.TabIndex = 29;
+            this.lstCaserneActuelle.FormattingEnabled = true;
+            this.lstCaserneActuelle.ItemHeight = 25;
+            this.lstCaserneActuelle.Location = new System.Drawing.Point(16, 153);
+            this.lstCaserneActuelle.Name = "lstCaserneActuelle";
+            this.lstCaserneActuelle.Size = new System.Drawing.Size(862, 54);
+            this.lstCaserneActuelle.TabIndex = 29;
             // 
             // lstHabilitations
             // 
@@ -146,14 +150,14 @@
             this.lstHabilitations.ItemHeight = 25;
             this.lstHabilitations.Location = new System.Drawing.Point(16, 84);
             this.lstHabilitations.Name = "lstHabilitations";
-            this.lstHabilitations.Size = new System.Drawing.Size(613, 29);
+            this.lstHabilitations.Size = new System.Drawing.Size(862, 29);
             this.lstHabilitations.TabIndex = 28;
             // 
             // btnMettreaJour
             // 
-            this.btnMettreaJour.Location = new System.Drawing.Point(453, 289);
+            this.btnMettreaJour.Location = new System.Drawing.Point(555, 341);
             this.btnMettreaJour.Name = "btnMettreaJour";
-            this.btnMettreaJour.Size = new System.Drawing.Size(185, 40);
+            this.btnMettreaJour.Size = new System.Drawing.Size(271, 40);
             this.btnMettreaJour.TabIndex = 24;
             this.btnMettreaJour.Text = "Mettre à jour";
             this.btnMettreaJour.UseVisualStyleBackColor = true;
@@ -162,7 +166,7 @@
             // chbConge
             // 
             this.chbConge.AutoSize = true;
-            this.chbConge.Location = new System.Drawing.Point(18, 300);
+            this.chbConge.Location = new System.Drawing.Point(16, 352);
             this.chbConge.Name = "chbConge";
             this.chbConge.Size = new System.Drawing.Size(117, 29);
             this.chbConge.TabIndex = 27;
@@ -172,7 +176,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(13, 125);
+            this.label12.Location = new System.Drawing.Point(13, 210);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(206, 25);
             this.label12.TabIndex = 26;
@@ -192,9 +196,9 @@
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(13, 30);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(243, 25);
+            this.label4.Size = new System.Drawing.Size(174, 25);
             this.label4.TabIndex = 24;
-            this.label4.Text = "Caserne de rattachement :";
+            this.label4.Text = "Nouvelle caserne :";
             // 
             // lblEmbauche
             // 
@@ -254,7 +258,7 @@
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(136, 286);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(743, 157);
+            this.groupBox1.Size = new System.Drawing.Size(900, 157);
             this.groupBox1.TabIndex = 18;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Carriére";
@@ -262,16 +266,16 @@
             // cbGradeNouveau
             // 
             this.cbGradeNouveau.FormattingEnabled = true;
-            this.cbGradeNouveau.Location = new System.Drawing.Point(328, 35);
+            this.cbGradeNouveau.Location = new System.Drawing.Point(401, 35);
             this.cbGradeNouveau.Name = "cbGradeNouveau";
-            this.cbGradeNouveau.Size = new System.Drawing.Size(203, 33);
+            this.cbGradeNouveau.Size = new System.Drawing.Size(293, 33);
             this.cbGradeNouveau.TabIndex = 23;
             this.cbGradeNouveau.SelectedIndexChanged += new System.EventHandler(this.cbGradeNouveau_SelectedIndexChanged);
             // 
             // BtnPlusInformation
             // 
             this.BtnPlusInformation.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnPlusInformation.Location = new System.Drawing.Point(328, 97);
+            this.BtnPlusInformation.Location = new System.Drawing.Point(463, 94);
             this.BtnPlusInformation.Name = "BtnPlusInformation";
             this.BtnPlusInformation.Size = new System.Drawing.Size(415, 39);
             this.BtnPlusInformation.TabIndex = 2;
@@ -283,12 +287,12 @@
             // 
             this.txtGrade.Location = new System.Drawing.Point(112, 35);
             this.txtGrade.Name = "txtGrade";
-            this.txtGrade.Size = new System.Drawing.Size(210, 30);
+            this.txtGrade.Size = new System.Drawing.Size(283, 30);
             this.txtGrade.TabIndex = 22;
             // 
             // btnChanger
             // 
-            this.btnChanger.Location = new System.Drawing.Point(559, 37);
+            this.btnChanger.Location = new System.Drawing.Point(700, 35);
             this.btnChanger.Name = "btnChanger";
             this.btnChanger.Size = new System.Drawing.Size(178, 40);
             this.btnChanger.TabIndex = 21;
@@ -539,6 +543,24 @@
             this.pictureBox1.TabIndex = 2;
             this.pictureBox1.TabStop = false;
             // 
+            // lstAffectationsPassees
+            // 
+            this.lstAffectationsPassees.FormattingEnabled = true;
+            this.lstAffectationsPassees.ItemHeight = 25;
+            this.lstAffectationsPassees.Location = new System.Drawing.Point(16, 238);
+            this.lstAffectationsPassees.Name = "lstAffectationsPassees";
+            this.lstAffectationsPassees.Size = new System.Drawing.Size(862, 54);
+            this.lstAffectationsPassees.TabIndex = 31;
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(13, 125);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(187, 25);
+            this.label15.TabIndex = 32;
+            this.label15.Text = "Affectation actuelle :";
+            // 
             // UCPersonnel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -567,7 +589,7 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.GroupBox gbInformationCarriere;
         private System.Windows.Forms.ComboBox cbCaserneRattachement;
-        private System.Windows.Forms.ListBox lstAffectationsPassees;
+        private System.Windows.Forms.ListBox lstCaserneActuelle;
         private System.Windows.Forms.ListBox lstHabilitations;
         private System.Windows.Forms.Button btnMettreaJour;
         private System.Windows.Forms.CheckBox chbConge;
@@ -607,5 +629,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.ListBox lstAffectationsPassees;
+        private System.Windows.Forms.Label label15;
     }
 }
