@@ -1,33 +1,36 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SQLite;
-using System.Data.Sql;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.ToolTip;
+using FormCreationMission;
 
-namespace SAEpageStatistique
+namespace FormCreationMission
 {
-    public partial class Form1 : Form
+    public partial class Statistique : UserControl
     {
         private SQLiteConnection cx;
         private DataSet ds;
         private SQLiteDataAdapter da;
         private bool isLoading = true;
-        public Form1()
+
+        public Statistique()
         {
-            this.cx = Connexion.Connec;
-            this.ds = MesDatas.DsGlobal;
+            InitializeComponent();
+        }
+        public Statistique(Form4 f, SQLiteConnection cxi, DataSet dsi)
+        {
+            this.cx = cxi;
+            this.ds = dsi;
             InitializeComponent();
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private void Statistique_Load(object sender, EventArgs e)
         {
             cboCaserne.Items.Add("choisir une caserne");
             cboCaserne.SelectedIndex = 0;
@@ -37,7 +40,7 @@ namespace SAEpageStatistique
             {
                 SQLiteCommand com = new SQLiteCommand(sql, this.cx);
                 SQLiteDataReader dr = com.ExecuteReader();
-                
+
                 while (dr.Read())
                 {
                     cboCaserne.Items.Add(dr[0].ToString());
@@ -50,17 +53,14 @@ namespace SAEpageStatistique
             }
 
             pnlCaserne.Visible = false;
-            string[] requeteCaserne = {"Information sur ","Engins les plus utilisés", "Cumul d’utilisation"};
-            
-            
-            
+            string[] requeteCaserne = { "Information sur ", "Engins les plus utilisés", "Cumul d’utilisation" };
             cboRequeteParCaserne.Items.AddRange(requeteCaserne);
             cboRequeteParCaserne.SelectedIndex = 0;
 
 
             string[] requeteGlobale = { "Stat global ", "Nombre d’interventions par type de sinistre", "Habilitations les plus sollicitées", "Liste des pompiers par habilitation" };
 
-            cboStatGlobal.Items.AddRange (requeteGlobale);
+            cboStatGlobal.Items.AddRange(requeteGlobale);
             cboStatGlobal.SelectedIndex = 0;
 
             cboHabilitation.Items.Add("choisir habilitation");
@@ -106,14 +106,6 @@ namespace SAEpageStatistique
 
 
             isLoading = false;
-
-
-        }
-
-        private void cboRequeteCaserne_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            
-
         }
 
         private void cboCaserne_SelectedIndexChanged(object sender, EventArgs e)
@@ -122,9 +114,9 @@ namespace SAEpageStatistique
             pnlCaserne.Visible = true;
             int y = 25;
             pnlCaserne.Controls.Clear();
-            if (cboRequeteParCaserne.SelectedIndex==1)
+            if (cboRequeteParCaserne.SelectedIndex == 1)
             {
-                string sql = "SELECT codeTypeEngin, numeroEngin, COUNT(*) FROM PartirAvec WHERE idCaserne = "+cboCaserne.SelectedIndex+" GROUP BY idCaserne, codeTypeEngin, numeroEngin;";
+                string sql = "SELECT codeTypeEngin, numeroEngin, COUNT(*) FROM PartirAvec WHERE idCaserne = " + cboCaserne.SelectedIndex + " GROUP BY idCaserne, codeTypeEngin, numeroEngin;";
 
                 try
                 {
@@ -134,7 +126,7 @@ namespace SAEpageStatistique
 
                     pnlCaserne.Controls.Clear();
 
-                    
+
 
                     while (dr.Read())
                     {
@@ -144,15 +136,15 @@ namespace SAEpageStatistique
                         int compteur = dr.GetInt32(2);
 
                         Label lbl = new Label();
-                        if (compteur  > 1)
+                        if (compteur > 1)
                         {
                             lbl.Text = "Engin " + engin + " (N°" + numero + ")" + " : " + compteur + " utilisations";
                         }
                         else
                         {
-                            lbl.Text = "Engin " + engin +" (N°" + numero + ")" + " : " + compteur + " utilisation";
+                            lbl.Text = "Engin " + engin + " (N°" + numero + ")" + " : " + compteur + " utilisation";
                         }
-                       
+
                         lbl.Location = new Point(10, y);
                         lbl.AutoSize = true;
 
@@ -168,9 +160,9 @@ namespace SAEpageStatistique
                 }
 
             }
-            else if(cboRequeteParCaserne.SelectedIndex==2)
+            else if (cboRequeteParCaserne.SelectedIndex == 2)
             {
-                string sql = "SELECT p.codeTypeEngin,  p.numeroEngin,  SUM(CAST((julianday(IFNULL(m.dateHeureRetour, CURRENT_TIMESTAMP)) - julianday(m.dateHeureDepart)) * 24 * 60 AS INTEGER)) AS duree_minutes FROM PartirAvec p JOIN Mission m ON p.idMission = m.id WHERE p.idCaserne = "+cboCaserne.SelectedIndex+" GROUP BY p.codeTypeEngin, p.numeroEngin;";
+                string sql = "SELECT p.codeTypeEngin,  p.numeroEngin,  SUM(CAST((julianday(IFNULL(m.dateHeureRetour, CURRENT_TIMESTAMP)) - julianday(m.dateHeureDepart)) * 24 * 60 AS INTEGER)) AS duree_minutes FROM PartirAvec p JOIN Mission m ON p.idMission = m.id WHERE p.idCaserne = " + cboCaserne.SelectedIndex + " GROUP BY p.codeTypeEngin, p.numeroEngin;";
 
                 try
                 {
@@ -180,7 +172,7 @@ namespace SAEpageStatistique
 
                     pnlCaserne.Controls.Clear();
 
-                    
+
 
                     while (dr.Read())
                     {
@@ -190,9 +182,9 @@ namespace SAEpageStatistique
                         int compteur = dr.GetInt32(2);
 
                         Label lbl = new Label();
-                       
-                        lbl.Text = "Engin " + engin +" (N°"+ numero+")" + " : " + compteur + " minutes";
-                        
+
+                        lbl.Text = "Engin " + engin + " (N°" + numero + ")" + " : " + compteur + " minutes";
+
 
                         lbl.Location = new Point(10, y);
                         lbl.AutoSize = true;
@@ -208,9 +200,9 @@ namespace SAEpageStatistique
                     MessageBox.Show("Erreur SQL : " + err.Message);
                 }
             }
-            if(cboCaserne.SelectedIndex ==0)
+            if (cboCaserne.SelectedIndex == 0)
             {
-                
+
                 Label lbl = new Label();
                 lbl.Text = "Veuillez choisir une caserne";
 
@@ -232,9 +224,6 @@ namespace SAEpageStatistique
 
                 pnlCaserne.Controls.Add(lbl);
             }
-
-
-
         }
 
         private void cboRequeteParCaserne_SelectedIndexChanged(object sender, EventArgs e)
@@ -352,7 +341,7 @@ namespace SAEpageStatistique
                 lbl.Location = new Point(10, y);
                 lbl.AutoSize = true;
 
-               pnlCaserne.Controls.Add(lbl);
+                pnlCaserne.Controls.Add(lbl);
             }
         }
 
@@ -361,12 +350,12 @@ namespace SAEpageStatistique
             if (isLoading) return;
             pnlGlobal.Controls.Clear();
 
-            
+
             int y = 20;
             if (cboStatGlobal.SelectedIndex == 1)
             {
                 cboTypeSinistre.SelectedIndex = 0;
-                cboTypeSinistre.Visible =  true;
+                cboTypeSinistre.Visible = true;
                 pnlGlobal.Visible = false;
             }
             else
@@ -383,7 +372,7 @@ namespace SAEpageStatistique
             {
                 cboHabilitation.Visible = false;
             }
-            if(cboStatGlobal.SelectedIndex == 2)
+            if (cboStatGlobal.SelectedIndex == 2)
             {
                 pnlGlobal.Visible = true;
                 String sql = "SELECT h.libelle, COUNT(*) FROM Mobiliser m JOIN Habilitation h ON m.idHabilitation=h.id GROUP BY m.idHabilitation ORDER BY  COUNT(*) DESC";
@@ -394,17 +383,17 @@ namespace SAEpageStatistique
                     SQLiteDataReader dr = com.ExecuteReader();
 
 
-                    
+
 
 
 
                     while (dr.Read())
                     {
-                        
+
                         String habilitation = dr.GetString(0);
                         int num = dr.GetInt32(1);
                         String nbinter = num.ToString();
-                        
+
 
                         Label lbl = new Label();
 
@@ -426,77 +415,6 @@ namespace SAEpageStatistique
                 }
 
             }
-        }
-
-        private void cboTypeSinistre_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (isLoading) return;
-            pnlGlobal.Visible = true;
-            pnlGlobal.Controls.Clear();
-            int y = 20;
-            if (cboTypeSinistre.SelectedIndex == 0)
-            {
-                Label lbl = new Label();
-                lbl.Text = "Veulliez choisir un type de sinistre";
-                lbl.Location = new Point(10, y);
-                lbl.AutoSize = true;
-                pnlGlobal.Controls.Add(lbl);
-            }
-            else
-            {
-                String sql = "SELECT COUNT(*), s.libelle FROM Mission m JOIN NatureSinistre s ON s.id=m.idNatureSinistre WHERE s.id =" + cboTypeSinistre.SelectedIndex + " GROUP BY s.id ORDER BY count(*) DESC";
-                try
-                {
-                    SQLiteCommand com = new SQLiteCommand(sql, this.cx);
-                    SQLiteDataReader dr = com.ExecuteReader();
-
-
-
-
-                    int compteur = 0;
-
-                    while (dr.Read())
-                    {
-                        pnlGlobal.Visible = true;
-
-                        int num = dr.GetInt32(0);
-                        String nbinter = num.ToString();
-                        String type = dr.GetString(1);
-
-
-                        Label lbl = new Label();
-
-                        lbl.Text = " Il y a eu " + nbinter + " intervention de type " + type;
-
-
-                        lbl.Location = new Point(10, y);
-                        lbl.AutoSize = true;
-
-                        pnlGlobal.Controls.Add(lbl);
-                        compteur++;
-                        y += 25;
-                    }
-                    if(compteur==0)
-                    {
-                        Label lbl = new Label();
-
-                        lbl.Text = " Il n'y a eu aucune intervention de type " + cboTypeSinistre.Text;
-
-
-                        lbl.Location = new Point(10, y);
-                        lbl.AutoSize = true;
-
-                        pnlGlobal.Controls.Add(lbl);
-                    }
-
-                    dr.Close();
-                }
-                catch (SQLiteException err)
-                {
-                    MessageBox.Show("Erreur SQL : " + err.Message);
-                }
-            }
-
         }
 
         private void cboHabilitation_SelectedIndexChanged(object sender, EventArgs e)
@@ -574,24 +492,74 @@ namespace SAEpageStatistique
             }
         }
 
-        private void lblStatistiqueGlobal_Click(object sender, EventArgs e)
+        private void cboTypeSinistre_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (isLoading) return;
+            pnlGlobal.Visible = true;
+            pnlGlobal.Controls.Clear();
+            int y = 20;
+            if (cboTypeSinistre.SelectedIndex == 0)
+            {
+                Label lbl = new Label();
+                lbl.Text = "Veulliez choisir un type de sinistre";
+                lbl.Location = new Point(10, y);
+                lbl.AutoSize = true;
+                pnlGlobal.Controls.Add(lbl);
+            }
+            else
+            {
+                String sql = "SELECT COUNT(*), s.libelle FROM Mission m JOIN NatureSinistre s ON s.id=m.idNatureSinistre WHERE s.id =" + cboTypeSinistre.SelectedIndex + " GROUP BY s.id ORDER BY count(*) DESC";
+                try
+                {
+                    SQLiteCommand com = new SQLiteCommand(sql, this.cx);
+                    SQLiteDataReader dr = com.ExecuteReader();
 
-        }
 
-        private void lblStatCasern_Click(object sender, EventArgs e)
-        {
 
-        }
 
-        private void pnlGlobal_Paint(object sender, PaintEventArgs e)
-        {
+                    int compteur = 0;
 
-        }
+                    while (dr.Read())
+                    {
+                        pnlGlobal.Visible = true;
 
-        private void pnlCaserne_Paint(object sender, PaintEventArgs e)
-        {
+                        int num = dr.GetInt32(0);
+                        String nbinter = num.ToString();
+                        String type = dr.GetString(1);
 
+
+                        Label lbl = new Label();
+
+                        lbl.Text = " Il y a eu " + nbinter + " intervention de type " + type;
+
+
+                        lbl.Location = new Point(10, y);
+                        lbl.AutoSize = true;
+
+                        pnlGlobal.Controls.Add(lbl);
+                        compteur++;
+                        y += 25;
+                    }
+                    if (compteur == 0)
+                    {
+                        Label lbl = new Label();
+
+                        lbl.Text = " Il n'y a eu aucune intervention de type " + cboTypeSinistre.Text;
+
+
+                        lbl.Location = new Point(10, y);
+                        lbl.AutoSize = true;
+
+                        pnlGlobal.Controls.Add(lbl);
+                    }
+
+                    dr.Close();
+                }
+                catch (SQLiteException err)
+                {
+                    MessageBox.Show("Erreur SQL : " + err.Message);
+                }
+            }
         }
     }
 }

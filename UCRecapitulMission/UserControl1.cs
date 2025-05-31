@@ -246,9 +246,19 @@ namespace UCRecapitulMission
                 {
                     PdfWriter.GetInstance(doc, new FileStream(cheminPDF, FileMode.Create));
                     doc.Open();
+                    // 🔥 Logo CaserNet
+                    string cheminLogo = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Images", "logo.png");
+                    if (File.Exists(cheminLogo))
+                    {
+                        iTextSharp.text.Image logo = iTextSharp.text.Image.GetInstance(cheminLogo);
+                        logo.ScaleAbsolute(100f, 100f); // Taille du logo
+                        logo.Alignment = Element.ALIGN_CENTER;
+                        doc.Add(logo);
+                        doc.Add(new Paragraph("\n")); // Espace après le logo
+                    }
 
-                    //TITRE
-                    iTextSharp.text.Font titreFont = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 18);
+                        //TITRE
+                        iTextSharp.text.Font titreFont = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 18);
                     doc.Add(new Paragraph($"RAPPORT DE MISSION N° {id}", titreFont));
                     doc.Add(new Paragraph("\n"));
 

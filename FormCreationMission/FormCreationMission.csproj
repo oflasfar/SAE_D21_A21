@@ -188,6 +188,12 @@
     <Compile Include="mesDatas.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Statistique.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Statistique.Designer.cs">
+      <DependentUpon>Statistique.cs</DependentUpon>
+    </Compile>
     <Compile Include="UCCreerMission.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -224,6 +230,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Statistique.resx">
+      <DependentUpon>Statistique.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UCCreerMission.resx">
       <DependentUpon>UCCreerMission.cs</DependentUpon>
     </EmbeddedResource>

@@ -26,8 +26,6 @@ namespace UCMenue
             InitializeComponent();
             this.f = fp;
             this.Personnel = Personnel;
-            
-
         }
 
         private void UserControl1_Load(object sender, EventArgs e)
@@ -72,5 +70,9 @@ namespace UCMenue
             }
         }
 
+        private void btnStatistique_Click(object sender, EventArgs e)
+        {
+            f.AfficherStatistique(); // méthode de Form4
+        }
     }
 }

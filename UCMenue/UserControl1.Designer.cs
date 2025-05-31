@@ -103,6 +103,7 @@
             this.btnStatistique.TabIndex = 4;
             this.btnStatistique.Text = "Statistique";
             this.btnStatistique.UseVisualStyleBackColor = false;
+            this.btnStatistique.Click += new System.EventHandler(this.btnStatistique_Click);
             // 
             // btnQuitter
             // 

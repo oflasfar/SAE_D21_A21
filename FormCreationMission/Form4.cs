@@ -109,6 +109,22 @@ namespace FormCreationMission
             }
         }
 
+        public void AfficherStatistique()
+        {
+            try
+            {
+                pnlAffichage.Controls.Clear();
+                Statistique uc = new Statistique(this,Connexion.Connec,MesDatas.DsGlobal);
+                uc.Dock = DockStyle.Fill;
+                pnlAffichage.Controls.Add(uc);
+                uc.BringToFront();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erreur : " + ex.Message);
+            }
+        }
+
         //Methode pour afficher le User Control du Personnel
         public void AfficherPersonnel()
         {
