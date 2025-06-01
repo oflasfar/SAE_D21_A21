@@ -185,6 +185,12 @@
     <Compile Include="FormConn.Designer.cs">
       <DependentUpon>FormConn.cs</DependentUpon>
     </Compile>
+    <Compile Include="gestionEngins.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="gestionEngins.Designer.cs">
+      <DependentUpon>gestionEngins.cs</DependentUpon>
+    </Compile>
     <Compile Include="mesDatas.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -221,6 +227,9 @@
     <EmbeddedResource Include="FormConn.resx">
       <DependentUpon>FormConn.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="gestionEngins.resx">
+      <DependentUpon>gestionEngins.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -229,6 +238,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="Statistique.resx">
       <DependentUpon>Statistique.cs</DependentUpon>
@@ -252,6 +262,48 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Resources\BRS.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Resources\CCF.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Resources\EPA.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Resources\FCYN.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Resources\final_page.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Resources\first_page.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Resources\FPT.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Resources\next_page.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Resources\previous_page.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Resources\VID.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Resources\VPC.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Resources\VSAV.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Resources\VSR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Resources\VSS.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.119.0\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets" Condition="Exists('packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.119.0\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets')" />

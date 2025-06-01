@@ -101,10 +101,7 @@ namespace FormCreationMission
                 MessageBox.Show(err.Message);
             }
             cboTypeSinistre.SelectedIndex = 0;
-
             pnlGlobal.AutoScroll = true;
-
-
             isLoading = false;
         }
 
@@ -381,12 +378,6 @@ namespace FormCreationMission
                 {
                     SQLiteCommand com = new SQLiteCommand(sql, this.cx);
                     SQLiteDataReader dr = com.ExecuteReader();
-
-
-
-
-
-
                     while (dr.Read())
                     {
 
@@ -413,7 +404,6 @@ namespace FormCreationMission
                 {
                     MessageBox.Show("Erreur SQL : " + err.Message);
                 }
-
             }
         }
 
@@ -463,19 +453,12 @@ namespace FormCreationMission
 
                     while (dr2.Read())
                     {
-
-
-
                         String abrev = dr2.GetString(0);
                         String nom = dr2.GetString(1);
                         String prenom = dr2.GetString(2);
                         int matricule = dr2.GetInt32(3);
-
-
                         Label lbl2 = new Label();
                         lbl2.Text = abrev + " " + nom + " " + prenom + " Matricule N°" + matricule.ToString();
-
-
                         lbl2.Location = new Point(10, y);
                         lbl2.AutoSize = true;
 
@@ -513,12 +496,7 @@ namespace FormCreationMission
                 {
                     SQLiteCommand com = new SQLiteCommand(sql, this.cx);
                     SQLiteDataReader dr = com.ExecuteReader();
-
-
-
-
                     int compteur = 0;
-
                     while (dr.Read())
                     {
                         pnlGlobal.Visible = true;
@@ -526,8 +504,6 @@ namespace FormCreationMission
                         int num = dr.GetInt32(0);
                         String nbinter = num.ToString();
                         String type = dr.GetString(1);
-
-
                         Label lbl = new Label();
 
                         lbl.Text = " Il y a eu " + nbinter + " intervention de type " + type;

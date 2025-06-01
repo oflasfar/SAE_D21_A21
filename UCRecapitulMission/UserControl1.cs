@@ -115,7 +115,7 @@ namespace UCRecapitulMission
 
                 // 🔁 Mise à jour dans la base de données
                 string sqlCheck = "SELECT COUNT(*) FROM Mission";
-                using (var checkCmd = new SQLiteCommand(sqlCheck, Connexion.Connec))
+                using (SQLiteCommand checkCmd = new SQLiteCommand(sqlCheck, Connexion.Connec))
                 {
                     if (Connexion.Connec.State != ConnectionState.Open)
                         Connexion.Connec.Open();
@@ -175,7 +175,7 @@ namespace UCRecapitulMission
                     }
                 }
 
-                // ✅ Libération des pompiers
+                //Libération des pompiers
                 DataTable dtPompier = this.ds.Tables["Pompier"];
                 foreach (DataRow ligne in lignesMobilises)
                 {
@@ -185,7 +185,7 @@ namespace UCRecapitulMission
                         rowsPompier[0]["enMission"] = 0;
                 }
 
-                // ✅ Libération des engins
+                //Libération des engins
                 DataTable dtEngins = this.ds.Tables["Engin"];
                 foreach (DataRow ligne in lignesEngins)
                 {
@@ -193,7 +193,7 @@ namespace UCRecapitulMission
                     {
                         int num = Convert.ToInt32(ligne["numeroEngin"]);
                         DataRow[] enginRows = dtEngins.Select($"numero = {num}");
-                        foreach (var r in enginRows)
+                        foreach (DataRow r in enginRows)
                             r["enMission"] = 0;
                     }
                 }
@@ -246,7 +246,7 @@ namespace UCRecapitulMission
                 {
                     PdfWriter.GetInstance(doc, new FileStream(cheminPDF, FileMode.Create));
                     doc.Open();
-                    // 🔥 Logo CaserNet
+                    //Logo CaserNet
                     string cheminLogo = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Images", "logo.png");
                     if (File.Exists(cheminLogo))
                     {
@@ -257,7 +257,7 @@ namespace UCRecapitulMission
                         doc.Add(new Paragraph("\n")); // Espace après le logo
                     }
 
-                        //TITRE
+                        //Titre
                         iTextSharp.text.Font titreFont = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 18);
                     doc.Add(new Paragraph($"RAPPORT DE MISSION N° {id}", titreFont));
                     doc.Add(new Paragraph("\n"));
@@ -276,12 +276,13 @@ namespace UCRecapitulMission
                     doc.Add(new Paragraph($"🔥 Nature sinistre  : {description}"));
                     doc.Add(new Paragraph("\n-----------------------------\n"));
 
-                    // 🚒 ENGINS MOBILISÉS
+                    //ENGINS MOBILISÉS
                     doc.Add(new Paragraph("🚒 Engins mobilisés :"));
 
-                    var lignesEngins = ds.Tables["PartirAvec"].Select($"idMission = {id}");
-                    var dtEngin = ds.Tables["Engin"];
-                    var dtTypeEngin = ds.Tables["TypeEngin"];
+                    DataRow[] lignesEngins = ds.Tables["PartirAvec"].Select($"idMission = {id}");
+                    DataTable dtEngin = ds.Tables["Engin"];
+                    DataTable dtTypeEngin = ds.Tables["TypeEngin"];
+
 
                     if (lignesEngins.Length == 0)
                     {
@@ -296,7 +297,7 @@ namespace UCRecapitulMission
                             if (engin != null)
                             {
                                 string typeCode = engin["codeTypeEngin"].ToString();
-                                // libelle = dtTypeEngin.Select($"code = '{typeCode}'").FirstOrDefault()?["libelle"]?.ToString() ?? typeCode;
+                                //libelle = dtTypeEngin.Select($"code = '{typeCode}'").FirstOrDefault()?["libelle"]?.ToString() ?? typeCode;
                                 string libelleType = dtTypeEngin.Select($"code = '{typeCode}'").FirstOrDefault()?["nom"].ToString() ?? typeCode;
 
                                 doc.Add(new Paragraph($"→({libelleType})"));
@@ -304,7 +305,7 @@ namespace UCRecapitulMission
                         }
                     }
 
-                    // 👨‍🚒 POMPIERS MOBILISÉS
+                    //POMPIERS MOBILISÉS
                     doc.Add(new Paragraph("\n👨‍🚒 Pompiers mobilisés :"));
                     /*
                     DataRow[] lignesPompiers = ds.Tables["Mobiliser"].Select($"idMission = {id}");
@@ -341,7 +342,7 @@ namespace UCRecapitulMission
 
                     doc.Add(new Paragraph("\n📄 Rapport généré le : " + DateTime.Now.ToString("dd/MM/yyyy HH:mm")));
                     doc.Close();
-                    //MessageBox.Show("✅ Rapport PDF créé avec succès dans :\n" + cheminPDF, "Succès");
+                    //MessageBox.Show("Rapport PDF créé avec succès dans :\n" + cheminPDF, "Succès");
                 }
                 catch (Exception ex)
                 {
@@ -411,7 +412,6 @@ namespace UCRecapitulMission
                 }
             }
             return retour;
-
         }
         private string recapTableGrade(string code)
         {

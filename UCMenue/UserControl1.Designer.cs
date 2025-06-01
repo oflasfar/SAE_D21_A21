@@ -76,6 +76,7 @@
             this.btnGestionEngin.TabIndex = 2;
             this.btnGestionEngin.Text = "Gestion Des Engins";
             this.btnGestionEngin.UseVisualStyleBackColor = false;
+            this.btnGestionEngin.Click += new System.EventHandler(this.btnGestionEngin_Click);
             // 
             // btnGestionPersonnel
             // 

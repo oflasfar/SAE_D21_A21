@@ -88,3 +88,4 @@ C:\OMAR\S2\SAE-D21\FormCreationMission\obj\Debug\FormCreationMission.UCCreerMiss
 C:\OMAR\S2\SAE-D21\FormCreationMission\obj\Debug\FormCreationMission.UCPersonnel.resources
 C:\OMAR\S2\SAE-D21\FormCreationMission\obj\Debug\FormCreationMission.FormConn.resources
 C:\OMAR\S2\SAE-D21\FormCreationMission\obj\Debug\FormCreationMission.Statistique.resources
+C:\OMAR\S2\SAE-D21\FormCreationMission\obj\Debug\FormCreationMission.gestionEngins.resources

@@ -109,6 +109,22 @@ namespace FormCreationMission
             }
         }
 
+        public void AfficherEngins()
+        {
+            try
+            {
+                pnlAffichage.Controls.Clear();
+                gestionEngins uc = new gestionEngins(MesDatas.DsGlobal,this);
+                uc.Dock = DockStyle.Fill;
+                pnlAffichage.Controls.Add(uc);
+                uc.BringToFront();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erreur : " + ex.Message);
+            }
+        }
+
         public void AfficherStatistique()
         {
             try

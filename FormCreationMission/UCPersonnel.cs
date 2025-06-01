@@ -819,7 +819,7 @@ namespace FormCreationMission
                     {
                         if (cbGradeNouveau.Visible)
                         {
-                            // Déjà visible → on copie le texte + image du grade
+                            // Déjà visible = on copie le texte + image du grade
                             if (cbGradeNouveau.SelectedItem is DataRowView selectedRow)
                             {
                                 string libelleGrade = selectedRow["libelle"].ToString();
@@ -918,7 +918,7 @@ namespace FormCreationMission
                                 if (Connexion.Connec.State != ConnectionState.Open)
                                     Connexion.Connec.Open();
 
-                                // 🔹 1. Charger toutes les casernes
+                                //Charger toutes les casernes
                                 string sqlToutesCaserne = "SELECT id, nom FROM Caserne";
                                 SQLiteDataAdapter da = new SQLiteDataAdapter(sqlToutesCaserne, Connexion.Connec);
                                 DataTable dtCaserne = new DataTable();
@@ -927,7 +927,7 @@ namespace FormCreationMission
                                 cbCaserneRattachement.DisplayMember = "nom";
                                 cbCaserneRattachement.ValueMember = "id";
 
-                                // 🔹 2. Caserne actuelle
+                                //Caserne actuelle
                                 lstCaserneActuelle.Items.Clear();
                                 string sqlCaserneActuelle = @"
                                 SELECT A.dateA, C.nom 
@@ -952,7 +952,7 @@ namespace FormCreationMission
                                     }
                                 }
 
-                                // 🔹 3. Habilitations
+                                //Habilitations
                                 lstHabilitations.Items.Clear();
                                 string sqlHabilitations = @"SELECT H.libelle FROM Habilitation H JOIN Passer P ON H.id = P.idHabilitation WHERE P.matriculePompier = @mat";
                                 using (SQLiteCommand cmd2 = new SQLiteCommand(sqlHabilitations, Connexion.Connec))
@@ -967,7 +967,7 @@ namespace FormCreationMission
                                     }
                                 }
 
-                                // 🔹 4. Anciennes affectations
+                                //Anciennes affectations
                                 lstAffectationsPassees.Items.Clear(); // ← on utilise une autre ListBox ici
                                 string sqlPassees = @"
                                 SELECT A.dateA, A.dateFin, C.nom 
@@ -1026,7 +1026,7 @@ namespace FormCreationMission
                             if (Connexion.Connec.State != ConnectionState.Open)
                                 Connexion.Connec.Open();
 
-                            // 🔹 1. Charger toutes les casernes
+                            // Charger toutes les casernes
                             string sqlToutesCaserne = "SELECT id, nom FROM Caserne";
                             SQLiteDataAdapter da = new SQLiteDataAdapter(sqlToutesCaserne, Connexion.Connec);
                             DataTable dtCaserne = new DataTable();
@@ -1035,7 +1035,7 @@ namespace FormCreationMission
                             cbCaserneRattachement.DisplayMember = "nom";
                             cbCaserneRattachement.ValueMember = "id";
 
-                            // 🔹 2. Caserne actuelle
+                            //Caserne actuelle
                             lstCaserneActuelle.Items.Clear();
                             string sqlCaserneActuelle = @"
 SELECT A.dateA, C.nom 
@@ -1060,7 +1060,7 @@ WHERE A.matriculePompier = @mat AND A.dateFin IS NULL";
                                 }
                             }
 
-                            // 🔹 3. Habilitations
+                            //Habilitations
                             lstHabilitations.Items.Clear();
                             string sqlHabilitations = @"SELECT H.libelle FROM Habilitation H JOIN Passer P ON H.id = P.idHabilitation WHERE P.matriculePompier = @mat";
                             using (SQLiteCommand cmd2 = new SQLiteCommand(sqlHabilitations, Connexion.Connec))
@@ -1075,8 +1075,8 @@ WHERE A.matriculePompier = @mat AND A.dateFin IS NULL";
                                 }
                             }
 
-                            // 🔹 4. Anciennes affectations
-                            lstAffectationsPassees.Items.Clear(); // ← on utilise une autre ListBox ici
+                            //Anciennes affectations
+                            lstAffectationsPassees.Items.Clear(); //on utilise une autre ListBox ici
                             string sqlPassees = @"
                             SELECT A.dateA, A.dateFin, C.nom 
                             FROM Affectation A 
@@ -1098,7 +1098,6 @@ WHERE A.matriculePompier = @mat AND A.dateFin IS NULL";
                                         string nomCaserne = reader["nom"].ToString();
                                         lstAffectationsPassees.Items.Add($"→ {dateDebut} à {dateFin} : {nomCaserne}");
                                     }
-
                                     if (!aDesAnciennes)
                                         lstAffectationsPassees.Items.Add("Aucune affectation passée.");
                                 }
@@ -1127,7 +1126,7 @@ WHERE A.matriculePompier = @mat AND A.dateFin IS NULL";
                 int matricule = Convert.ToInt32(lblMatricule.Text);
                 int nouvelleCaserne = Convert.ToInt32(cbCaserneRattachement.SelectedValue);
 
-                // ✅ 1. Récupérer l'ID de la caserne actuelle
+                //Récupérer l'ID de la caserne actuelle
                 int idCaserneActuelle = -1;
                 string sqlSelect = "SELECT idCaserne FROM Affectation WHERE matriculePompier = @mat AND dateFin IS NULL";
                 using (SQLiteCommand cmd = new SQLiteCommand(sqlSelect, Connexion.Connec))
@@ -1138,14 +1137,14 @@ WHERE A.matriculePompier = @mat AND A.dateFin IS NULL";
                         idCaserneActuelle = Convert.ToInt32(result);
                 }
 
-                // ✅ 2. Vérifier si la caserne a changé
+                // Vérifier si la caserne a changé
                 bool caserneChange = idCaserneActuelle != nouvelleCaserne;
 
                 transaction = Connexion.Connec.BeginTransaction();
 
                 if (caserneChange)
                 {
-                    // 🔁 Fermer ancienne affectation
+                    //Fermer ancienne affectation
                     string sqlUpdate = @"
                 UPDATE Affectation
                 SET dateFin = @dateFin
@@ -1158,7 +1157,7 @@ WHERE A.matriculePompier = @mat AND A.dateFin IS NULL";
                         cmdUpdate.ExecuteNonQuery();
                     }
 
-                    // 🔁 Nouvelle affectation
+                    //Nouvelle affectation
                     string nouvelleDate = DateTime.Now.AddSeconds(1).ToString("yyyy-MM-dd HH:mm:ss");
 
                     string sqlInsert = @"
@@ -1174,7 +1173,7 @@ WHERE A.matriculePompier = @mat AND A.dateFin IS NULL";
                     }
                 }
 
-                // ✅ 3. Mise à jour du champ enConge
+                //Mise à jour du champ enConge
                 string sqlConge = "UPDATE Pompier SET enConge = @etatConge WHERE matricule = @matricule";
 
                 using (SQLiteCommand cmdConge = new SQLiteCommand(sqlConge, Connexion.Connec, transaction))
@@ -1194,13 +1193,13 @@ WHERE A.matriculePompier = @mat AND A.dateFin IS NULL";
                 return;
             }
 
-            // ✅ Mise à jour des deux listes d'affichage
+            //Mise à jour des deux listes d'affichage
             try
             {
                 lstCaserneActuelle.Items.Clear();
                 lstAffectationsPassees.Items.Clear();
 
-                // 🔵 1. Liste des affectations passées
+                //Liste des affectations passées
                 string sqlPassees = @"
                 SELECT A.dateA, A.dateFin, C.nom 
                 FROM Affectation A 
@@ -1230,7 +1229,7 @@ WHERE A.matriculePompier = @mat AND A.dateFin IS NULL";
                     }
                 }
 
-                // 🟢 2. Affectation en cours (s'il y en a une)
+                //Affectation en cours (s'il y en a une)
                 string sqlEnCours = @"
                 SELECT A.dateA, C.nom 
                 FROM Affectation A 

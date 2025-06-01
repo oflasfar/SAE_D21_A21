@@ -74,5 +74,10 @@ namespace UCMenue
         {
             f.AfficherStatistique(); // méthode de Form4
         }
+
+        private void btnGestionEngin_Click(object sender, EventArgs e)
+        {
+            f.AfficherEngins(); // méthode de Form4
+        }
     }
 }
