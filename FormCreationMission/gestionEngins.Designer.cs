@@ -56,34 +56,37 @@
             // lblDateReception
             // 
             this.lblDateReception.AutoSize = true;
-            this.lblDateReception.Location = new System.Drawing.Point(233, 388);
+            this.lblDateReception.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDateReception.Location = new System.Drawing.Point(242, 277);
             this.lblDateReception.Name = "lblDateReception";
-            this.lblDateReception.Size = new System.Drawing.Size(117, 16);
+            this.lblDateReception.Size = new System.Drawing.Size(210, 29);
             this.lblDateReception.TabIndex = 33;
             this.lblDateReception.Text = "Date de réception:";
             // 
             // lblNumero
             // 
             this.lblNumero.AutoSize = true;
-            this.lblNumero.Location = new System.Drawing.Point(233, 336);
+            this.lblNumero.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNumero.Location = new System.Drawing.Point(242, 198);
             this.lblNumero.Name = "lblNumero";
-            this.lblNumero.Size = new System.Drawing.Size(58, 16);
+            this.lblNumero.Size = new System.Drawing.Size(106, 29);
             this.lblNumero.TabIndex = 32;
             this.lblNumero.Text = "Numéro:";
             // 
             // lblDisponible
             // 
             this.lblDisponible.AutoSize = true;
-            this.lblDisponible.Location = new System.Drawing.Point(233, 436);
+            this.lblDisponible.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDisponible.Location = new System.Drawing.Point(242, 349);
             this.lblDisponible.Name = "lblDisponible";
-            this.lblDisponible.Size = new System.Drawing.Size(75, 16);
+            this.lblDisponible.Size = new System.Drawing.Size(135, 29);
             this.lblDisponible.TabIndex = 31;
             this.lblDisponible.Text = "Disponible:";
             // 
             // dgvCaserne
             // 
             this.dgvCaserne.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvCaserne.Location = new System.Drawing.Point(899, 176);
+            this.dgvCaserne.Location = new System.Drawing.Point(1001, 73);
             this.dgvCaserne.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dgvCaserne.Name = "dgvCaserne";
             this.dgvCaserne.RowHeadersWidth = 62;
@@ -94,10 +97,10 @@
             // 
             // pbEnginImage
             // 
-            this.pbEnginImage.Location = new System.Drawing.Point(704, 321);
+            this.pbEnginImage.Location = new System.Drawing.Point(707, 198);
             this.pbEnginImage.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pbEnginImage.Name = "pbEnginImage";
-            this.pbEnginImage.Size = new System.Drawing.Size(276, 166);
+            this.pbEnginImage.Size = new System.Drawing.Size(405, 326);
             this.pbEnginImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbEnginImage.TabIndex = 29;
             this.pbEnginImage.TabStop = false;
@@ -105,36 +108,40 @@
             // lblNomEngin
             // 
             this.lblNomEngin.AutoSize = true;
-            this.lblNomEngin.Location = new System.Drawing.Point(233, 509);
+            this.lblNomEngin.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNomEngin.Location = new System.Drawing.Point(242, 495);
             this.lblNomEngin.Name = "lblNomEngin";
-            this.lblNomEngin.Size = new System.Drawing.Size(44, 16);
+            this.lblNomEngin.Size = new System.Drawing.Size(79, 29);
             this.lblNomEngin.TabIndex = 28;
             this.lblNomEngin.Text = "label1";
             // 
             // lblIndex
             // 
             this.lblIndex.AutoSize = true;
+            this.lblIndex.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblIndex.Location = new System.Drawing.Point(987, 648);
             this.lblIndex.Name = "lblIndex";
-            this.lblIndex.Size = new System.Drawing.Size(44, 16);
+            this.lblIndex.Size = new System.Drawing.Size(79, 29);
             this.lblIndex.TabIndex = 27;
             this.lblIndex.Text = "label1";
             // 
             // lblMotif
             // 
             this.lblMotif.AutoSize = true;
-            this.lblMotif.Location = new System.Drawing.Point(233, 474);
+            this.lblMotif.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMotif.Location = new System.Drawing.Point(242, 416);
             this.lblMotif.Name = "lblMotif";
-            this.lblMotif.Size = new System.Drawing.Size(44, 16);
+            this.lblMotif.Size = new System.Drawing.Size(79, 29);
             this.lblMotif.TabIndex = 26;
             this.lblMotif.Text = "label1";
             // 
             // lblOuiNon
             // 
             this.lblOuiNon.AutoSize = true;
-            this.lblOuiNon.Location = new System.Drawing.Point(456, 433);
+            this.lblOuiNon.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblOuiNon.Location = new System.Drawing.Point(502, 349);
             this.lblOuiNon.Name = "lblOuiNon";
-            this.lblOuiNon.Size = new System.Drawing.Size(44, 16);
+            this.lblOuiNon.Size = new System.Drawing.Size(79, 29);
             this.lblOuiNon.TabIndex = 25;
             this.lblOuiNon.Text = "label1";
             // 
@@ -184,38 +191,45 @@
             // 
             // txtReception
             // 
-            this.txtReception.Location = new System.Drawing.Point(503, 385);
+            this.txtReception.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtReception.Location = new System.Drawing.Point(507, 274);
             this.txtReception.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtReception.Name = "txtReception";
-            this.txtReception.Size = new System.Drawing.Size(154, 22);
+            this.txtReception.Size = new System.Drawing.Size(154, 34);
             this.txtReception.TabIndex = 20;
+            this.txtReception.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtReception_KeyPress);
             // 
             // txtNumero
             // 
-            this.txtNumero.Location = new System.Drawing.Point(440, 333);
+            this.txtNumero.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtNumero.Location = new System.Drawing.Point(507, 198);
             this.txtNumero.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtNumero.Name = "txtNumero";
-            this.txtNumero.Size = new System.Drawing.Size(154, 22);
+            this.txtNumero.Size = new System.Drawing.Size(154, 34);
             this.txtNumero.TabIndex = 19;
+            this.txtNumero.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtNumero_KeyPress);
             // 
             // lblChoixCaserne
             // 
             this.lblChoixCaserne.AutoSize = true;
-            this.lblChoixCaserne.Location = new System.Drawing.Point(437, 198);
+            this.lblChoixCaserne.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblChoixCaserne.Location = new System.Drawing.Point(242, 87);
             this.lblChoixCaserne.Name = "lblChoixCaserne";
-            this.lblChoixCaserne.Size = new System.Drawing.Size(131, 16);
+            this.lblChoixCaserne.Size = new System.Drawing.Size(237, 29);
             this.lblChoixCaserne.TabIndex = 18;
             this.lblChoixCaserne.Text = "Choix de la caserne :";
             // 
             // cboChoix
             // 
+            this.cboChoix.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboChoix.FormattingEnabled = true;
-            this.cboChoix.Location = new System.Drawing.Point(618, 196);
+            this.cboChoix.Location = new System.Drawing.Point(556, 87);
             this.cboChoix.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cboChoix.Name = "cboChoix";
-            this.cboChoix.Size = new System.Drawing.Size(257, 24);
+            this.cboChoix.Size = new System.Drawing.Size(257, 37);
             this.cboChoix.TabIndex = 17;
             this.cboChoix.SelectedIndexChanged += new System.EventHandler(this.cboChoix_SelectedIndexChanged);
+            this.cboChoix.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cboChoix_KeyPress);
             // 
             // gestionEngins
             // 

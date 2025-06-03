@@ -40,11 +40,11 @@
             // 
             this.btnTableuDeBord.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnTableuDeBord.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnTableuDeBord.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnTableuDeBord.Location = new System.Drawing.Point(59, 79);
+            this.btnTableuDeBord.Font = new System.Drawing.Font("MS UI Gothic", 22.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnTableuDeBord.Location = new System.Drawing.Point(4, 79);
             this.btnTableuDeBord.Margin = new System.Windows.Forms.Padding(4);
             this.btnTableuDeBord.Name = "btnTableuDeBord";
-            this.btnTableuDeBord.Size = new System.Drawing.Size(251, 80);
+            this.btnTableuDeBord.Size = new System.Drawing.Size(403, 80);
             this.btnTableuDeBord.TabIndex = 0;
             this.btnTableuDeBord.Text = "Tableu De Bord";
             this.btnTableuDeBord.UseVisualStyleBackColor = false;
@@ -54,11 +54,11 @@
             // 
             this.btnNouvelleMission.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnNouvelleMission.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnNouvelleMission.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnNouvelleMission.Location = new System.Drawing.Point(59, 215);
+            this.btnNouvelleMission.Font = new System.Drawing.Font("MS UI Gothic", 22.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnNouvelleMission.Location = new System.Drawing.Point(4, 212);
             this.btnNouvelleMission.Margin = new System.Windows.Forms.Padding(4);
             this.btnNouvelleMission.Name = "btnNouvelleMission";
-            this.btnNouvelleMission.Size = new System.Drawing.Size(251, 80);
+            this.btnNouvelleMission.Size = new System.Drawing.Size(403, 80);
             this.btnNouvelleMission.TabIndex = 1;
             this.btnNouvelleMission.Text = "Nouvelle Mission";
             this.btnNouvelleMission.UseVisualStyleBackColor = false;
@@ -68,11 +68,11 @@
             // 
             this.btnGestionEngin.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnGestionEngin.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnGestionEngin.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnGestionEngin.Location = new System.Drawing.Point(59, 353);
+            this.btnGestionEngin.Font = new System.Drawing.Font("MS UI Gothic", 22.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnGestionEngin.Location = new System.Drawing.Point(4, 353);
             this.btnGestionEngin.Margin = new System.Windows.Forms.Padding(4);
             this.btnGestionEngin.Name = "btnGestionEngin";
-            this.btnGestionEngin.Size = new System.Drawing.Size(251, 80);
+            this.btnGestionEngin.Size = new System.Drawing.Size(403, 80);
             this.btnGestionEngin.TabIndex = 2;
             this.btnGestionEngin.Text = "Gestion Des Engins";
             this.btnGestionEngin.UseVisualStyleBackColor = false;
@@ -82,11 +82,11 @@
             // 
             this.btnGestionPersonnel.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnGestionPersonnel.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnGestionPersonnel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnGestionPersonnel.Location = new System.Drawing.Point(59, 490);
+            this.btnGestionPersonnel.Font = new System.Drawing.Font("MS UI Gothic", 22.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnGestionPersonnel.Location = new System.Drawing.Point(4, 490);
             this.btnGestionPersonnel.Margin = new System.Windows.Forms.Padding(4);
             this.btnGestionPersonnel.Name = "btnGestionPersonnel";
-            this.btnGestionPersonnel.Size = new System.Drawing.Size(251, 80);
+            this.btnGestionPersonnel.Size = new System.Drawing.Size(403, 80);
             this.btnGestionPersonnel.TabIndex = 3;
             this.btnGestionPersonnel.Text = "Gestion Du Personnel";
             this.btnGestionPersonnel.UseVisualStyleBackColor = false;
@@ -96,11 +96,11 @@
             // 
             this.btnStatistique.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnStatistique.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnStatistique.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnStatistique.Location = new System.Drawing.Point(59, 624);
+            this.btnStatistique.Font = new System.Drawing.Font("MS UI Gothic", 22.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnStatistique.Location = new System.Drawing.Point(4, 624);
             this.btnStatistique.Margin = new System.Windows.Forms.Padding(4);
             this.btnStatistique.Name = "btnStatistique";
-            this.btnStatistique.Size = new System.Drawing.Size(251, 80);
+            this.btnStatistique.Size = new System.Drawing.Size(403, 80);
             this.btnStatistique.TabIndex = 4;
             this.btnStatistique.Text = "Statistique";
             this.btnStatistique.UseVisualStyleBackColor = false;
@@ -109,12 +109,12 @@
             // btnQuitter
             // 
             this.btnQuitter.BackColor = System.Drawing.Color.OrangeRed;
-            this.btnQuitter.Font = new System.Drawing.Font("Microsoft YaHei", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnQuitter.Font = new System.Drawing.Font("MS UI Gothic", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnQuitter.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnQuitter.Location = new System.Drawing.Point(59, 809);
+            this.btnQuitter.Location = new System.Drawing.Point(72, 808);
             this.btnQuitter.Margin = new System.Windows.Forms.Padding(4);
             this.btnQuitter.Name = "btnQuitter";
-            this.btnQuitter.Size = new System.Drawing.Size(148, 85);
+            this.btnQuitter.Size = new System.Drawing.Size(251, 85);
             this.btnQuitter.TabIndex = 6;
             this.btnQuitter.Text = "Quitter";
             this.btnQuitter.UseVisualStyleBackColor = false;
@@ -124,13 +124,14 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.BackColor = System.Drawing.Color.Navy;
             this.Controls.Add(this.btnQuitter);
             this.Controls.Add(this.btnStatistique);
             this.Controls.Add(this.btnGestionPersonnel);
             this.Controls.Add(this.btnGestionEngin);
             this.Controls.Add(this.btnNouvelleMission);
             this.Controls.Add(this.btnTableuDeBord);
+            this.Cursor = System.Windows.Forms.Cursors.Default;
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "UCMenueLateral";
             this.Size = new System.Drawing.Size(411, 1073);

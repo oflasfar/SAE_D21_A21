@@ -43,3 +43,4 @@ C:\OMAR\S2\SAE-D21\UCRecapitulMission\obj\Debug\UCRecapitulMission.csproj.CoreCo
 C:\OMAR\S2\SAE-D21\UCRecapitulMission\obj\Debug\UCRecapi.D37B2A33.Up2Date
 C:\OMAR\S2\SAE-D21\UCRecapitulMission\obj\Debug\UCRecapitulMission.dll
 C:\OMAR\S2\SAE-D21\UCRecapitulMission\obj\Debug\UCRecapitulMission.pdb
+C:\OMAR\S2\SAE-D21\UCRecapitulMission\obj\Debug\UCRecapitulMission.Properties.Resources.resources

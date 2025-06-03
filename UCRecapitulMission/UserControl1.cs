@@ -449,5 +449,10 @@ namespace UCRecapitulMission
         {
 
         }
+
+        private void lblCaserne_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

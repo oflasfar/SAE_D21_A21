@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form4));
             this.lblTableauBord = new System.Windows.Forms.Label();
             this.chkbxEnCours = new System.Windows.Forms.CheckBox();
             this.btnActualiser = new System.Windows.Forms.Button();
@@ -37,22 +38,22 @@
             // lblTableauBord
             // 
             this.lblTableauBord.AutoSize = true;
-            this.lblTableauBord.Font = new System.Drawing.Font("MS UI Gothic", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTableauBord.Location = new System.Drawing.Point(1093, 9);
+            this.lblTableauBord.Font = new System.Drawing.Font("MS UI Gothic", 28.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTableauBord.Location = new System.Drawing.Point(1074, 9);
             this.lblTableauBord.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblTableauBord.Name = "lblTableauBord";
-            this.lblTableauBord.Size = new System.Drawing.Size(242, 34);
+            this.lblTableauBord.Size = new System.Drawing.Size(334, 47);
             this.lblTableauBord.TabIndex = 2;
             this.lblTableauBord.Text = "Tableau de bord";
             // 
             // chkbxEnCours
             // 
             this.chkbxEnCours.AutoSize = true;
-            this.chkbxEnCours.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkbxEnCours.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkbxEnCours.Location = new System.Drawing.Point(599, 20);
             this.chkbxEnCours.Margin = new System.Windows.Forms.Padding(4);
             this.chkbxEnCours.Name = "chkbxEnCours";
-            this.chkbxEnCours.Size = new System.Drawing.Size(104, 24);
+            this.chkbxEnCours.Size = new System.Drawing.Size(103, 26);
             this.chkbxEnCours.TabIndex = 3;
             this.chkbxEnCours.Text = "En cours";
             this.chkbxEnCours.UseVisualStyleBackColor = true;
@@ -60,6 +61,7 @@
             // 
             // btnActualiser
             // 
+            this.btnActualiser.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnActualiser.Location = new System.Drawing.Point(759, 15);
             this.btnActualiser.Name = "btnActualiser";
             this.btnActualiser.Size = new System.Drawing.Size(241, 28);
@@ -85,8 +87,9 @@
             this.Controls.Add(this.btnActualiser);
             this.Controls.Add(this.chkbxEnCours);
             this.Controls.Add(this.lblTableauBord);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form4";
-            this.Text = "Form4";
+            this.Text = "CaserNet";
             this.Load += new System.EventHandler(this.Form4_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

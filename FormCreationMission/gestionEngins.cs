@@ -343,6 +343,19 @@ namespace FormCreationMission
             }
         }
 
-        
+        private void cboChoix_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true; // Empêche la saisie de texte dans le ComboBox
+        }
+
+        private void txtNumero_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true; // Empêche la saisie de texte dans le TextBox
+        }
+
+        private void txtReception_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true; // Empêche la saisie de texte dans le TextBox
+        }
     }
 }

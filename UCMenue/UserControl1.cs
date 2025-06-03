@@ -30,7 +30,7 @@ namespace UCMenue
 
         private void UserControl1_Load(object sender, EventArgs e)
         {
-            //
+            btnTableuDeBord.BackColor = Color.DarkRed;
         }
 
         private void btnQuitter_Click(object sender, EventArgs e)
@@ -41,6 +41,12 @@ namespace UCMenue
         private void btnTableuDeBord_Click(object sender, EventArgs e)
         {
             f.btnActualiser_Click(sender, e);
+            btnTableuDeBord.BackColor = Color.DarkRed;
+            btnNouvelleMission.BackColor = Color.Transparent;
+            btnGestionEngin.BackColor = Color.Transparent;
+            btnGestionPersonnel.BackColor = Color.Transparent;
+            btnStatistique.BackColor = Color.Transparent;
+
         }
 
         private void btnNouvelleMission_Click(object sender, EventArgs e)
@@ -48,6 +54,11 @@ namespace UCMenue
             if (f != null) // f est la Form4
             {
                 f.AfficherDansPanel(); // méthode de Form4
+                btnTableuDeBord.BackColor = Color.Transparent;
+                btnNouvelleMission.BackColor = Color.DarkRed;
+                btnGestionEngin.BackColor = Color.Transparent;
+                btnGestionPersonnel.BackColor = Color.Transparent;
+                btnStatistique.BackColor = Color.Transparent;
             }
             else
             {
@@ -61,7 +72,11 @@ namespace UCMenue
             if (Personnel != null)
             {
                 f.AfficherPersonnel(); // méthode de Form4
-
+                btnTableuDeBord.BackColor = Color.Transparent;
+                btnNouvelleMission.BackColor = Color.Transparent;
+                btnGestionEngin.BackColor = Color.Transparent;
+                btnGestionPersonnel.BackColor = Color.DarkRed;
+                btnStatistique.BackColor = Color.Transparent;
 
             }
             else
@@ -73,11 +88,21 @@ namespace UCMenue
         private void btnStatistique_Click(object sender, EventArgs e)
         {
             f.AfficherStatistique(); // méthode de Form4
+            btnTableuDeBord.BackColor = Color.Transparent;
+            btnNouvelleMission.BackColor = Color.Transparent;
+            btnGestionEngin.BackColor = Color.Transparent;
+            btnGestionPersonnel.BackColor = Color.Transparent;
+            btnStatistique.BackColor = Color.DarkRed;
         }
 
         private void btnGestionEngin_Click(object sender, EventArgs e)
         {
             f.AfficherEngins(); // méthode de Form4
+            btnTableuDeBord.BackColor = Color.Transparent;
+            btnNouvelleMission.BackColor = Color.Transparent;
+            btnGestionEngin.BackColor = Color.DarkRed;
+            btnGestionPersonnel.BackColor = Color.Transparent;
+            btnStatistique.BackColor = Color.Transparent;
         }
     }
 }

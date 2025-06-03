@@ -28,7 +28,7 @@ namespace FormCreationMission
         private void UCCreerMission_Load(object sender, EventArgs e)
         {
             gbMobilisation.Visible = false;
-            btnQuitter.Visible = false;
+            //btnQuitter.Visible = false;
             btnRapport.Visible = false;
             /*
             DataTable dt = new DataTable();
@@ -120,16 +120,18 @@ namespace FormCreationMission
 
         private void btnConstituerEquipe_Click(object sender, EventArgs e)
         {
+            MessageBox.Show("Cosmonaute : " + MesDatas.DsGlobal.Tables["Affectations"].Select("idCaserne = " + 1 + "\"").ToString());
+
             gbMobilisation.Visible = true;
             // Liste finale des engins nécessaires
             List<(string codeTypeEngin, int nombre)> enginsNecessaires = new List<(string, int)>();
 
-            // 1. Récupération des valeurs depuis les ComboBox
+            // Récupération des valeurs depuis les ComboBox
             int idNatureSinistre = Convert.ToInt32(cbNatureSinistre.SelectedValue);
             int idCaserne = Convert.ToInt32(cbCaserneImmobiliser.SelectedValue);
 
-
-            // 2. Recherche des engins nécessaires pour ce type de sinistre
+            MessageBox.Show("Cosmonaute : " + MesDatas.DsGlobal.Tables["Affectations"].Select("idCaserne = " + idCaserne + "\"").ToString());
+            // Recherche des engins nécessaires pour ce type de sinistre
             foreach (DataRow row in MesDatas.DsGlobal.Tables["Necessiter"].Select("idNatureSinistre = " + idNatureSinistre))
             {
                 string type = row["codeTypeEngin"].ToString();
@@ -234,12 +236,24 @@ namespace FormCreationMission
                 int totalPompiers = equipage * nombre;
 
                 var selection = pompiersEligibles.Take(totalPompiers).ToList();
+                if (pompiersEligibles.Count < totalPompiers)
+                {
+                    MessageBox.Show(
+                        $"⚠️ Il manque des pompiers pour l'engin de type {typeEngin}. " +
+                        $"Requis : {totalPompiers}, disponibles : {pompiersEligibles.Count}.",
+                        "Effectif incomplet",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning
+                    );
+                }
+
 
                 foreach (var p in selection)
                 {
                     dgvPompiers.Rows.Add(p["matricule"], p["nom"], p["prenom"], typeEngin);
                 }
             }
+            
 
 
 
@@ -325,9 +339,16 @@ namespace FormCreationMission
                 DataRow[] enginsDispo = MesDatas.DsGlobal.Tables["Engin"]
                     .Select($"codeTypeEngin = '{type}' AND idCaserne = {idCaserne} AND enMission = 0 AND enPanne = 0");
                 //On regarde si on a assez d'engins disponibles
-                if (enginsDispo.Length >= nb)
-                    //On ajoute dans la liste des engins nécessaires
-                    enginsNecessaires.Add((type, nb));
+                if (enginsDispo.Length > 0)
+                {
+                    int nbRequis = Math.Min(nb, enginsDispo.Length);
+                    enginsNecessaires.Add((type, nbRequis));
+                }
+                if (enginsDispo.Length < nb)
+                {
+                    MessageBox.Show($"⚠️ Pas assez d'engins pour le type {type}. Nécessaires : {nb}, disponibles : {enginsDispo.Length}.", "Attention", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+
             }
             //On prepare le datagreidview pour les engins
             dgvEngins.Rows.Clear();
@@ -513,22 +534,23 @@ namespace FormCreationMission
                 DataTable dtPartirAvec = MesDatas.DsGlobal.Tables["PartirAvec"];
                 int idMission = Convert.ToInt32(id); // déjà défini au-dessus
                 int idCaserne = Convert.ToInt32(cbCaserneImmobiliser.SelectedValue);
-
                 foreach (DataGridViewRow row in dgvEngins.Rows)
                 {
-                    if (row.Cells["typeEngin"].Value != null)
+                    if (row.Cells["typeEngin"].Value != null && row.Cells["nombre"].Value != null)
                     {
                         string codeTypeEngin = row.Cells["typeEngin"].Value.ToString();
+                        int nombreRequis = Convert.ToInt32(row.Cells["nombre"].Value);
 
-                        // Trouver les engins disponibles de ce type dans cette caserne
-                        DataRow[] enginRow = dtEngin.Select($"codeTypeEngin = '{codeTypeEngin}' AND idCaserne = {idCaserne} AND enMission = 0");
+                        // Récupère les engins disponibles
+                        DataRow[] enginsDispo = dtEngin.Select($"codeTypeEngin = '{codeTypeEngin}' AND idCaserne = {idCaserne} AND enMission = 0");
 
-                        foreach (DataRow engin in enginRow)
+                        //Prendre uniquement les N premiers nécessaires
+                        for (int i = 0; i < Math.Min(nombreRequis, enginsDispo.Length); i++)
                         {
-                            //Mettre à jour l'état dans le DataSet
+                            DataRow engin = enginsDispo[i];
+
                             engin["enMission"] = 1;
 
-                            //Ajouter dans l’historique (PartirAvec)
                             DataRow ligne = dtPartirAvec.NewRow();
                             ligne["idMission"] = idMission;
                             ligne["idCaserne"] = idCaserne;
@@ -538,8 +560,15 @@ namespace FormCreationMission
 
                             dtPartirAvec.Rows.Add(ligne);
                         }
+
+                        //En option : message si pas assez d'engins
+                        if (enginsDispo.Length < nombreRequis)
+                        {
+                            MessageBox.Show($"⚠️ Pas assez d'engins de type {codeTypeEngin}. Requis : {nombreRequis}, disponibles : {enginsDispo.Length}.", "Alerte", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        }
                     }
                 }
+
 
                 //Nettoyage du formulaire
                 txtMotif.Text = "";
@@ -671,6 +700,16 @@ namespace FormCreationMission
         private void lblId_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void cbNatureSinistre_KeyPress_1(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;
+        }
+
+        private void cbCaserneImmobiliser_KeyPress_1(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;
         }
     }
 }

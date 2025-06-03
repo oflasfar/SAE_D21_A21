@@ -31,6 +31,8 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UCPersonnel));
             this.panel2 = new System.Windows.Forms.Panel();
             this.gbInformationCarriere = new System.Windows.Forms.GroupBox();
+            this.label15 = new System.Windows.Forms.Label();
+            this.lstAffectationsPassees = new System.Windows.Forms.ListBox();
             this.cbCaserneRattachement = new System.Windows.Forms.ComboBox();
             this.lstCaserneActuelle = new System.Windows.Forms.ListBox();
             this.lstHabilitations = new System.Windows.Forms.ListBox();
@@ -72,8 +74,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.lstAffectationsPassees = new System.Windows.Forms.ListBox();
-            this.label15 = new System.Windows.Forms.Label();
             this.panel2.SuspendLayout();
             this.gbInformationCarriere.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -101,9 +101,9 @@
             this.panel2.Controls.Add(this.lblMatricule);
             this.panel2.Controls.Add(this.label3);
             this.panel2.Controls.Add(this.pbGrade);
-            this.panel2.Location = new System.Drawing.Point(352, 3);
+            this.panel2.Location = new System.Drawing.Point(14, 165);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1050, 865);
+            this.panel2.Size = new System.Drawing.Size(1388, 703);
             this.panel2.TabIndex = 3;
             this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
             // 
@@ -120,42 +120,60 @@
             this.gbInformationCarriere.Controls.Add(this.label10);
             this.gbInformationCarriere.Controls.Add(this.label4);
             this.gbInformationCarriere.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gbInformationCarriere.Location = new System.Drawing.Point(136, 456);
+            this.gbInformationCarriere.Location = new System.Drawing.Point(678, 193);
             this.gbInformationCarriere.Name = "gbInformationCarriere";
-            this.gbInformationCarriere.Size = new System.Drawing.Size(900, 387);
+            this.gbInformationCarriere.Size = new System.Drawing.Size(710, 481);
             this.gbInformationCarriere.TabIndex = 23;
             this.gbInformationCarriere.TabStop = false;
             this.gbInformationCarriere.Text = "Information Carriere";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(14, 173);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(187, 25);
+            this.label15.TabIndex = 32;
+            this.label15.Text = "Affectation actuelle :";
+            // 
+            // lstAffectationsPassees
+            // 
+            this.lstAffectationsPassees.FormattingEnabled = true;
+            this.lstAffectationsPassees.ItemHeight = 25;
+            this.lstAffectationsPassees.Location = new System.Drawing.Point(23, 336);
+            this.lstAffectationsPassees.Name = "lstAffectationsPassees";
+            this.lstAffectationsPassees.Size = new System.Drawing.Size(691, 79);
+            this.lstAffectationsPassees.TabIndex = 31;
             // 
             // cbCaserneRattachement
             // 
             this.cbCaserneRattachement.FormattingEnabled = true;
             this.cbCaserneRattachement.Location = new System.Drawing.Point(193, 27);
             this.cbCaserneRattachement.Name = "cbCaserneRattachement";
-            this.cbCaserneRattachement.Size = new System.Drawing.Size(685, 33);
+            this.cbCaserneRattachement.Size = new System.Drawing.Size(514, 33);
             this.cbCaserneRattachement.TabIndex = 30;
             // 
             // lstCaserneActuelle
             // 
             this.lstCaserneActuelle.FormattingEnabled = true;
             this.lstCaserneActuelle.ItemHeight = 25;
-            this.lstCaserneActuelle.Location = new System.Drawing.Point(16, 153);
+            this.lstCaserneActuelle.Location = new System.Drawing.Point(19, 206);
             this.lstCaserneActuelle.Name = "lstCaserneActuelle";
-            this.lstCaserneActuelle.Size = new System.Drawing.Size(862, 54);
+            this.lstCaserneActuelle.Size = new System.Drawing.Size(688, 79);
             this.lstCaserneActuelle.TabIndex = 29;
             // 
             // lstHabilitations
             // 
             this.lstHabilitations.FormattingEnabled = true;
             this.lstHabilitations.ItemHeight = 25;
-            this.lstHabilitations.Location = new System.Drawing.Point(16, 84);
+            this.lstHabilitations.Location = new System.Drawing.Point(22, 118);
             this.lstHabilitations.Name = "lstHabilitations";
-            this.lstHabilitations.Size = new System.Drawing.Size(862, 29);
+            this.lstHabilitations.Size = new System.Drawing.Size(688, 29);
             this.lstHabilitations.TabIndex = 28;
             // 
             // btnMettreaJour
             // 
-            this.btnMettreaJour.Location = new System.Drawing.Point(555, 341);
+            this.btnMettreaJour.Location = new System.Drawing.Point(439, 435);
             this.btnMettreaJour.Name = "btnMettreaJour";
             this.btnMettreaJour.Size = new System.Drawing.Size(271, 40);
             this.btnMettreaJour.TabIndex = 24;
@@ -166,7 +184,7 @@
             // chbConge
             // 
             this.chbConge.AutoSize = true;
-            this.chbConge.Location = new System.Drawing.Point(16, 352);
+            this.chbConge.Location = new System.Drawing.Point(19, 446);
             this.chbConge.Name = "chbConge";
             this.chbConge.Size = new System.Drawing.Size(117, 29);
             this.chbConge.TabIndex = 27;
@@ -176,7 +194,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(13, 210);
+            this.label12.Location = new System.Drawing.Point(18, 308);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(206, 25);
             this.label12.TabIndex = 26;
@@ -185,7 +203,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(13, 56);
+            this.label10.Location = new System.Drawing.Point(22, 84);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(118, 25);
             this.label10.TabIndex = 25;
@@ -204,7 +222,7 @@
             // 
             this.lblEmbauche.AutoSize = true;
             this.lblEmbauche.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblEmbauche.Location = new System.Drawing.Point(383, 231);
+            this.lblEmbauche.Location = new System.Drawing.Point(948, 114);
             this.lblEmbauche.Name = "lblEmbauche";
             this.lblEmbauche.Size = new System.Drawing.Size(75, 25);
             this.lblEmbauche.TabIndex = 22;
@@ -214,7 +232,7 @@
             // 
             this.lblDateNaissance.AutoSize = true;
             this.lblDateNaissance.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDateNaissance.Location = new System.Drawing.Point(383, 199);
+            this.lblDateNaissance.Location = new System.Drawing.Point(948, 82);
             this.lblDateNaissance.Name = "lblDateNaissance";
             this.lblDateNaissance.Size = new System.Drawing.Size(75, 25);
             this.lblDateNaissance.TabIndex = 21;
@@ -224,7 +242,7 @@
             // 
             this.rdbVolontaire.AutoSize = true;
             this.rdbVolontaire.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rdbVolontaire.Location = new System.Drawing.Point(347, 158);
+            this.rdbVolontaire.Location = new System.Drawing.Point(912, 41);
             this.rdbVolontaire.Name = "rdbVolontaire";
             this.rdbVolontaire.Size = new System.Drawing.Size(121, 29);
             this.rdbVolontaire.TabIndex = 20;
@@ -236,7 +254,7 @@
             // 
             this.rdbProfessionnel.AutoSize = true;
             this.rdbProfessionnel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rdbProfessionnel.Location = new System.Drawing.Point(160, 158);
+            this.rdbProfessionnel.Location = new System.Drawing.Point(725, 41);
             this.rdbProfessionnel.Name = "rdbProfessionnel";
             this.rdbProfessionnel.Size = new System.Drawing.Size(151, 29);
             this.rdbProfessionnel.TabIndex = 19;
@@ -256,9 +274,9 @@
             this.groupBox1.Controls.Add(this.label11);
             this.groupBox1.Controls.Add(this.lblBip);
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.Location = new System.Drawing.Point(136, 286);
+            this.groupBox1.Location = new System.Drawing.Point(36, 180);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(900, 157);
+            this.groupBox1.Size = new System.Drawing.Size(636, 494);
             this.groupBox1.TabIndex = 18;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Carriére";
@@ -266,16 +284,16 @@
             // cbGradeNouveau
             // 
             this.cbGradeNouveau.FormattingEnabled = true;
-            this.cbGradeNouveau.Location = new System.Drawing.Point(401, 35);
+            this.cbGradeNouveau.Location = new System.Drawing.Point(112, 94);
             this.cbGradeNouveau.Name = "cbGradeNouveau";
-            this.cbGradeNouveau.Size = new System.Drawing.Size(293, 33);
+            this.cbGradeNouveau.Size = new System.Drawing.Size(283, 33);
             this.cbGradeNouveau.TabIndex = 23;
             this.cbGradeNouveau.SelectedIndexChanged += new System.EventHandler(this.cbGradeNouveau_SelectedIndexChanged);
             // 
             // BtnPlusInformation
             // 
             this.BtnPlusInformation.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnPlusInformation.Location = new System.Drawing.Point(463, 94);
+            this.BtnPlusInformation.Location = new System.Drawing.Point(24, 259);
             this.BtnPlusInformation.Name = "BtnPlusInformation";
             this.BtnPlusInformation.Size = new System.Drawing.Size(415, 39);
             this.BtnPlusInformation.TabIndex = 2;
@@ -292,7 +310,7 @@
             // 
             // btnChanger
             // 
-            this.btnChanger.Location = new System.Drawing.Point(700, 35);
+            this.btnChanger.Location = new System.Drawing.Point(431, 35);
             this.btnChanger.Name = "btnChanger";
             this.btnChanger.Size = new System.Drawing.Size(178, 40);
             this.btnChanger.TabIndex = 21;
@@ -312,7 +330,7 @@
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(19, 83);
+            this.label13.Location = new System.Drawing.Point(22, 158);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(117, 25);
             this.label13.TabIndex = 19;
@@ -321,7 +339,7 @@
             // lblPortable
             // 
             this.lblPortable.AutoSize = true;
-            this.lblPortable.Location = new System.Drawing.Point(155, 83);
+            this.lblPortable.Location = new System.Drawing.Point(158, 158);
             this.lblPortable.Name = "lblPortable";
             this.lblPortable.Size = new System.Drawing.Size(75, 25);
             this.lblPortable.TabIndex = 18;
@@ -330,7 +348,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(19, 129);
+            this.label11.Location = new System.Drawing.Point(22, 204);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(51, 25);
             this.label11.TabIndex = 17;
@@ -339,7 +357,7 @@
             // lblBip
             // 
             this.lblBip.AutoSize = true;
-            this.lblBip.Location = new System.Drawing.Point(155, 129);
+            this.lblBip.Location = new System.Drawing.Point(158, 204);
             this.lblBip.Name = "lblBip";
             this.lblBip.Size = new System.Drawing.Size(75, 25);
             this.lblBip.TabIndex = 16;
@@ -349,7 +367,7 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(147, 243);
+            this.label7.Location = new System.Drawing.Point(712, 126);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(176, 25);
             this.label7.TabIndex = 17;
@@ -359,7 +377,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(149, 199);
+            this.label5.Location = new System.Drawing.Point(714, 82);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(188, 25);
             this.label5.TabIndex = 16;
@@ -429,7 +447,7 @@
             // 
             this.lblMatricule.AutoSize = true;
             this.lblMatricule.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMatricule.Location = new System.Drawing.Point(459, 10);
+            this.lblMatricule.Location = new System.Drawing.Point(575, 12);
             this.lblMatricule.Name = "lblMatricule";
             this.lblMatricule.Size = new System.Drawing.Size(64, 25);
             this.lblMatricule.TabIndex = 9;
@@ -439,7 +457,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(300, 10);
+            this.label3.Location = new System.Drawing.Point(416, 12);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(107, 25);
             this.label3.TabIndex = 8;
@@ -447,7 +465,7 @@
             // 
             // pbGrade
             // 
-            this.pbGrade.Location = new System.Drawing.Point(709, 42);
+            this.pbGrade.Location = new System.Drawing.Point(1212, 42);
             this.pbGrade.Name = "pbGrade";
             this.pbGrade.Size = new System.Drawing.Size(143, 145);
             this.pbGrade.TabIndex = 7;
@@ -455,7 +473,7 @@
             // 
             // panel1
             // 
-            this.panel1.BackColor = System.Drawing.Color.DarkRed;
+            this.panel1.BackColor = System.Drawing.Color.Navy;
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Controls.Add(this.btnAjoutPompiers);
             this.panel1.Controls.Add(this.btnQuitter);
@@ -464,26 +482,28 @@
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.pictureBox1);
-            this.panel1.Location = new System.Drawing.Point(3, 3);
+            this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(343, 865);
+            this.panel1.Size = new System.Drawing.Size(1430, 148);
             this.panel1.TabIndex = 2;
             // 
             // btnAjoutPompiers
             // 
-            this.btnAjoutPompiers.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAjoutPompiers.Location = new System.Drawing.Point(17, 455);
+            this.btnAjoutPompiers.BackColor = System.Drawing.Color.DarkRed;
+            this.btnAjoutPompiers.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAjoutPompiers.ForeColor = System.Drawing.Color.Transparent;
+            this.btnAjoutPompiers.Location = new System.Drawing.Point(1044, 26);
             this.btnAjoutPompiers.Name = "btnAjoutPompiers";
-            this.btnAjoutPompiers.Size = new System.Drawing.Size(203, 56);
+            this.btnAjoutPompiers.Size = new System.Drawing.Size(357, 84);
             this.btnAjoutPompiers.TabIndex = 8;
             this.btnAjoutPompiers.Text = "Ajouter Pompiers";
-            this.btnAjoutPompiers.UseVisualStyleBackColor = true;
+            this.btnAjoutPompiers.UseVisualStyleBackColor = false;
             this.btnAjoutPompiers.Click += new System.EventHandler(this.btnAjoutPompiers_Click_1);
             // 
             // btnQuitter
             // 
             this.btnQuitter.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnQuitter.Location = new System.Drawing.Point(17, 608);
+            this.btnQuitter.Location = new System.Drawing.Point(85, 630);
             this.btnQuitter.Name = "btnQuitter";
             this.btnQuitter.Size = new System.Drawing.Size(203, 48);
             this.btnQuitter.TabIndex = 7;
@@ -495,7 +515,7 @@
             // 
             this.cbPompiers.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbPompiers.FormattingEnabled = true;
-            this.cbPompiers.Location = new System.Drawing.Point(17, 340);
+            this.cbPompiers.Location = new System.Drawing.Point(593, 77);
             this.cbPompiers.Name = "cbPompiers";
             this.cbPompiers.Size = new System.Drawing.Size(310, 33);
             this.cbPompiers.TabIndex = 6;
@@ -505,7 +525,7 @@
             // 
             this.cbCaserne.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbCaserne.FormattingEnabled = true;
-            this.cbCaserne.Location = new System.Drawing.Point(17, 212);
+            this.cbCaserne.Location = new System.Drawing.Point(212, 77);
             this.cbCaserne.Name = "cbCaserne";
             this.cbCaserne.Size = new System.Drawing.Size(310, 33);
             this.cbCaserne.TabIndex = 5;
@@ -516,7 +536,7 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(12, 285);
+            this.label2.Location = new System.Drawing.Point(599, 26);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(304, 25);
             this.label2.TabIndex = 4;
@@ -527,7 +547,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(12, 161);
+            this.label1.Location = new System.Drawing.Point(207, 26);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(315, 25);
             this.label1.TabIndex = 3;
@@ -537,29 +557,11 @@
             // 
             this.pictureBox1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.BackgroundImage")));
             this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox1.Location = new System.Drawing.Point(120, 31);
+            this.pictureBox1.Location = new System.Drawing.Point(49, 22);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(83, 79);
             this.pictureBox1.TabIndex = 2;
             this.pictureBox1.TabStop = false;
-            // 
-            // lstAffectationsPassees
-            // 
-            this.lstAffectationsPassees.FormattingEnabled = true;
-            this.lstAffectationsPassees.ItemHeight = 25;
-            this.lstAffectationsPassees.Location = new System.Drawing.Point(16, 238);
-            this.lstAffectationsPassees.Name = "lstAffectationsPassees";
-            this.lstAffectationsPassees.Size = new System.Drawing.Size(862, 54);
-            this.lstAffectationsPassees.TabIndex = 31;
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(13, 125);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(187, 25);
-            this.label15.TabIndex = 32;
-            this.label15.Text = "Affectation actuelle :";
             // 
             // UCPersonnel
             // 

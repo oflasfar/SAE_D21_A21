@@ -329,6 +329,7 @@ namespace FormCreationMission
         public void actualiser()
         {
             //Nettoyage du panel d'affichage
+
             pnlAffichage.Controls.Clear();
             int y = 10; // Position de départ verticale
             foreach (DataRow row in MesDatas.DsGlobal.Tables["Mission"].Rows)
