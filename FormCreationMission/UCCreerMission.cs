@@ -308,6 +308,7 @@ namespace FormCreationMission
                 MessageBox.Show("❌ Veuillez remplir tous les champs avant de continuer.");
                 return;
             }
+            
 
             gbMobilisation.Visible = true;
             // Liste finale des engins nécessaires
@@ -371,31 +372,39 @@ namespace FormCreationMission
                 }
 
                 List<DataRow> pompiersEligibles = new List<DataRow>();
-                // On parcoure les habilitations pour trouver les pompiers éligibles
+                //On parcoure les habilitations pour trouver les pompiers éligibles
                 foreach (int idHab in habilitations)
                 {
-                    // On récupère les pompiers ayant cette habilitation
+                    //Tous les pompiers ayant cette habilitation
                     DataRow[] rowsPasser = MesDatas.DsGlobal.Tables["Passer"]
                         .Select("idHabilitation = " + idHab);
-                    // On parcoure les lignes pour vérifier les pompiers
+
                     foreach (DataRow passerRow in rowsPasser)
                     {
                         int matricule = Convert.ToInt32(passerRow["matriculePompier"]);
-                        DataRow[] pompiers = MesDatas.DsGlobal.Tables["Pompier"].Select("matricule = " + matricule);
 
-                        if (pompiers.Length > 0)
+                        //Vérifier qu'il est bien affecté à la caserne sélectionnée, et encore en poste
+                        DataRow[] affectations = MesDatas.DsGlobal.Tables["Affectation"]
+                            .Select("matriculePompier = " + matricule + " AND idCaserne = " + idCaserne + " AND dateFin IS NULL");
+
+                        if (affectations.Length > 0)
                         {
-                            DataRow pompier = pompiers[0];
-
-                            // ✅ Vérification enMission dans le DataSet
-                            if (Convert.ToInt32(pompier["enMission"]) == 0 && !estEnConge(pompier))
+                            //Récupération du pompier depuis la table Pompier
+                            DataRow[] pompiers = MesDatas.DsGlobal.Tables["Pompier"].Select("matricule = " + matricule);
+                            if (pompiers.Length > 0)
                             {
-                                if (!pompiersEligibles.Contains(pompier))
-                                    pompiersEligibles.Add(pompier);
+                                DataRow pompier = pompiers[0];
+
+                                if (Convert.ToInt32(pompier["enMission"]) == 0 && !estEnConge(pompier))
+                                {
+                                    if (!pompiersEligibles.Contains(pompier))
+                                        pompiersEligibles.Add(pompier);
+                                }
                             }
                         }
                     }
                 }
+
                 // On parcoure les pompiers éligibles pour les ajouter au DataGridView
                 int equipage = 0;
                 DataRow[] rowType = MesDatas.DsGlobal.Tables["TypeEngin"].Select($"code = '{typeEngin}'");
@@ -409,7 +418,6 @@ namespace FormCreationMission
                 foreach (DataRow p in selection)
                 {
                     dgvPompiers.Rows.Add(p["matricule"], p["nom"], p["prenom"], typeEngin);
-                    //p["enMission"] = 1; // ✅ Mise à jour dans le DataSet
                 }
             }
         }
@@ -533,7 +541,6 @@ namespace FormCreationMission
                     }
                 }
 
-
                 //Nettoyage du formulaire
                 txtMotif.Text = "";
                 txtRue.Text = "";
@@ -557,9 +564,6 @@ namespace FormCreationMission
                 lblId.Text = prochainId.ToString();
 
                 MesDatas.DsGlobal.AcceptChanges();
-
-                //Message final
-                //MessageBox.Show("✅ Mission enregistrée dans le DataSet !");
 
                 // --- Rafraîchir tableau de bord
                 if (tableauDeBord != null)
