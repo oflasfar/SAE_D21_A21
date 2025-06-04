@@ -31,6 +31,8 @@
             this.cbNatureSinistre = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.gbMobilisation = new System.Windows.Forms.GroupBox();
+            this.flpPompiers = new System.Windows.Forms.FlowLayoutPanel();
+            this.flpEngins = new System.Windows.Forms.FlowLayoutPanel();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.dgvPompiers = new System.Windows.Forms.DataGridView();
@@ -88,12 +90,32 @@
             this.gbMobilisation.Controls.Add(this.dgvEngins);
             this.gbMobilisation.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gbMobilisation.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.gbMobilisation.Location = new System.Drawing.Point(87, 390);
+            this.gbMobilisation.Location = new System.Drawing.Point(714, 762);
             this.gbMobilisation.Name = "gbMobilisation";
-            this.gbMobilisation.Size = new System.Drawing.Size(1325, 300);
+            this.gbMobilisation.Size = new System.Drawing.Size(10, 10);
             this.gbMobilisation.TabIndex = 29;
             this.gbMobilisation.TabStop = false;
             this.gbMobilisation.Text = "Mobilisation des engins et des pompiers";
+            this.gbMobilisation.Visible = false;
+            // 
+            // flpPompiers
+            // 
+            this.flpPompiers.AutoScroll = true;
+            this.flpPompiers.BackColor = System.Drawing.Color.DarkGray;
+            this.flpPompiers.Location = new System.Drawing.Point(714, 416);
+            this.flpPompiers.Name = "flpPompiers";
+            this.flpPompiers.Size = new System.Drawing.Size(697, 211);
+            this.flpPompiers.TabIndex = 20;
+            // 
+            // flpEngins
+            // 
+            this.flpEngins.AutoScroll = true;
+            this.flpEngins.BackColor = System.Drawing.Color.DarkGray;
+            this.flpEngins.Location = new System.Drawing.Point(58, 416);
+            this.flpEngins.Name = "flpEngins";
+            this.flpEngins.Size = new System.Drawing.Size(625, 211);
+            this.flpEngins.TabIndex = 19;
+            this.flpEngins.Paint += new System.Windows.Forms.PaintEventHandler(this.flpEngins_Paint);
             // 
             // label4
             // 
@@ -171,6 +193,7 @@
             this.txtCodePostale.Name = "txtCodePostale";
             this.txtCodePostale.Size = new System.Drawing.Size(379, 30);
             this.txtCodePostale.TabIndex = 12;
+            this.txtCodePostale.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCodePostale_KeyPress);
             // 
             // txtRue
             // 
@@ -275,9 +298,9 @@
             this.gbDecisionRegulateur.Controls.Add(this.label2);
             this.gbDecisionRegulateur.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gbDecisionRegulateur.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.gbDecisionRegulateur.Location = new System.Drawing.Point(714, 64);
+            this.gbDecisionRegulateur.Location = new System.Drawing.Point(714, 52);
             this.gbDecisionRegulateur.Name = "gbDecisionRegulateur";
-            this.gbDecisionRegulateur.Size = new System.Drawing.Size(697, 302);
+            this.gbDecisionRegulateur.Size = new System.Drawing.Size(697, 314);
             this.gbDecisionRegulateur.TabIndex = 28;
             this.gbDecisionRegulateur.TabStop = false;
             this.gbDecisionRegulateur.Text = "Décision du regulateur";
@@ -307,11 +330,12 @@
             this.lblDateDeclanchee.AutoSize = true;
             this.lblDateDeclanchee.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblDateDeclanchee.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.lblDateDeclanchee.Location = new System.Drawing.Point(773, 17);
+            this.lblDateDeclanchee.Location = new System.Drawing.Point(833, 17);
             this.lblDateDeclanchee.Name = "lblDateDeclanchee";
             this.lblDateDeclanchee.Size = new System.Drawing.Size(92, 32);
             this.lblDateDeclanchee.TabIndex = 26;
             this.lblDateDeclanchee.Text = "label4";
+            this.lblDateDeclanchee.Click += new System.EventHandler(this.lblDateDeclanchee_Click);
             // 
             // label3
             // 
@@ -352,6 +376,8 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DarkRed;
+            this.Controls.Add(this.flpEngins);
+            this.Controls.Add(this.flpPompiers);
             this.Controls.Add(this.gbMobilisation);
             this.Controls.Add(this.btnMAJ);
             this.Controls.Add(this.btnRapport);
@@ -406,5 +432,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label lblId;
         private System.Windows.Forms.Label lblIdMission;
+        private System.Windows.Forms.FlowLayoutPanel flpPompiers;
+        private System.Windows.Forms.FlowLayoutPanel flpEngins;
     }
 }

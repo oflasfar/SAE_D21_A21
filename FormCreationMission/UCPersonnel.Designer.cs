@@ -120,9 +120,9 @@
             this.gbInformationCarriere.Controls.Add(this.label10);
             this.gbInformationCarriere.Controls.Add(this.label4);
             this.gbInformationCarriere.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gbInformationCarriere.Location = new System.Drawing.Point(678, 193);
+            this.gbInformationCarriere.Location = new System.Drawing.Point(678, 180);
             this.gbInformationCarriere.Name = "gbInformationCarriere";
-            this.gbInformationCarriere.Size = new System.Drawing.Size(710, 481);
+            this.gbInformationCarriere.Size = new System.Drawing.Size(710, 494);
             this.gbInformationCarriere.TabIndex = 23;
             this.gbInformationCarriere.TabStop = false;
             this.gbInformationCarriere.Text = "Information Carriere";
@@ -297,7 +297,7 @@
             this.BtnPlusInformation.Name = "BtnPlusInformation";
             this.BtnPlusInformation.Size = new System.Drawing.Size(415, 39);
             this.BtnPlusInformation.TabIndex = 2;
-            this.BtnPlusInformation.Text = "Plud d\'information";
+            this.BtnPlusInformation.Text = "Plus d\'information";
             this.BtnPlusInformation.UseVisualStyleBackColor = true;
             this.BtnPlusInformation.Click += new System.EventHandler(this.BtnPlusInformation_Click_1);
             // 
@@ -465,7 +465,7 @@
             // 
             // pbGrade
             // 
-            this.pbGrade.Location = new System.Drawing.Point(1212, 42);
+            this.pbGrade.Location = new System.Drawing.Point(1214, 12);
             this.pbGrade.Name = "pbGrade";
             this.pbGrade.Size = new System.Drawing.Size(143, 145);
             this.pbGrade.TabIndex = 7;

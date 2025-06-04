@@ -94,9 +94,9 @@ namespace FormCreationMission
             int age = DateTime.Now.Year - naissance.Year;
             if (naissance > DateTime.Now.AddYears(-age)) age--;
 
-            if (age < 19)
+            if (age < 18)
             {
-                MessageBox.Show("❌ Le pompier doit avoir au moins 19 ans.", "Âge insuffisant", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("❌ Le pompier doit avoir au moins 18 ans.", "Âge insuffisant", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -213,5 +213,9 @@ namespace FormCreationMission
             }
         }
 
+        private void txtPortable_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

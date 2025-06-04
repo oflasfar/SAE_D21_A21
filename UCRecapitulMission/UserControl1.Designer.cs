@@ -34,7 +34,6 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.lblID2 = new System.Windows.Forms.Label();
             this.lblDescription = new System.Windows.Forms.Label();
-            this.lblTypeMission = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.lblCaserne = new System.Windows.Forms.Label();
             this.lblDate = new System.Windows.Forms.Label();
@@ -74,7 +73,6 @@
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Controls.Add(this.lblID2);
             this.panel1.Controls.Add(this.lblDescription);
-            this.panel1.Controls.Add(this.lblTypeMission);
             this.panel1.Controls.Add(this.label6);
             this.panel1.Controls.Add(this.lblCaserne);
             this.panel1.Controls.Add(this.lblDate);
@@ -93,7 +91,7 @@
             // 
             this.lblID2.AutoSize = true;
             this.lblID2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblID2.Location = new System.Drawing.Point(281, 26);
+            this.lblID2.Location = new System.Drawing.Point(257, 22);
             this.lblID2.Name = "lblID2";
             this.lblID2.Size = new System.Drawing.Size(0, 20);
             this.lblID2.TabIndex = 9;
@@ -102,26 +100,16 @@
             // 
             this.lblDescription.AutoSize = true;
             this.lblDescription.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDescription.Location = new System.Drawing.Point(139, 86);
+            this.lblDescription.Location = new System.Drawing.Point(367, 86);
             this.lblDescription.Name = "lblDescription";
             this.lblDescription.Size = new System.Drawing.Size(45, 20);
             this.lblDescription.TabIndex = 8;
             this.lblDescription.Text = "Type";
             // 
-            // lblTypeMission
-            // 
-            this.lblTypeMission.AutoSize = true;
-            this.lblTypeMission.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTypeMission.Location = new System.Drawing.Point(351, 86);
-            this.lblTypeMission.Name = "lblTypeMission";
-            this.lblTypeMission.Size = new System.Drawing.Size(67, 20);
-            this.lblTypeMission.TabIndex = 7;
-            this.lblTypeMission.Text = "Mission";
-            // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(583, 26);
+            this.label6.Location = new System.Drawing.Point(517, 22);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(0, 16);
             this.label6.TabIndex = 6;
@@ -130,7 +118,7 @@
             // 
             this.lblCaserne.AutoSize = true;
             this.lblCaserne.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCaserne.Location = new System.Drawing.Point(558, 26);
+            this.lblCaserne.Location = new System.Drawing.Point(414, 17);
             this.lblCaserne.Name = "lblCaserne";
             this.lblCaserne.Size = new System.Drawing.Size(103, 25);
             this.lblCaserne.TabIndex = 5;
@@ -141,7 +129,7 @@
             // 
             this.lblDate.AutoSize = true;
             this.lblDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDate.Location = new System.Drawing.Point(412, 26);
+            this.lblDate.Location = new System.Drawing.Point(523, 23);
             this.lblDate.Name = "lblDate";
             this.lblDate.Size = new System.Drawing.Size(0, 20);
             this.lblDate.TabIndex = 4;
@@ -150,7 +138,7 @@
             // 
             this.lblDateDebut.AutoSize = true;
             this.lblDateDebut.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDateDebut.Location = new System.Drawing.Point(336, 26);
+            this.lblDateDebut.Location = new System.Drawing.Point(134, 86);
             this.lblDateDebut.Name = "lblDateDebut";
             this.lblDateDebut.Size = new System.Drawing.Size(82, 20);
             this.lblDateDebut.TabIndex = 3;
@@ -160,7 +148,7 @@
             // 
             this.lblIDMission.AutoSize = true;
             this.lblIDMission.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblIDMission.Location = new System.Drawing.Point(244, 26);
+            this.lblIDMission.Location = new System.Drawing.Point(257, 26);
             this.lblIDMission.Name = "lblIDMission";
             this.lblIDMission.Size = new System.Drawing.Size(0, 20);
             this.lblIDMission.TabIndex = 2;
@@ -169,7 +157,7 @@
             // 
             this.lblId.AutoSize = true;
             this.lblId.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblId.Location = new System.Drawing.Point(139, 26);
+            this.lblId.Location = new System.Drawing.Point(134, 26);
             this.lblId.Name = "lblId";
             this.lblId.Size = new System.Drawing.Size(104, 20);
             this.lblId.TabIndex = 1;
@@ -212,7 +200,6 @@
         private System.Windows.Forms.Button btnCloturer;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label lblDescription;
-        private System.Windows.Forms.Label lblTypeMission;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label lblCaserne;
         private System.Windows.Forms.Label lblDate;

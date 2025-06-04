@@ -27,6 +27,8 @@ namespace FormCreationMission
 
         private void UCCreerMission_Load(object sender, EventArgs e)
         {
+            flpEngins.Visible = false;
+            flpPompiers.Visible = false;
             gbMobilisation.Visible = false;
             //btnQuitter.Visible = false;
             btnRapport.Visible = false;
@@ -322,9 +324,10 @@ namespace FormCreationMission
                 MessageBox.Show("❌ Veuillez remplir tous les champs avant de continuer.");
                 return;
             }
-            
+            flpEngins.Visible = true;
+            flpPompiers.Visible = true;
 
-            gbMobilisation.Visible = true;
+            //gbMobilisation.Visible = true;
             // Liste finale des engins nécessaires
             List<(string codeTypeEngin, int nombre)> enginsNecessaires = new List<(string, int)>();
             // Récupération des valeurs depuis les ComboBox
@@ -441,6 +444,73 @@ namespace FormCreationMission
                     dgvPompiers.Rows.Add(p["matricule"], p["nom"], p["prenom"], typeEngin);
                 }
             }
+
+
+            /////
+            ///
+            // 🔁 Réaffichage visuel des ENGINS depuis dgvEngins
+            flpEngins.Controls.Clear();
+            foreach (DataGridViewRow row in dgvEngins.Rows)
+            {
+                if (row.IsNewRow || row.Cells[0].Value == null) continue;
+
+                string type = row.Cells[0].Value.ToString();
+                string quantite = row.Cells[1].Value.ToString();
+                string equipage = row.Cells[2].Value.ToString();
+
+                Panel panel = new Panel
+                {
+                    Width = flpEngins.Width - 25,
+                    Height = 40,
+                    BackColor = Color.LightGray,
+                    Margin = new Padding(3),
+                    Padding = new Padding(5),
+                    Tag = type
+                };
+
+                Label lbl = new Label
+                {
+                    Text = $"🚒 {type} | Quantité : {quantite} | Équipage : {equipage}",
+                    Dock = DockStyle.Fill,
+                    TextAlign = ContentAlignment.MiddleLeft
+                };
+
+                panel.Controls.Add(lbl);
+                flpEngins.Controls.Add(panel);
+            }
+
+            // 🔁 Réaffichage visuel des POMPIERS depuis dgvPompiers
+            flpPompiers.Controls.Clear();
+            foreach (DataGridViewRow row in dgvPompiers.Rows)
+            {
+                if (row.IsNewRow || row.Cells[0].Value == null) continue;
+
+                int matricule = Convert.ToInt32(row.Cells[0].Value);
+                string nom = row.Cells[1].Value.ToString();
+                string prenom = row.Cells[2].Value.ToString();
+                string typeEngin = row.Cells[3].Value.ToString();
+
+                Panel panel = new Panel
+                {
+                    Width = flpPompiers.Width - 25,
+                    Height = 40,
+                    BackColor = Color.LightSteelBlue,
+                    Margin = new Padding(4),
+                    Padding = new Padding(5),
+                    Tag = new Tuple<int, string>(matricule, typeEngin)
+                };
+
+                Label lbl = new Label
+                {
+                    Text = $"👨‍🚒 {prenom} {nom} – Matricule : {matricule} – Engin : {typeEngin}",
+                    Dock = DockStyle.Fill,
+                    TextAlign = ContentAlignment.MiddleLeft
+                };
+
+                panel.Controls.Add(lbl);
+                flpPompiers.Controls.Add(panel);
+            }
+
         }
 
 
@@ -715,6 +785,25 @@ namespace FormCreationMission
         private void dgvEngins_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
         {
 
+        }
+
+        private void flpEngins_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void lblDateDeclanchee_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtCodePostale_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Autoriser uniquement les chiffres et les touches de contrôle (ex: retour arrière)
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true; // Empêche la saisie
+            }
         }
     }
 }

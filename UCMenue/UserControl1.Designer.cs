@@ -46,7 +46,7 @@
             this.btnTableuDeBord.Name = "btnTableuDeBord";
             this.btnTableuDeBord.Size = new System.Drawing.Size(403, 80);
             this.btnTableuDeBord.TabIndex = 0;
-            this.btnTableuDeBord.Text = "Tableu De Bord";
+            this.btnTableuDeBord.Text = "Tableau De Bord";
             this.btnTableuDeBord.UseVisualStyleBackColor = false;
             this.btnTableuDeBord.Click += new System.EventHandler(this.btnTableuDeBord_Click);
             // 

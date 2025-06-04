@@ -198,6 +198,7 @@
             this.txtPortable.Name = "txtPortable";
             this.txtPortable.Size = new System.Drawing.Size(372, 34);
             this.txtPortable.TabIndex = 4;
+            this.txtPortable.TextChanged += new System.EventHandler(this.txtPortable_TextChanged);
             this.txtPortable.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPortable_KeyPress);
             // 
             // rbM

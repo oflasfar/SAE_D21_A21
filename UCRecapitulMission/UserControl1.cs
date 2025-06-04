@@ -26,6 +26,7 @@ namespace UCRecapitulMission
         private SQLiteConnection cx;
         private DataSet ds;
         private String dateRetour;
+        string type;
         public UCAffichageMission()
         {
             InitializeComponent();
@@ -41,8 +42,8 @@ namespace UCRecapitulMission
                 {
                     //MessageBox.Show(row["idCaserne"].ToString());
                     lblCaserne.Text = "Caserne : "+ row["idCaserne"].ToString();
-                    lblDateDebut.Text = "Debut le : " + row["dateHeureDepart"].ToString();
-                    lblTypeMission.Text  = row["motifAppel"].ToString();
+                    lblDateDebut.Text = "Debut le : " + Convert.ToDateTime(row["dateHeureDepart"]).ToString("dd/MM/yyyy");
+                    type  = row["motifAppel"].ToString();
                     string nature = row["idNatureSinistre"].ToString();
                     dateRetour = row["dateHeureRetour"].ToString();
                     foreach (DataRow naturerow in dsi.Tables["NatureSinistre"].Rows)
@@ -264,7 +265,7 @@ namespace UCRecapitulMission
 
                     //INFOS DE BASE
                     string debut = lblDateDebut.Text.Split(':')[1].Trim();
-                    string type = lblTypeMission.Text;
+                    //string type = lblTypeMission.Text;
                     string description = lblDescription.Text;
                     string caserne = lblCaserne.Text.Split(':')[1].Trim();
                     string adresse = "";
