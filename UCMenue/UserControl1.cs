@@ -41,6 +41,8 @@ namespace UCMenue
         private void btnTableuDeBord_Click(object sender, EventArgs e)
         {
             f.btnActualiser_Click(sender, e);
+            f.chkbxEnCours.Visible = true; // Cache la checkbox "En cours" dans Form4
+            f.lblTableauBord.Text = "Tableau de bord";
             btnTableuDeBord.BackColor = Color.DarkRed;
             btnNouvelleMission.BackColor = Color.Transparent;
             btnGestionEngin.BackColor = Color.Transparent;
@@ -54,6 +56,8 @@ namespace UCMenue
             if (f != null) // f est la Form4
             {
                 f.AfficherDansPanel(); // méthode de Form4
+                f.chkbxEnCours.Visible = false; // Cache la checkbox "En cours" dans Form4
+                f.lblTableauBord.Text = "Nouvelle Mission"; // Met à jour le label pour indiquer la nouvelle mission
                 btnTableuDeBord.BackColor = Color.Transparent;
                 btnNouvelleMission.BackColor = Color.DarkRed;
                 btnGestionEngin.BackColor = Color.Transparent;
@@ -64,6 +68,7 @@ namespace UCMenue
             {
                 MessageBox.Show("La fenêtre principale n’est pas prête.");
             }
+
         }
 
 
@@ -72,6 +77,8 @@ namespace UCMenue
             if (Personnel != null)
             {
                 f.AfficherPersonnel(); // méthode de Form4
+                f.chkbxEnCours.Visible = false; // Cache la checkbox "En cours" dans Form4
+                f.lblTableauBord.Text = "Gestion du personnel";
                 btnTableuDeBord.BackColor = Color.Transparent;
                 btnNouvelleMission.BackColor = Color.Transparent;
                 btnGestionEngin.BackColor = Color.Transparent;
@@ -88,6 +95,8 @@ namespace UCMenue
         private void btnStatistique_Click(object sender, EventArgs e)
         {
             f.AfficherStatistique(); // méthode de Form4
+            f.chkbxEnCours.Visible = false; // Cache la checkbox "En cours" dans Form4
+            f.lblTableauBord.Text = "Statistique";
             btnTableuDeBord.BackColor = Color.Transparent;
             btnNouvelleMission.BackColor = Color.Transparent;
             btnGestionEngin.BackColor = Color.Transparent;
@@ -98,6 +107,8 @@ namespace UCMenue
         private void btnGestionEngin_Click(object sender, EventArgs e)
         {
             f.AfficherEngins(); // méthode de Form4
+            f.chkbxEnCours.Visible = false; // Cache la checkbox "En cours" dans Form4
+            f.lblTableauBord.Text = "Gestion des engins";
             btnTableuDeBord.BackColor = Color.Transparent;
             btnNouvelleMission.BackColor = Color.Transparent;
             btnGestionEngin.BackColor = Color.DarkRed;

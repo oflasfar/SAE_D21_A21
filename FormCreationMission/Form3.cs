@@ -203,5 +203,15 @@ namespace FormCreationMission
                 rbM.Checked = false;
             }
         }
+
+        private void txtPortable_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Autoriser uniquement les chiffres et les touches de contrôle (ex: retour arrière)
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true; // Empêche la saisie
+            }
+        }
+
     }
 }

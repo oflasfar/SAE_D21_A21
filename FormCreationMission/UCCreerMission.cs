@@ -711,5 +711,10 @@ namespace FormCreationMission
         {
             e.Handled = true;
         }
+
+        private void dgvEngins_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }

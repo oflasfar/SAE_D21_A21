@@ -191,6 +191,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.DarkRed;
             this.Controls.Add(this.btnRapport);
             this.Controls.Add(this.btnCloturer);
             this.Controls.Add(this.panel1);

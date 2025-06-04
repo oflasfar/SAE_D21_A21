@@ -103,6 +103,14 @@ namespace FormCreationMission
             cboTypeSinistre.SelectedIndex = 0;
             pnlGlobal.AutoScroll = true;
             isLoading = false;
+            gbDonnes.Controls.Add(lblStatCasern);
+            gbDonnes.Controls.Add(cboCaserne);
+            gbDonnes.Controls.Add(cboRequeteParCaserne);
+            gbDonnes.Controls.Add(lblStatistiqueGlobal);
+            gbDonnes.Controls.Add(cboStatGlobal);
+            gbDonnes.Controls.Add(cboTypeSinistre);
+            gbDonnes.Controls.Add(cboHabilitation);
+
         }
 
         private void cboCaserne_SelectedIndexChanged(object sender, EventArgs e)
@@ -388,7 +396,23 @@ namespace FormCreationMission
 
                         Label lbl = new Label();
 
-                        lbl.Text = " L' Habilitation " + habilitation + " a été appelée " + nbinter + " fois";
+                        //lbl.Text = " L' Habilitation " + habilitation + " a été appelée ( " + nbinter + " ) fois";
+                        if(nbinter == "1")
+                        {
+                            lbl.Text = "( " + nbinter + " )  appel pour l'habilitation " + habilitation;
+                        }
+                        else
+                        {
+                            int x = int.Parse(nbinter);
+                            if (x > 9)
+                            {
+                                lbl.Text = "(" + nbinter + ") appels pour l'habilitation " + habilitation;
+                            }
+                            else
+                            {
+                                lbl.Text = "( " + nbinter + " ) appels pour l'habilitation " + habilitation;
+                            }
+                        }
 
 
                         lbl.Location = new Point(10, y);
@@ -536,6 +560,11 @@ namespace FormCreationMission
                     MessageBox.Show("Erreur SQL : " + err.Message);
                 }
             }
+        }
+
+        private void lblStatCasern_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormConn));
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.txtLogin = new System.Windows.Forms.TextBox();
@@ -68,6 +69,7 @@
             this.txtMDP.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtMDP.Location = new System.Drawing.Point(171, 122);
             this.txtMDP.Name = "txtMDP";
+            this.txtMDP.PasswordChar = '*';
             this.txtMDP.Size = new System.Drawing.Size(298, 30);
             this.txtMDP.TabIndex = 3;
             // 
@@ -76,7 +78,7 @@
             this.btnConnexion.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnConnexion.Location = new System.Drawing.Point(171, 189);
             this.btnConnexion.Name = "btnConnexion";
-            this.btnConnexion.Size = new System.Drawing.Size(222, 44);
+            this.btnConnexion.Size = new System.Drawing.Size(298, 44);
             this.btnConnexion.TabIndex = 4;
             this.btnConnexion.Text = "Connexion";
             this.btnConnexion.UseVisualStyleBackColor = true;
@@ -92,8 +94,9 @@
             this.Controls.Add(this.txtLogin);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FormConn";
-            this.Text = "FormConn";
+            this.Text = "Login";
             this.Load += new System.EventHandler(this.FormConn_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

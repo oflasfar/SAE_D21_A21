@@ -39,7 +39,7 @@
             // 
             this.lblTableauBord.AutoSize = true;
             this.lblTableauBord.Font = new System.Drawing.Font("MS UI Gothic", 28.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTableauBord.Location = new System.Drawing.Point(1074, 9);
+            this.lblTableauBord.Location = new System.Drawing.Point(1075, 15);
             this.lblTableauBord.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblTableauBord.Name = "lblTableauBord";
             this.lblTableauBord.Size = new System.Drawing.Size(334, 47);
@@ -68,6 +68,7 @@
             this.btnActualiser.TabIndex = 0;
             this.btnActualiser.Text = "Actualiser";
             this.btnActualiser.UseVisualStyleBackColor = true;
+            this.btnActualiser.Visible = false;
             this.btnActualiser.Click += new System.EventHandler(this.btnActualiser_Click);
             // 
             // pnlAffichage
@@ -97,9 +98,9 @@
         }
 
         #endregion
-        private System.Windows.Forms.Label lblTableauBord;
-        private System.Windows.Forms.CheckBox chkbxEnCours;
         public System.Windows.Forms.Button btnActualiser;
         private System.Windows.Forms.Panel pnlAffichage;
+        public System.Windows.Forms.Label lblTableauBord;
+        public System.Windows.Forms.CheckBox chkbxEnCours;
     }
 }

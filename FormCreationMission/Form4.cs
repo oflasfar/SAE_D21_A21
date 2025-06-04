@@ -53,43 +53,55 @@ namespace FormCreationMission
             }
 
             pnlAffichage.Controls.Clear();
-            //placement du menu
+
+            // placement du menu
             Form2 personnel = new Form2();
             UCMenueLateral menu = new UCMenueLateral(this, personnel);
             menu.Location = new System.Drawing.Point(12, 1);
             this.Controls.Add(menu);
-            //Placement des mission dans panel
+
+            //Nettoyage du panel d'affichage
+            pnlAffichage.Controls.Clear();
             int y = 10; // Position de départ verticale
-            //Boucle pour afficher les missions
             foreach (DataRow row in MesDatas.DsGlobal.Tables["Mission"].Rows)
             {
+                //on cherche l'Id
                 int id = Convert.ToInt32(row["id"]);
+                //on cherche la nature du sinistre
                 string nature = row["idNatureSinistre"].ToString();
                 string libelleNature = "";
+                //on cherche le libellé de la nature du sinistre
                 DataRow[] foundNature = MesDatas.DsGlobal.Tables["NatureSinistre"].Select("id = '" + nature + "'");
                 if (foundNature.Length > 0)
                 {
                     libelleNature = foundNature[0]["libelle"].ToString();
                 }
+                //Création de l'UC pour afficher la mission
                 UCAffichageMission uCRecapitulMission = new UCAffichageMission(id, Connexion.Connec, MesDatas.DsGlobal);
-                uCRecapitulMission.Width = 600;
+                
+                //On creer un panel wrapper pour center l'UC
                 Panel wrapper = new Panel();
                 wrapper.IsAccessible = true;
-                wrapper.Width = pnlAffichage.ClientSize.Width+100;
+                wrapper.Width = pnlAffichage.ClientSize.Width;
                 wrapper.Height = uCRecapitulMission.Height + 10;
                 wrapper.Padding = new Padding(0);
                 wrapper.Margin = new Padding(0);
                 wrapper.BackColor = Color.Transparent;
+                //Ajouter l'UC dans le wrapper
                 wrapper.Controls.Add(uCRecapitulMission);
+                //Centrer l'UC dans le wrapper
                 uCRecapitulMission.Left = (wrapper.Width - uCRecapitulMission.Width) / 2;
                 uCRecapitulMission.Top = 0;
-                //positionne verticalement le wrapper
+                //Important : positionne verticalement le wrapper
                 wrapper.Top = y;
                 wrapper.Left = 0;
+                //Ajouter le panel wrapper dans le panel d'affichage
                 pnlAffichage.Controls.Add(wrapper);
                 //Incrémentation pour la prochaine mission
                 y += wrapper.Height + 10;
             }
+
+
         }
 
         //Methode pour afficher le User Control du Menu
@@ -329,7 +341,6 @@ namespace FormCreationMission
         public void actualiser()
         {
             //Nettoyage du panel d'affichage
-
             pnlAffichage.Controls.Clear();
             int y = 10; // Position de départ verticale
             foreach (DataRow row in MesDatas.DsGlobal.Tables["Mission"].Rows)
@@ -347,7 +358,7 @@ namespace FormCreationMission
                 }
                 //Création de l'UC pour afficher la mission
                 UCAffichageMission uCRecapitulMission = new UCAffichageMission(id, Connexion.Connec, MesDatas.DsGlobal);
-                uCRecapitulMission.Width = 600;
+
                 //On creer un panel wrapper pour center l'UC
                 Panel wrapper = new Panel();
                 wrapper.IsAccessible = true;
