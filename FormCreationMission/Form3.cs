@@ -177,6 +177,7 @@ namespace FormCreationMission
             if(rbVo.Checked)
             {
                 rbVo.Checked = false;
+                
             }
         }
 
@@ -185,6 +186,7 @@ namespace FormCreationMission
             if (rbPro.Checked)
             {
                 rbPro.Checked = false;
+                
             }
         }
 
@@ -216,6 +218,16 @@ namespace FormCreationMission
         private void txtPortable_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void cbGrade_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true; // Empêche la saisie manuelle dans le ComboBox
+        }
+
+        private void cbCaserne_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true; // Empêche la saisie manuelle dans le ComboBox
         }
     }
 }

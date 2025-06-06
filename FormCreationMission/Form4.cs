@@ -55,8 +55,7 @@ namespace FormCreationMission
             pnlAffichage.Controls.Clear();
 
             // placement du menu
-            Form2 personnel = new Form2();
-            UCMenueLateral menu = new UCMenueLateral(this, personnel);
+            UCMenueLateral menu = new UCMenueLateral(this);
             menu.Location = new System.Drawing.Point(12, 1);
             this.Controls.Add(menu);
 

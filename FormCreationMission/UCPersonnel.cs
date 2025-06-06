@@ -1271,5 +1271,25 @@ WHERE A.matriculePompier = @mat AND A.dateFin IS NULL";
         {
 
         }
+
+        private void rdbProfessionnel_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void rdbProfessionnel_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true; // Ignore key press events
+        }
+
+        private void rdbVolontaire_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true; // Ignore key press events
+        }
+
+        private void rdbVolontaire_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

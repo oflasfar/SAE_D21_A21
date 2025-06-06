@@ -109,18 +109,19 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(517, 22);
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(586, 24);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(0, 16);
+            this.label6.Size = new System.Drawing.Size(0, 32);
             this.label6.TabIndex = 6;
             // 
             // lblCaserne
             // 
             this.lblCaserne.AutoSize = true;
-            this.lblCaserne.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCaserne.Location = new System.Drawing.Point(414, 17);
+            this.lblCaserne.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCaserne.Location = new System.Drawing.Point(423, 16);
             this.lblCaserne.Name = "lblCaserne";
-            this.lblCaserne.Size = new System.Drawing.Size(103, 25);
+            this.lblCaserne.Size = new System.Drawing.Size(143, 32);
             this.lblCaserne.TabIndex = 5;
             this.lblCaserne.Text = "Caserne : ";
             this.lblCaserne.Click += new System.EventHandler(this.lblCaserne_Click);
@@ -128,10 +129,10 @@
             // lblDate
             // 
             this.lblDate.AutoSize = true;
-            this.lblDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDate.Location = new System.Drawing.Point(523, 23);
+            this.lblDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDate.Location = new System.Drawing.Point(592, 25);
             this.lblDate.Name = "lblDate";
-            this.lblDate.Size = new System.Drawing.Size(0, 20);
+            this.lblDate.Size = new System.Drawing.Size(0, 32);
             this.lblDate.TabIndex = 4;
             // 
             // lblDateDebut

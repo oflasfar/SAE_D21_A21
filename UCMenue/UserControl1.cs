@@ -15,17 +15,16 @@ namespace UCMenue
     public partial class UCMenueLateral: UserControl
     {
         Form4 f;
-        Form2 Personnel;
+
         
         public UCMenueLateral()
         {
             InitializeComponent();
         }
-        public UCMenueLateral(Form4 fp,Form2 Personnel)
+        public UCMenueLateral(Form4 fp)
         {
             InitializeComponent();
             this.f = fp;
-            this.Personnel = Personnel;
         }
 
         private void UserControl1_Load(object sender, EventArgs e)
@@ -74,8 +73,8 @@ namespace UCMenue
 
         private void btnGestionPersonnel_Click(object sender, EventArgs e)
         {
-            if (Personnel != null)
-            {
+            
+            
                 f.AfficherPersonnel(); // méthode de Form4
                 f.chkbxEnCours.Visible = false; // Cache la checkbox "En cours" dans Form4
                 f.lblTableauBord.Text = "Gestion du personnel";
@@ -85,11 +84,8 @@ namespace UCMenue
                 btnGestionPersonnel.BackColor = Color.DarkRed;
                 btnStatistique.BackColor = Color.Transparent;
 
-            }
-            else
-            {
-                MessageBox.Show("Le formulaire de gestion du personnel n’a pas été fourni.");
-            }
+            
+            
         }
 
         private void btnStatistique_Click(object sender, EventArgs e)

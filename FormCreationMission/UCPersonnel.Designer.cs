@@ -74,6 +74,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.label16 = new System.Windows.Forms.Label();
             this.panel2.SuspendLayout();
             this.gbInformationCarriere.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -241,6 +242,7 @@
             // rdbVolontaire
             // 
             this.rdbVolontaire.AutoSize = true;
+            this.rdbVolontaire.Enabled = false;
             this.rdbVolontaire.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rdbVolontaire.Location = new System.Drawing.Point(912, 41);
             this.rdbVolontaire.Name = "rdbVolontaire";
@@ -249,10 +251,13 @@
             this.rdbVolontaire.TabStop = true;
             this.rdbVolontaire.Text = "Volontaire";
             this.rdbVolontaire.UseVisualStyleBackColor = true;
+            this.rdbVolontaire.CheckedChanged += new System.EventHandler(this.rdbVolontaire_CheckedChanged);
+            this.rdbVolontaire.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.rdbVolontaire_KeyPress);
             // 
             // rdbProfessionnel
             // 
             this.rdbProfessionnel.AutoSize = true;
+            this.rdbProfessionnel.Enabled = false;
             this.rdbProfessionnel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rdbProfessionnel.Location = new System.Drawing.Point(725, 41);
             this.rdbProfessionnel.Name = "rdbProfessionnel";
@@ -261,9 +266,12 @@
             this.rdbProfessionnel.TabStop = true;
             this.rdbProfessionnel.Text = "Professionnel";
             this.rdbProfessionnel.UseVisualStyleBackColor = true;
+            this.rdbProfessionnel.CheckedChanged += new System.EventHandler(this.rdbProfessionnel_CheckedChanged);
+            this.rdbProfessionnel.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.rdbProfessionnel_KeyPress);
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label16);
             this.groupBox1.Controls.Add(this.cbGradeNouveau);
             this.groupBox1.Controls.Add(this.BtnPlusInformation);
             this.groupBox1.Controls.Add(this.txtGrade);
@@ -284,7 +292,7 @@
             // cbGradeNouveau
             // 
             this.cbGradeNouveau.FormattingEnabled = true;
-            this.cbGradeNouveau.Location = new System.Drawing.Point(112, 94);
+            this.cbGradeNouveau.Location = new System.Drawing.Point(222, 94);
             this.cbGradeNouveau.Name = "cbGradeNouveau";
             this.cbGradeNouveau.Size = new System.Drawing.Size(283, 33);
             this.cbGradeNouveau.TabIndex = 23;
@@ -303,16 +311,16 @@
             // 
             // txtGrade
             // 
-            this.txtGrade.Location = new System.Drawing.Point(112, 35);
+            this.txtGrade.Location = new System.Drawing.Point(222, 40);
             this.txtGrade.Name = "txtGrade";
             this.txtGrade.Size = new System.Drawing.Size(283, 30);
             this.txtGrade.TabIndex = 22;
             // 
             // btnChanger
             // 
-            this.btnChanger.Location = new System.Drawing.Point(431, 35);
+            this.btnChanger.Location = new System.Drawing.Point(511, 35);
             this.btnChanger.Name = "btnChanger";
-            this.btnChanger.Size = new System.Drawing.Size(178, 40);
+            this.btnChanger.Size = new System.Drawing.Size(119, 40);
             this.btnChanger.TabIndex = 21;
             this.btnChanger.Text = "Changer";
             this.btnChanger.UseVisualStyleBackColor = true;
@@ -563,6 +571,15 @@
             this.pictureBox1.TabIndex = 2;
             this.pictureBox1.TabStop = false;
             // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(22, 97);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(157, 25);
+            this.label16.TabIndex = 24;
+            this.label16.Text = "Nouveau grade :";
+            // 
             // UCPersonnel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -633,5 +650,6 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.ListBox lstAffectationsPassees;
         private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Label label16;
     }
 }

@@ -233,6 +233,7 @@
             this.cbGrade.Name = "cbGrade";
             this.cbGrade.Size = new System.Drawing.Size(381, 37);
             this.cbGrade.TabIndex = 5;
+            this.cbGrade.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cbGrade_KeyPress);
             // 
             // rbVo
             // 
@@ -293,9 +294,9 @@
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(627, 278);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(194, 29);
+            this.label1.Size = new System.Drawing.Size(116, 29);
             this.label1.TabIndex = 24;
-            this.label1.Text = "Date embauche :";
+            this.label1.Text = "Caserne :";
             // 
             // cbCaserne
             // 
@@ -306,6 +307,7 @@
             this.cbCaserne.Size = new System.Drawing.Size(381, 37);
             this.cbCaserne.TabIndex = 6;
             this.cbCaserne.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            this.cbCaserne.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cbCaserne_KeyPress);
             // 
             // btnQuitter
             // 
@@ -322,6 +324,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.MediumTurquoise;
             this.ClientSize = new System.Drawing.Size(1236, 635);
             this.Controls.Add(this.btnQuitter);
             this.Controls.Add(this.cbCaserne);

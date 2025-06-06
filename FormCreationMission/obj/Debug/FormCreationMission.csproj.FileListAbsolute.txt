@@ -4,7 +4,6 @@ C:\OMAR\S2\SAE-D21\FormCreationMission\bin\Debug\FormCreationMission.pdb
 C:\OMAR\S2\SAE-D21\FormCreationMission\bin\Debug\System.Data.SQLite.dll
 C:\OMAR\S2\SAE-D21\FormCreationMission\bin\Debug\System.Data.SQLite.xml
 C:\OMAR\S2\SAE-D21\FormCreationMission\obj\Debug\FormCreationMission.csproj.AssemblyReference.cache
-C:\OMAR\S2\SAE-D21\FormCreationMission\obj\Debug\FormCreationMission.Form1.resources
 C:\OMAR\S2\SAE-D21\FormCreationMission\obj\Debug\FormCreationMission.Properties.Resources.resources
 C:\OMAR\S2\SAE-D21\FormCreationMission\obj\Debug\FormCreationMission.csproj.GenerateResource.cache
 C:\OMAR\S2\SAE-D21\FormCreationMission\obj\Debug\FormCreationMission.csproj.CoreCompileInputs.cache
@@ -77,7 +76,6 @@ C:\OMAR\S2\SAE-D21\FormCreationMission\bin\Debug\BouncyCastle.Cryptography.dll
 C:\OMAR\S2\SAE-D21\FormCreationMission\bin\Debug\itextsharp.dll
 C:\OMAR\S2\SAE-D21\FormCreationMission\bin\Debug\BouncyCastle.Cryptography.xml
 C:\OMAR\S2\SAE-D21\FormCreationMission\bin\Debug\itextsharp.xml
-C:\OMAR\S2\SAE-D21\FormCreationMission\obj\Debug\FormCreationMission.Form2.resources
 C:\OMAR\S2\SAE-D21\FormCreationMission\obj\Debug\FormCreationMission.Form3.resources
 C:\OMAR\S2\SAE-D21\FormCreationMission\bin\Debug\UCMenue.dll
 C:\OMAR\S2\SAE-D21\FormCreationMission\bin\Debug\UCRecapitulMission.dll
