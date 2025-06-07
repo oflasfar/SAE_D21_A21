@@ -61,8 +61,10 @@ namespace FormCreationMission
 
             //Nettoyage du panel d'affichage
             pnlAffichage.Controls.Clear();
+            // Inverser les lignes de la table Mission sans changer la boucle
+            DataRow[] missionsInversees = MesDatas.DsGlobal.Tables["Mission"].Select("", "id DESC");
             int y = 10; // Position de départ verticale
-            foreach (DataRow row in MesDatas.DsGlobal.Tables["Mission"].Rows)
+            foreach (DataRow row in missionsInversees)
             {
                 //on cherche l'Id
                 int id = Convert.ToInt32(row["id"]);
@@ -341,8 +343,10 @@ namespace FormCreationMission
         {
             //Nettoyage du panel d'affichage
             pnlAffichage.Controls.Clear();
+            // Inverser les lignes de la table Mission sans changer la boucle
+            DataRow[] missionsInversees = MesDatas.DsGlobal.Tables["Mission"].Select("", "id DESC");
             int y = 10; // Position de départ verticale
-            foreach (DataRow row in MesDatas.DsGlobal.Tables["Mission"].Rows)
+            foreach (DataRow row in missionsInversees)
             {
                 //on cherche l'Id
                 int id = Convert.ToInt32(row["id"]);

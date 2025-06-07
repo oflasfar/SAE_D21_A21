@@ -15,6 +15,8 @@ using static System.Net.Mime.MediaTypeNames;
 using System.Data.SQLite;
 using SAEPageMission;
 using System.Reflection.Emit;
+using iTextFont = iTextSharp.text.Font;
+
 
 
 namespace UCRecapitulMission
@@ -226,14 +228,10 @@ namespace UCRecapitulMission
                     Environment.GetFolderPath(Environment.SpecialFolder.Desktop),
                     "Rapports Missions"
                 );
-                // On récupère l'ID de la mission à partir du label
-                string id = lblID2.Text.Trim();
-                //Nom du fichier PDF
-                string nomFichier = $"Mission_{id}_Rapport.pdf";
 
-                if (!Directory.Exists(bureauPath))
-                    Directory.CreateDirectory(bureauPath);
-                //On construie le chemin
+                string id = lblID2.Text.Trim();
+                string nomFichier = $"Mission_{id}_Rapport.pdf";
+                if (!Directory.Exists(bureauPath)) Directory.CreateDirectory(bureauPath);
                 string cheminPDF = Path.Combine(bureauPath, nomFichier);
 
                 if (File.Exists(cheminPDF))
@@ -241,53 +239,59 @@ namespace UCRecapitulMission
                     MessageBox.Show("❗ Ce rapport existe déjà dans le Bureau.");
                     return;
                 }
-                //On initialise le document
-                Document doc = new Document();
+
+                Document doc = new Document(PageSize.A4, 50, 50, 50, 50);
                 try
                 {
                     PdfWriter.GetInstance(doc, new FileStream(cheminPDF, FileMode.Create));
                     doc.Open();
-                    //Logo CaserNet
+
+                    // Fonts
+                    iTextFont titreFont = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 18, BaseColor.BLACK);
+                    iTextFont sectionFont = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 14, BaseColor.DARK_GRAY);
+                    iTextFont normalFont = FontFactory.GetFont(FontFactory.HELVETICA, 12, BaseColor.BLACK);
+                    iTextFont smallFont = FontFactory.GetFont(FontFactory.HELVETICA, 10, BaseColor.GRAY);
+
+                    // Logo
                     string cheminLogo = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Images", "logo.png");
                     if (File.Exists(cheminLogo))
                     {
                         iTextSharp.text.Image logo = iTextSharp.text.Image.GetInstance(cheminLogo);
-                        logo.ScaleAbsolute(100f, 100f); // Taille du logo
+                        logo.ScaleToFit(100f, 100f);
                         logo.Alignment = Element.ALIGN_CENTER;
                         doc.Add(logo);
-                        doc.Add(new Paragraph("\n")); // Espace après le logo
                     }
 
-                        //Titre
-                        iTextSharp.text.Font titreFont = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 18);
-                    doc.Add(new Paragraph($"RAPPORT DE MISSION N° {id}", titreFont));
+                    doc.Add(new Paragraph("\n"));
+                    doc.Add(new Paragraph($"RAPPORT DE MISSION N° {id}", titreFont) { Alignment = Element.ALIGN_CENTER });
                     doc.Add(new Paragraph("\n"));
 
-                    //INFOS DE BASE
+                    // Infos générales
                     string debut = lblDateDebut.Text.Split(':')[1].Trim();
-                    //string type = lblTypeMission.Text;
                     string description = lblDescription.Text;
                     string caserne = lblCaserne.Text.Split(':')[1].Trim();
-                    string adresse = "";
 
-                    doc.Add(new Paragraph($"📅 Début de mission : {debut}"));
-                    doc.Add(new Paragraph($"📅 Fin de mission   : {this.dateRetour}"));
-                    doc.Add(new Paragraph($"🏢 Caserne          : {caserne}"));
-                    doc.Add(new Paragraph($"📞 Motif d'appel    : {type}"));
-                    doc.Add(new Paragraph($"🔥 Nature sinistre  : {description}"));
-                    doc.Add(new Paragraph("\n-----------------------------\n"));
+                    PdfPTable tableInfo = new PdfPTable(1);
+                    tableInfo.WidthPercentage = 100;
+                    tableInfo.SpacingAfter = 10f;
 
-                    //ENGINS MOBILISÉS
-                    doc.Add(new Paragraph("🚒 Engins mobilisés :"));
+                    tableInfo.AddCell(new PdfPCell(new Phrase("Informations Générales", sectionFont)) { Colspan = 1 });
+                    tableInfo.AddCell(new Phrase($"📅 Début : {debut}", normalFont));
+                    tableInfo.AddCell(new Phrase($"📅 Fin   : {this.dateRetour}", normalFont));
+                    tableInfo.AddCell(new Phrase($"🏢 Caserne : {caserne}", normalFont));
+                    tableInfo.AddCell(new Phrase($"📞 Motif : {type}", normalFont));
+                    tableInfo.AddCell(new Phrase($"🔥 Nature : {description}", normalFont));
+                    doc.Add(tableInfo);
 
-                    DataRow[] lignesEngins = ds.Tables["PartirAvec"].Select($"idMission = {id}");
-                    DataTable dtEngin = ds.Tables["Engin"];
-                    DataTable dtTypeEngin = ds.Tables["TypeEngin"];
-
+                    // Engins mobilisés
+                    doc.Add(new Paragraph("🚒 Engins mobilisés :", sectionFont));
+                    var lignesEngins = ds.Tables["PartirAvec"].Select($"idMission = {id}");
+                    var dtEngin = ds.Tables["Engin"];
+                    var dtTypeEngin = ds.Tables["TypeEngin"];
 
                     if (lignesEngins.Length == 0)
                     {
-                        doc.Add(new Paragraph("→ Aucun engin mobilisé."));
+                        doc.Add(new Paragraph("→ Aucun engin mobilisé.", normalFont));
                     }
                     else
                     {
@@ -297,53 +301,25 @@ namespace UCRecapitulMission
                             var engin = dtEngin.Select($"numero = {num}").FirstOrDefault();
                             if (engin != null)
                             {
-                                string typeCode = engin["codeTypeEngin"].ToString();
-                                //libelle = dtTypeEngin.Select($"code = '{typeCode}'").FirstOrDefault()?["libelle"]?.ToString() ?? typeCode;
-                                string libelleType = dtTypeEngin.Select($"code = '{typeCode}'").FirstOrDefault()?["nom"].ToString() ?? typeCode;
-
-                                doc.Add(new Paragraph($"→({libelleType})"));
+                                string code = engin["codeTypeEngin"].ToString();
+                                string libelle = dtTypeEngin.Select($"code = '{code}'").FirstOrDefault()?["nom"].ToString() ?? code;
+                                doc.Add(new Paragraph($"→ {libelle}", normalFont));
                             }
                         }
                     }
 
-                    //POMPIERS MOBILISÉS
-                    doc.Add(new Paragraph("\n👨‍🚒 Pompiers mobilisés :"));
-                    /*
-                    DataRow[] lignesPompiers = ds.Tables["Mobiliser"].Select($"idMission = {id}");
-                    DataTable dtPompier = ds.Tables["Pompier"];
-                    DataTable dtGrade = ds.Tables["Grade"];
-                    DataTable dtHabilitation = ds.Tables["Habilitation"];
+                    doc.Add(new Paragraph("\n"));
 
-                    if (lignesPompiers.Length == 0)
-                    {
-                        doc.Add(new Paragraph("→ Aucun pompier mobilisé."));
-                    }
-                    else
-                    {
-                        foreach (DataRow ligne in lignesPompiers)
-                        {
-                            int matricule = Convert.ToInt32(ligne["matriculePompier"]);
-                            int idHab = Convert.ToInt32(ligne["idHabilitation"]);
+                    // Pompiers mobilisés
+                    doc.Add(new Paragraph("👨‍🚒 Pompiers mobilisés :", sectionFont));
+                    string lignes = recapTableMobiliser(id);
+                    doc.Add(new Paragraph(lignes, normalFont));
 
-                            DataRow pompier = dtPompier.Select($"matricule = {matricule}").FirstOrDefault();
-                            if (pompier != null)
-                            {
-                                string nom = pompier["nom"].ToString();
-                                string prenom = pompier["prenom"].ToString();
-                                string grade = dtGrade.Select($"code = '{pompier["codeGrade"]}'").FirstOrDefault()?["libelle"].ToString() ?? "";
-                                string hab = dtHabilitation.Select($"id = {idHab}").FirstOrDefault()?["libelle"].ToString() ?? "";
+                    // Date de génération
+                    doc.Add(new Paragraph($"\n📄 Rapport généré le : {DateTime.Now:dd/MM/yyyy HH:mm}", smallFont));
 
-                                doc.Add(new Paragraph($"→ {grade} {prenom} {nom} (matricule : {matricule}) - {hab}"));
-                            }
-                        }
-                    }
-                    */
-                    string xxx = recapTableMobiliser(id);
-                    doc.Add(new Paragraph(xxx));
-
-                    doc.Add(new Paragraph("\n📄 Rapport généré le : " + DateTime.Now.ToString("dd/MM/yyyy HH:mm")));
                     doc.Close();
-                    //MessageBox.Show("Rapport PDF créé avec succès dans :\n" + cheminPDF, "Succès");
+                    MessageBox.Show("✅ Rapport généré avec succès !");
                 }
                 catch (Exception ex)
                 {
@@ -355,6 +331,7 @@ namespace UCRecapitulMission
                 MessageBox.Show("❌ La mission doit d'abord être terminée pour générer le rapport.");
             }
         }
+
 
 
 
