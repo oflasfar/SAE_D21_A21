@@ -32,22 +32,6 @@ namespace FormCreationMission
             gbMobilisation.Visible = false;
             //btnQuitter.Visible = false;
             btnRapport.Visible = false;
-            /*
-            DataTable dt = new DataTable();
-            dt = Connexion.Connec.GetSchema("Tables");
-            string xx = "Liste :\n";
-            for (int i = 0; i < dt.Rows.Count; i++)
-            {
-                string ntable = dt.Rows[i]["TABLE_NAME"].ToString();
-                xx += ntable + "\n";
-                string sql = "SELECT * FROM " + ntable;
-                SQLiteDataAdapter da = new SQLiteDataAdapter(sql, Connexion.Connec);
-                da.Fill(MesDatas.DsGlobal, ntable);
-            }
-            */
-
-            //MessageBox.Show(xx);
-
             // --- Initialisation des labels et comboBox
             lblId.Text = (MesDatas.DsGlobal.Tables["Mission"].Rows.Count + 1).ToString();
             lblDateDeclanchee.Text = DateTime.Now.ToString();
@@ -61,15 +45,6 @@ namespace FormCreationMission
             cbCaserneImmobiliser.ValueMember = "id";
         }
 
-
-        
-
-        private void btnQuitter_Click(object sender, EventArgs e)
-        {
-            //Application.Exit();
-            //this.Close();
-        }
-
         private void cbNatureSinistre_KeyPress(object sender, KeyPressEventArgs e)
         {
             e.Handled = true;
@@ -80,11 +55,7 @@ namespace FormCreationMission
             e.Handled = true;
         }
 
-        private void gbMobilisation_Enter(object sender, EventArgs e)
-        {
-
-        }
-
+        
         private bool estEnMission(int matricule)
         {
             // On récupère toutes les lignes de la table Mobiliser où le pompier est mobilisé
@@ -118,10 +89,12 @@ namespace FormCreationMission
         }
 
 
-
+        /*
 
         private void btnConstituerEquipe_Click(object sender, EventArgs e)
         {
+            ////////////////:
+            ///
             MessageBox.Show("Cosmonaute : " + MesDatas.DsGlobal.Tables["Affectations"].Select("idCaserne = " + 1 + "\"").ToString());
 
             gbMobilisation.Visible = true;
@@ -260,6 +233,7 @@ namespace FormCreationMission
 
 
         }
+        */
 
         private string Nettoyer(string input)
         {
@@ -273,7 +247,11 @@ namespace FormCreationMission
             {
                 System.Globalization.UnicodeCategory uc = System.Globalization.CharUnicodeInfo.GetUnicodeCategory(c);
                 if (uc != System.Globalization.UnicodeCategory.NonSpacingMark && c <= 127)
+                //UC = caractere unicode
+                //NonSpacingMark = les accents et autres marques de diacritiques
+                //c <= 127 = on garde les caractères ASCII
                 {
+                    //On l'ajoute dnas le stringbuiler
                     sb.Append(c);
                 }
             }
@@ -287,26 +265,6 @@ namespace FormCreationMission
         private void dgvPompiers_KeyPress(object sender, KeyPressEventArgs e)
         {
             e.Handled = true;
-        }
-
-        private void btnRapport_Click(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void dgvEngins_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-        private void btnMAJ_Click(object sender, EventArgs e)
-        {
-            //
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -323,27 +281,25 @@ namespace FormCreationMission
                 MessageBox.Show("❌ Veuillez remplir tous les champs avant de continuer.");
                 return;
             }
+            //On affiche les panels des pompiers et des engins
             flpEngins.Visible = true;
             flpPompiers.Visible = true;
-
-            //gbMobilisation.Visible = true;
             // Liste finale des engins nécessaires
             List<(string codeTypeEngin, int nombre)> enginsNecessaires = new List<(string, int)>();
             // Récupération des valeurs depuis les ComboBox
             int idNatureSinistre = Convert.ToInt32(cbNatureSinistre.SelectedValue);
             int idCaserne = Convert.ToInt32(cbCaserneImmobiliser.SelectedValue);
-            //On parcoure la table Necessiter pour trouver les engins nécessaires
+            //On parcoure la table Necessiter pour trouver les engins nécessaires a l'id de NatureSinistre
             foreach (DataRow row in MesDatas.DsGlobal.Tables["Necessiter"].Select("idNatureSinistre = " + idNatureSinistre))
             {
                 string type = row["codeTypeEngin"].ToString();
                 int nb = Convert.ToInt32(row["nombre"]);
-                //On part chercher maintenant dans la table des engins
-                DataRow[] enginsDispo = MesDatas.DsGlobal.Tables["Engin"]
-                    .Select($"codeTypeEngin = '{type}' AND idCaserne = {idCaserne} AND enMission = 0 AND enPanne = 0");
+                //On part chercher maintenant dans la table des engin
+                DataRow[] enginsDispo = MesDatas.DsGlobal.Tables["Engin"].Select($"codeTypeEngin = '{type}' AND idCaserne = {idCaserne} AND enMission = 0 AND enPanne = 0");
                 //On regarde si on a assez d'engins disponibles
                 if (enginsDispo.Length > 0)
                 {
-                    int nbRequis = Math.Min(nb, enginsDispo.Length);
+                    int nbRequis = Math.Min(nb, enginsDispo.Length);//On prend le nombre minimium dont on a besoin car c est possible d avoir 2 engins mais on a besoin de 5 alors on prend que 2 et apres on compare
                     enginsNecessaires.Add((type, nbRequis));
                 }
                 if (enginsDispo.Length < nb)
@@ -352,7 +308,7 @@ namespace FormCreationMission
                 }
 
             }
-            //On prepare le datagreidview pour les engins
+            //On prepare le datagreidview que on utilise pas pour l affichage pour les engins
             dgvEngins.Rows.Clear();
             if (dgvEngins.Columns.Count == 0)
             {
@@ -360,7 +316,7 @@ namespace FormCreationMission
                 dgvEngins.Columns.Add("nombre", "Quantité requise");
                 dgvEngins.Columns.Add("equipage", "Équipage requis");
             }
-
+            //On ajoute dans le dgv
             foreach ((string type, int nb) in enginsNecessaires)
             {
                 int equipage = 0;
@@ -371,7 +327,7 @@ namespace FormCreationMission
                 dgvEngins.Rows.Add(type, nb, equipage);
             }
 
-            //On prepare le datagridview pour les pompiers
+            //On prepare le datagridview que on utilise pas pour l aaffichage pour les pompiers
             dgvPompiers.Rows.Clear();
             if (dgvPompiers.Columns.Count == 0)
             {
@@ -380,13 +336,12 @@ namespace FormCreationMission
                 dgvPompiers.Columns.Add("prenom", "Prénom");
                 dgvPompiers.Columns.Add("pourEngin", "Type Engin");
             }
-
+            ////////Maintenant pour les pompiers
             foreach ((string typeEngin, int nombre) in enginsNecessaires)
             {
                 List<int> habilitations = new List<int>();
-                DataRow[] rowsEmbarquer = MesDatas.DsGlobal.Tables["Embarquer"]
-                    .Select($"codeTypeEngin = '{typeEngin}'");
-
+                DataRow[] rowsEmbarquer = MesDatas.DsGlobal.Tables["Embarquer"].Select($"codeTypeEngin = '{typeEngin}'");
+                //On ajoute l id des habilitation dans la liste habilitations
                 foreach (DataRow row in rowsEmbarquer)
                 {
                     int idHab = Convert.ToInt32(row["idHabilitation"]);
@@ -399,8 +354,7 @@ namespace FormCreationMission
                 foreach (int idHab in habilitations)
                 {
                     //Tous les pompiers ayant cette habilitation
-                    DataRow[] rowsPasser = MesDatas.DsGlobal.Tables["Passer"]
-                        .Select("idHabilitation = " + idHab);
+                    DataRow[] rowsPasser = MesDatas.DsGlobal.Tables["Passer"].Select("idHabilitation = " + idHab);
 
                     foreach (DataRow passerRow in rowsPasser)
                     {
@@ -417,7 +371,7 @@ namespace FormCreationMission
                             if (pompiers.Length > 0)
                             {
                                 DataRow pompier = pompiers[0];
-
+                                //On verifie si il sont en mission ou en conge
                                 if (Convert.ToInt32(pompier["enMission"]) == 0 && !estEnConge(pompier))
                                 {
                                     if (!pompiersEligibles.Contains(pompier))
@@ -435,19 +389,15 @@ namespace FormCreationMission
                     equipage = Convert.ToInt32(rowType[0]["equipage"]);
 
                 int totalPompiers = equipage * nombre;
-                List<DataRow> selection = pompiersEligibles.Take(totalPompiers).ToList();
-
+                //selection c est la liste finale
+                List<DataRow> selection = pompiersEligibles.Take(totalPompiers).ToList();//Elle prend les n premiers pompiers éligibles
 
                 foreach (DataRow p in selection)
                 {
                     dgvPompiers.Rows.Add(p["matricule"], p["nom"], p["prenom"], typeEngin);
                 }
             }
-
-
-            /////
-            ///
-            // 🔁 Réaffichage visuel des ENGINS depuis dgvEngins
+            //Reafichage visuel des engin depuis dgvEngins
             flpEngins.Controls.Clear();
             foreach (DataGridViewRow row in dgvEngins.Rows)
             {
@@ -456,7 +406,7 @@ namespace FormCreationMission
                 string type = row.Cells[0].Value.ToString();
                 string quantite = row.Cells[1].Value.ToString();
                 string equipage = row.Cells[2].Value.ToString();
-
+                //Panel pour chaque engin
                 Panel panel = new Panel
                 {
                     Width = flpEngins.Width - 25,
@@ -466,7 +416,7 @@ namespace FormCreationMission
                     Padding = new Padding(5),
                     Tag = type
                 };
-
+                //label que on va ajouter dans le panel
                 Label lbl = new Label
                 {
                     Text = $"🚒 {type} | Quantité : {quantite} | Équipage : {equipage}",
@@ -478,7 +428,7 @@ namespace FormCreationMission
                 flpEngins.Controls.Add(panel);
             }
 
-            // 🔁 Réaffichage visuel des POMPIERS depuis dgvPompiers
+            //Réaffichage visuel des ômpiers depuis dgvPompiers
             flpPompiers.Controls.Clear();
             foreach (DataGridViewRow row in dgvPompiers.Rows)
             {
@@ -509,7 +459,6 @@ namespace FormCreationMission
                 panel.Controls.Add(lbl);
                 flpPompiers.Controls.Add(panel);
             }
-
         }
 
 
@@ -672,6 +621,9 @@ namespace FormCreationMission
                 {
                     MessageBox.Show("⚠️ Le tableau de bord est introuvable.");
                 }
+                //On les remets a 0
+                flpEngins.Visible = false;
+                flpPompiers.Visible = false;
             }
             catch (Exception ex)
             {
@@ -691,19 +643,20 @@ namespace FormCreationMission
                     File.Delete(chemin);
                 }
 
-                // Création du document PDF avec iTextSharp
+                // creation du pdf avec iTextSharp
                 Document document = new Document(PageSize.A4, 50, 50, 25, 25);
                 PdfWriter.GetInstance(document, new FileStream(chemin, FileMode.Create));
                 document.Open();
 
-                // Titre
-                var titreFont = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 18);
-                var titre = new Paragraph("RAPPORT DE MISSION", titreFont);
+                // titre
+                iTextSharp.text.Font titreFont = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 18);
+                iTextSharp.text.Paragraph titre = new iTextSharp.text.Paragraph("RAPPORT DE MISSION", titreFont);
+
                 titre.Alignment = Element.ALIGN_CENTER;
                 document.Add(titre);
                 document.Add(new Paragraph("\n"));
 
-                // Informations mission
+                // informatio mission
                 document.Add(new Paragraph("Numero de mission : " + Nettoyer(lblId.Text)));
                 document.Add(new Paragraph("Date declenchement : " + Nettoyer(lblDateDeclanchee.Text)));
                 document.Add(new Paragraph("Nature du sinistre : " + Nettoyer(cbNatureSinistre.Text)));
@@ -713,7 +666,7 @@ namespace FormCreationMission
 
                 document.Add(new Paragraph("\n-----------------------------\n"));
 
-                // Engins mobilisés
+                // Engins mobilises
                 document.Add(new Paragraph("Engins mobilises :"));
                 if (dgvEngins.Rows.Count == 0)
                 {
@@ -766,10 +719,7 @@ namespace FormCreationMission
             }
         }
 
-        private void lblId_Click(object sender, EventArgs e)
-        {
-
-        }
+        
 
         private void cbNatureSinistre_KeyPress_1(object sender, KeyPressEventArgs e)
         {
@@ -781,20 +731,7 @@ namespace FormCreationMission
             e.Handled = true;
         }
 
-        private void dgvEngins_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-        private void flpEngins_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void lblDateDeclanchee_Click(object sender, EventArgs e)
-        {
-
-        }
+        
 
         private void txtCodePostale_KeyPress(object sender, KeyPressEventArgs e)
         {

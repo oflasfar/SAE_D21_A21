@@ -38,6 +38,7 @@
             // lblTableauBord
             // 
             this.lblTableauBord.AutoSize = true;
+            this.lblTableauBord.BackColor = System.Drawing.Color.White;
             this.lblTableauBord.Font = new System.Drawing.Font("MS UI Gothic", 28.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTableauBord.Location = new System.Drawing.Point(1075, 15);
             this.lblTableauBord.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
@@ -83,6 +84,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.ClientSize = new System.Drawing.Size(1924, 1055);
             this.Controls.Add(this.pnlAffichage);
             this.Controls.Add(this.btnActualiser);

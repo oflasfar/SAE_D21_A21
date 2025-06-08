@@ -46,6 +46,7 @@
             this.rdbVolontaire = new System.Windows.Forms.RadioButton();
             this.rdbProfessionnel = new System.Windows.Forms.RadioButton();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label16 = new System.Windows.Forms.Label();
             this.cbGradeNouveau = new System.Windows.Forms.ComboBox();
             this.BtnPlusInformation = new System.Windows.Forms.Button();
             this.txtGrade = new System.Windows.Forms.TextBox();
@@ -74,7 +75,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.label16 = new System.Windows.Forms.Label();
             this.panel2.SuspendLayout();
             this.gbInformationCarriere.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -106,7 +106,6 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(1388, 703);
             this.panel2.TabIndex = 3;
-            this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
             // 
             // gbInformationCarriere
             // 
@@ -141,9 +140,9 @@
             // 
             this.lstAffectationsPassees.FormattingEnabled = true;
             this.lstAffectationsPassees.ItemHeight = 25;
-            this.lstAffectationsPassees.Location = new System.Drawing.Point(23, 336);
+            this.lstAffectationsPassees.Location = new System.Drawing.Point(23, 311);
             this.lstAffectationsPassees.Name = "lstAffectationsPassees";
-            this.lstAffectationsPassees.Size = new System.Drawing.Size(691, 79);
+            this.lstAffectationsPassees.Size = new System.Drawing.Size(691, 104);
             this.lstAffectationsPassees.TabIndex = 31;
             // 
             // cbCaserneRattachement
@@ -167,9 +166,9 @@
             // 
             this.lstHabilitations.FormattingEnabled = true;
             this.lstHabilitations.ItemHeight = 25;
-            this.lstHabilitations.Location = new System.Drawing.Point(22, 118);
+            this.lstHabilitations.Location = new System.Drawing.Point(22, 93);
             this.lstHabilitations.Name = "lstHabilitations";
-            this.lstHabilitations.Size = new System.Drawing.Size(688, 29);
+            this.lstHabilitations.Size = new System.Drawing.Size(688, 79);
             this.lstHabilitations.TabIndex = 28;
             // 
             // btnMettreaJour
@@ -195,7 +194,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(18, 308);
+            this.label12.Location = new System.Drawing.Point(18, 288);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(206, 25);
             this.label12.TabIndex = 26;
@@ -204,7 +203,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(22, 84);
+            this.label10.Location = new System.Drawing.Point(18, 64);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(118, 25);
             this.label10.TabIndex = 25;
@@ -251,7 +250,6 @@
             this.rdbVolontaire.TabStop = true;
             this.rdbVolontaire.Text = "Volontaire";
             this.rdbVolontaire.UseVisualStyleBackColor = true;
-            this.rdbVolontaire.CheckedChanged += new System.EventHandler(this.rdbVolontaire_CheckedChanged);
             this.rdbVolontaire.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.rdbVolontaire_KeyPress);
             // 
             // rdbProfessionnel
@@ -266,7 +264,6 @@
             this.rdbProfessionnel.TabStop = true;
             this.rdbProfessionnel.Text = "Professionnel";
             this.rdbProfessionnel.UseVisualStyleBackColor = true;
-            this.rdbProfessionnel.CheckedChanged += new System.EventHandler(this.rdbProfessionnel_CheckedChanged);
             this.rdbProfessionnel.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.rdbProfessionnel_KeyPress);
             // 
             // groupBox1
@@ -289,6 +286,15 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Carriére";
             // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(22, 97);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(157, 25);
+            this.label16.TabIndex = 24;
+            this.label16.Text = "Nouveau grade :";
+            // 
             // cbGradeNouveau
             // 
             this.cbGradeNouveau.FormattingEnabled = true;
@@ -296,7 +302,6 @@
             this.cbGradeNouveau.Name = "cbGradeNouveau";
             this.cbGradeNouveau.Size = new System.Drawing.Size(283, 33);
             this.cbGradeNouveau.TabIndex = 23;
-            this.cbGradeNouveau.SelectedIndexChanged += new System.EventHandler(this.cbGradeNouveau_SelectedIndexChanged);
             // 
             // BtnPlusInformation
             // 
@@ -570,15 +575,6 @@
             this.pictureBox1.Size = new System.Drawing.Size(83, 79);
             this.pictureBox1.TabIndex = 2;
             this.pictureBox1.TabStop = false;
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(22, 97);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(157, 25);
-            this.label16.TabIndex = 24;
-            this.label16.Text = "Nouveau grade :";
             // 
             // UCPersonnel
             // 

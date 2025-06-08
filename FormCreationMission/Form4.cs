@@ -45,8 +45,6 @@ namespace FormCreationMission
             for (int i = 0; i < dt.Rows.Count; i++)
             {
                 string ntable = dt.Rows[i]["TABLE_NAME"].ToString();
-                //C est une liste pour savoir les tables de la base de données si ils sont tous chargées ou pas
-                //xx += ntable + "\n";
                 string sql = "SELECT * FROM " + ntable;
                 SQLiteDataAdapter da = new SQLiteDataAdapter(sql, Connexion.Connec);
                 da.Fill(MesDatas.DsGlobal, ntable);
@@ -64,6 +62,7 @@ namespace FormCreationMission
             // Inverser les lignes de la table Mission sans changer la boucle
             DataRow[] missionsInversees = MesDatas.DsGlobal.Tables["Mission"].Select("", "id DESC");
             int y = 10; // Position de départ verticale
+            //Affichage des mission dans le panel en mode inverse
             foreach (DataRow row in missionsInversees)
             {
                 //on cherche l'Id
@@ -101,8 +100,6 @@ namespace FormCreationMission
                 //Incrémentation pour la prochaine mission
                 y += wrapper.Height + 10;
             }
-
-
         }
 
         //Methode pour afficher le User Control du Menu
@@ -170,173 +167,7 @@ namespace FormCreationMission
                 MessageBox.Show("Erreur : " + ex.Message);
             }
         }
-
-        //Fonction pour charger le dataSet
-        private void ChargerDataSet()
-        {
-
-            DataTable dt = new DataTable();
-            dt = Connexion.Connec.GetSchema("Tables");
-            string xx = "Liste :\n";
-            for (int i = 0; i < dt.Rows.Count; i++)
-            {
-                string ntable = dt.Rows[i]["TABLE_NAME"].ToString();
-                xx += ntable + "\n";
-                string sql = "SELECT * FROM " + ntable;
-                SQLiteDataAdapter da = new SQLiteDataAdapter(sql, Connexion.Connec);
-                da.Fill(MesDatas.DsGlobal, ntable);
-            }
-            //MessageBox.Show(ds.Tables.Count.ToString() + " table(s) chargées !");
-            //dtgvEX.DataSource = ds.Tables["Mission"];
-        }
-
-        //Fonction pour remplir les informations du PDF
-        private string remplirInfoPDF(string idMission, string idCaserne)
-        {
-            String descriptionDetaille = recapTableMission(idMission);
-            descriptionDetaille = recapTableMobiliser(idMission);
-            return descriptionDetaille;
-        }
-
-        //Pour avoir le récapitulatif de la mission (l'adresse)
-        private string recapTableMission(string idMission)
-        {
-            string retour = "";
-            foreach (DataRow row in MesDatas.DsGlobal.Tables["Mission"].Rows)
-            {
-                if (row["id"].ToString() == idMission)
-                {
-                    retour += "Adresse de la mission : " + row["adresse"].ToString() + " " + row["cp"].ToString() + " " + row["ville"].ToString() + "\n";
-                    retour += "Compte rendue: " + row["compteRendu"].ToString() + "\n\n";
-                }
-            }
-            return retour;
-        }
-
-        private string recapTableMobiliser(string idMission)
-        {
-            string retour = "Les pompier mobilisée sont:\n";
-            foreach (DataRow row in MesDatas.DsGlobal.Tables["Mobiliser"].Rows)
-            {
-                if (row["idMission"].ToString() == idMission)
-                {
-                    retour += recapTablePompier(row["matriculePompier"].ToString()) + recapTableHabilitation(row["idHabilitation"].ToString()) + "\n";
-                }
-            }
-            return retour;
-        }
-        private string recapTablePompier(string matricule)
-        {
-            string retour = "";
-            foreach (DataRow row in MesDatas.DsGlobal.Tables["Pompier"].Rows)
-            {
-                if (row["matricule"].ToString() == matricule)
-                {
-                    if (row["sexe"].ToString() == "m")
-                    {
-                        retour += "Le ";
-                    }
-                    else
-                    {
-                        retour += "La ";
-                    }
-                    retour += recapTableGrade(row["codeGrade"].ToString()) + row["prenom"].ToString() + " " + row["nom"].ToString() + "(" + matricule + ")" + "\n";
-                }
-            }
-            return retour;
-        }
-        private string recapTableGrade(string code)
-        {
-            string retour = "";
-            foreach (DataRow row in MesDatas.DsGlobal.Tables["Grade"].Rows)
-            {
-                if (row["code"].ToString() == code)
-                {
-                    retour += row["libelle"].ToString() + " ";
-                }
-            }
-            return retour;
-        }
-        private string recapTableHabilitation(string idHabilitation)
-        {
-            string retour = "";
-            foreach (DataRow row in MesDatas.DsGlobal.Tables["Habilitation"].Rows)
-            {
-                if (row["id"].ToString() == idHabilitation)
-                {
-                    retour = "mobiliser en tant que: " + row["libelle"].ToString() + "\n";
-                }
-            }
-            return retour;
-        }
-
-
-
-        private void chkbxEnCours_CheckedChanged(object sender, EventArgs e)
-        {
-            /*
-            foreach (Control ctrl in pnlAffichage.Controls.OfType<Control>().ToList())
-            {
-                if (ctrl != lblTableauBord && ctrl != chkbxEnCours)
-                {
-                    pnlAffichage.Controls.Remove(ctrl);
-                    ctrl.Dispose(); // facultatif mais propre
-                }
-            }
-            int y = 160;
-            int x = 185;
-            foreach (DataRow row in ds.Tables["Mission"].Rows)
-            {
-                if (row["terminee"].ToString() == "0")
-                {
-                    // Exemple d'accès aux colonnes par nom
-                    int id = Convert.ToInt32(row["id"]); // ou le vrai nom de colonne de ta table
-                    string idcaserne = row["idCaserne"].ToString();
-                    string debut = row["dateHeureDepart"].ToString();
-                    string type = row["motifAppel"].ToString();
-
-                    string nature = row["idNatureSinistre"].ToString();
-
-                    string fin = row["dateHeureRetour"].ToString();
-
-                    string description = remplirInfoPDF(id.ToString(), idcaserne);
-                    foreach (DataRow naturerow in ds.Tables["NatureSinistre"].Rows)
-                    {
-                        if (naturerow["id"].ToString() == nature)
-                        {
-                            string libelleNature = naturerow["libelle"].ToString();
-                            UCAffichageMission uCRecapitulMission = new UCAffichageMission(id, idcaserne, type, libelleNature, debut, description, fin);
-                            
-
-                            uCRecapitulMission.Location = new Point(x, y); // Position sur la Forme
-                            pnlAffichage.Controls.Add(uCRecapitulMission);
-                            y = y + 127;
-                        }
-                    }
-                }
-               
-            }*/
-        }
-
-        private void btnpdf_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void grpbxMission_Enter(object sender, EventArgs e)
-        {
-
-        }
-
-        private void ucMenueLateral1_Load(object sender, EventArgs e)
-        {
-
-        }
+        
 
         //Boutton actualiser
         public void actualiser()
@@ -401,22 +232,27 @@ namespace FormCreationMission
             {
                 //On nettoie le panel principale
                 pnlAffichage.Controls.Clear();
+                DataRow[] missionsInversees = MesDatas.DsGlobal.Tables["Mission"].Select("", "id DESC");
                 int y = 10; // Position de départ verticale
-                foreach (DataRow row in MesDatas.DsGlobal.Tables["Mission"].Rows)
+                foreach (DataRow row in missionsInversees)
                 {
                     if (row["terminee"].ToString() == "0")
                     {
+                        //on cherche l'Id
                         int id = Convert.ToInt32(row["id"]);
+                        //on cherche la nature du sinistre
                         string nature = row["idNatureSinistre"].ToString();
                         string libelleNature = "";
+                        //on cherche le libellé de la nature du sinistre
                         DataRow[] foundNature = MesDatas.DsGlobal.Tables["NatureSinistre"].Select("id = '" + nature + "'");
                         if (foundNature.Length > 0)
                         {
                             libelleNature = foundNature[0]["libelle"].ToString();
                         }
+                        //Création de l'UC pour afficher la mission
                         UCAffichageMission uCRecapitulMission = new UCAffichageMission(id, Connexion.Connec, MesDatas.DsGlobal);
-                        uCRecapitulMission.Width = 600;
-                        //Creation de chaque panel pour chaque mission
+
+                        //On creer un panel wrapper pour center l'UC
                         Panel wrapper = new Panel();
                         wrapper.IsAccessible = true;
                         wrapper.Width = pnlAffichage.ClientSize.Width;
@@ -424,14 +260,15 @@ namespace FormCreationMission
                         wrapper.Padding = new Padding(0);
                         wrapper.Margin = new Padding(0);
                         wrapper.BackColor = Color.Transparent;
-                        //Ajout de l'UC dans le wrapper
+                        //Ajouter l'UC dans le wrapper
                         wrapper.Controls.Add(uCRecapitulMission);
+                        //Centrer l'UC dans le wrapper
                         uCRecapitulMission.Left = (wrapper.Width - uCRecapitulMission.Width) / 2;
                         uCRecapitulMission.Top = 0;
                         //Important : positionne verticalement le wrapper
                         wrapper.Top = y;
                         wrapper.Left = 0;
-                        //Ajout du wrapper dans le panel principale
+                        //Ajouter le panel wrapper dans le panel d'affichage
                         pnlAffichage.Controls.Add(wrapper);
                         //Incrémentation pour la prochaine mission
                         y += wrapper.Height + 10;

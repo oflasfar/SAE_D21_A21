@@ -31,12 +31,12 @@
             this.cbNatureSinistre = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.gbMobilisation = new System.Windows.Forms.GroupBox();
-            this.flpPompiers = new System.Windows.Forms.FlowLayoutPanel();
-            this.flpEngins = new System.Windows.Forms.FlowLayoutPanel();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.dgvPompiers = new System.Windows.Forms.DataGridView();
             this.dgvEngins = new System.Windows.Forms.DataGridView();
+            this.flpPompiers = new System.Windows.Forms.FlowLayoutPanel();
+            this.flpEngins = new System.Windows.Forms.FlowLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
             this.txtMotif = new System.Windows.Forms.TextBox();
             this.txtVille = new System.Windows.Forms.TextBox();
@@ -90,32 +90,13 @@
             this.gbMobilisation.Controls.Add(this.dgvEngins);
             this.gbMobilisation.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gbMobilisation.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.gbMobilisation.Location = new System.Drawing.Point(714, 762);
+            this.gbMobilisation.Location = new System.Drawing.Point(714, 725);
             this.gbMobilisation.Name = "gbMobilisation";
-            this.gbMobilisation.Size = new System.Drawing.Size(10, 10);
+            this.gbMobilisation.Size = new System.Drawing.Size(119, 62);
             this.gbMobilisation.TabIndex = 29;
             this.gbMobilisation.TabStop = false;
             this.gbMobilisation.Text = "Mobilisation des engins et des pompiers";
             this.gbMobilisation.Visible = false;
-            // 
-            // flpPompiers
-            // 
-            this.flpPompiers.AutoScroll = true;
-            this.flpPompiers.BackColor = System.Drawing.Color.DarkGray;
-            this.flpPompiers.Location = new System.Drawing.Point(714, 416);
-            this.flpPompiers.Name = "flpPompiers";
-            this.flpPompiers.Size = new System.Drawing.Size(697, 211);
-            this.flpPompiers.TabIndex = 20;
-            // 
-            // flpEngins
-            // 
-            this.flpEngins.AutoScroll = true;
-            this.flpEngins.BackColor = System.Drawing.Color.DarkGray;
-            this.flpEngins.Location = new System.Drawing.Point(58, 416);
-            this.flpEngins.Name = "flpEngins";
-            this.flpEngins.Size = new System.Drawing.Size(625, 211);
-            this.flpEngins.TabIndex = 19;
-            this.flpEngins.Paint += new System.Windows.Forms.PaintEventHandler(this.flpEngins_Paint);
             // 
             // label4
             // 
@@ -161,7 +142,28 @@
             this.dgvEngins.RowTemplate.Height = 24;
             this.dgvEngins.Size = new System.Drawing.Size(625, 211);
             this.dgvEngins.TabIndex = 0;
-            this.dgvEngins.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvEngins_CellContentClick_1);
+            //this.dgvEngins.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvEngins_CellContentClick_1);
+            // 
+            // flpPompiers
+            // 
+            this.flpPompiers.AutoScroll = true;
+            this.flpPompiers.BackColor = System.Drawing.Color.DarkGray;
+            this.flpPompiers.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.flpPompiers.Location = new System.Drawing.Point(714, 416);
+            this.flpPompiers.Name = "flpPompiers";
+            this.flpPompiers.Size = new System.Drawing.Size(697, 293);
+            this.flpPompiers.TabIndex = 20;
+            // 
+            // flpEngins
+            // 
+            this.flpEngins.AutoScroll = true;
+            this.flpEngins.BackColor = System.Drawing.Color.DarkGray;
+            this.flpEngins.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.flpEngins.Location = new System.Drawing.Point(58, 416);
+            this.flpEngins.Name = "flpEngins";
+            this.flpEngins.Size = new System.Drawing.Size(625, 293);
+            this.flpEngins.TabIndex = 19;
+            //this.flpEngins.Paint += new System.Windows.Forms.PaintEventHandler(this.flpEngins_Paint);
             // 
             // label1
             // 
@@ -335,7 +337,7 @@
             this.lblDateDeclanchee.Size = new System.Drawing.Size(92, 32);
             this.lblDateDeclanchee.TabIndex = 26;
             this.lblDateDeclanchee.Text = "label4";
-            this.lblDateDeclanchee.Click += new System.EventHandler(this.lblDateDeclanchee_Click);
+            //this.lblDateDeclanchee.Click += new System.EventHandler(this.lblDateDeclanchee_Click);
             // 
             // label3
             // 
@@ -358,7 +360,7 @@
             this.lblId.Size = new System.Drawing.Size(92, 32);
             this.lblId.TabIndex = 24;
             this.lblId.Text = "label2";
-            this.lblId.Click += new System.EventHandler(this.lblId_Click);
+            //this.lblId.Click += new System.EventHandler(this.lblId_Click);
             // 
             // lblIdMission
             // 
