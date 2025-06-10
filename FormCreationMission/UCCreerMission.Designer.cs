@@ -142,7 +142,6 @@
             this.dgvEngins.RowTemplate.Height = 24;
             this.dgvEngins.Size = new System.Drawing.Size(625, 211);
             this.dgvEngins.TabIndex = 0;
-            //this.dgvEngins.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvEngins_CellContentClick_1);
             // 
             // flpPompiers
             // 
@@ -163,7 +162,6 @@
             this.flpEngins.Name = "flpEngins";
             this.flpEngins.Size = new System.Drawing.Size(625, 293);
             this.flpEngins.TabIndex = 19;
-            //this.flpEngins.Paint += new System.Windows.Forms.PaintEventHandler(this.flpEngins_Paint);
             // 
             // label1
             // 
@@ -265,7 +263,7 @@
             this.btnConstituerEquipe.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.btnConstituerEquipe.Location = new System.Drawing.Point(237, 217);
             this.btnConstituerEquipe.Name = "btnConstituerEquipe";
-            this.btnConstituerEquipe.Size = new System.Drawing.Size(366, 65);
+            this.btnConstituerEquipe.Size = new System.Drawing.Size(421, 65);
             this.btnConstituerEquipe.TabIndex = 17;
             this.btnConstituerEquipe.Text = "Constituer Equipe";
             this.btnConstituerEquipe.UseVisualStyleBackColor = true;
@@ -285,7 +283,7 @@
             this.btnRapport.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnRapport.Location = new System.Drawing.Point(878, 725);
             this.btnRapport.Name = "btnRapport";
-            this.btnRapport.Size = new System.Drawing.Size(160, 62);
+            this.btnRapport.Size = new System.Drawing.Size(47, 62);
             this.btnRapport.TabIndex = 30;
             this.btnRapport.Text = "Rapport";
             this.btnRapport.UseVisualStyleBackColor = true;
@@ -337,7 +335,6 @@
             this.lblDateDeclanchee.Size = new System.Drawing.Size(92, 32);
             this.lblDateDeclanchee.TabIndex = 26;
             this.lblDateDeclanchee.Text = "label4";
-            //this.lblDateDeclanchee.Click += new System.EventHandler(this.lblDateDeclanchee_Click);
             // 
             // label3
             // 
@@ -360,7 +357,6 @@
             this.lblId.Size = new System.Drawing.Size(92, 32);
             this.lblId.TabIndex = 24;
             this.lblId.Text = "label2";
-            //this.lblId.Click += new System.EventHandler(this.lblId_Click);
             // 
             // lblIdMission
             // 

@@ -167,6 +167,7 @@
             // 
             // PBalarm
             // 
+            this.PBalarm.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.PBalarm.Image = ((System.Drawing.Image)(resources.GetObject("PBalarm.Image")));
             this.PBalarm.Location = new System.Drawing.Point(21, 22);
             this.PBalarm.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);

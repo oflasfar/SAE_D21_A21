@@ -85,6 +85,7 @@
             // 
             // panel2
             // 
+            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel2.Controls.Add(this.gbInformationCarriere);
             this.panel2.Controls.Add(this.lblEmbauche);
             this.panel2.Controls.Add(this.lblDateNaissance);
@@ -478,6 +479,7 @@
             // 
             // pbGrade
             // 
+            this.pbGrade.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pbGrade.Location = new System.Drawing.Point(1214, 12);
             this.pbGrade.Name = "pbGrade";
             this.pbGrade.Size = new System.Drawing.Size(143, 145);
@@ -509,7 +511,7 @@
             this.btnAjoutPompiers.Name = "btnAjoutPompiers";
             this.btnAjoutPompiers.Size = new System.Drawing.Size(357, 84);
             this.btnAjoutPompiers.TabIndex = 8;
-            this.btnAjoutPompiers.Text = "Ajouter Pompiers";
+            this.btnAjoutPompiers.Text = "Ajouter Pompier";
             this.btnAjoutPompiers.UseVisualStyleBackColor = false;
             this.btnAjoutPompiers.Click += new System.EventHandler(this.btnAjoutPompiers_Click_1);
             // 
@@ -553,7 +555,7 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(304, 25);
             this.label2.TabIndex = 4;
-            this.label2.Text = "Veuiilez selectionner un pompier :";
+            this.label2.Text = "Veuillez selectionner un pompier :";
             // 
             // label1
             // 

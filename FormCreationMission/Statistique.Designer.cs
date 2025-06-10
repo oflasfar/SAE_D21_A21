@@ -149,9 +149,9 @@
             this.lblStatistiqueGlobal.Location = new System.Drawing.Point(112, 90);
             this.lblStatistiqueGlobal.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblStatistiqueGlobal.Name = "lblStatistiqueGlobal";
-            this.lblStatistiqueGlobal.Size = new System.Drawing.Size(204, 29);
+            this.lblStatistiqueGlobal.Size = new System.Drawing.Size(216, 29);
             this.lblStatistiqueGlobal.TabIndex = 12;
-            this.lblStatistiqueGlobal.Text = "Statisque global : ";
+            this.lblStatistiqueGlobal.Text = "Statistique global : ";
             // 
             // lblStatCasern
             // 
