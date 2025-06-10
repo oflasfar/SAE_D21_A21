@@ -160,7 +160,7 @@
             // txtMatricule
             // 
             this.txtMatricule.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtMatricule.Location = new System.Drawing.Point(230, 36);
+            this.txtMatricule.Location = new System.Drawing.Point(251, 27);
             this.txtMatricule.Name = "txtMatricule";
             this.txtMatricule.Size = new System.Drawing.Size(331, 34);
             this.txtMatricule.TabIndex = 1;
@@ -169,7 +169,7 @@
             // txtPrenom
             // 
             this.txtPrenom.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPrenom.Location = new System.Drawing.Point(230, 168);
+            this.txtPrenom.Location = new System.Drawing.Point(251, 168);
             this.txtPrenom.Name = "txtPrenom";
             this.txtPrenom.Size = new System.Drawing.Size(331, 34);
             this.txtPrenom.TabIndex = 3;
@@ -177,7 +177,7 @@
             // txtNom
             // 
             this.txtNom.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtNom.Location = new System.Drawing.Point(230, 101);
+            this.txtNom.Location = new System.Drawing.Point(251, 101);
             this.txtNom.Name = "txtNom";
             this.txtNom.Size = new System.Drawing.Size(331, 34);
             this.txtNom.TabIndex = 2;
@@ -324,7 +324,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.MediumTurquoise;
+            this.BackColor = System.Drawing.Color.DarkSlateGray;
             this.ClientSize = new System.Drawing.Size(1236, 635);
             this.Controls.Add(this.btnQuitter);
             this.Controls.Add(this.cbCaserne);

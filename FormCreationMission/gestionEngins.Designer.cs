@@ -97,10 +97,10 @@
             // 
             // pbEnginImage
             // 
-            this.pbEnginImage.Location = new System.Drawing.Point(707, 198);
+            this.pbEnginImage.Location = new System.Drawing.Point(727, 198);
             this.pbEnginImage.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pbEnginImage.Name = "pbEnginImage";
-            this.pbEnginImage.Size = new System.Drawing.Size(405, 326);
+            this.pbEnginImage.Size = new System.Drawing.Size(385, 251);
             this.pbEnginImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbEnginImage.TabIndex = 29;
             this.pbEnginImage.TabStop = false;

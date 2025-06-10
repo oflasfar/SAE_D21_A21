@@ -41,10 +41,10 @@
             this.btnTableuDeBord.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnTableuDeBord.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnTableuDeBord.Font = new System.Drawing.Font("MS UI Gothic", 22.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnTableuDeBord.Location = new System.Drawing.Point(4, 79);
+            this.btnTableuDeBord.Location = new System.Drawing.Point(4, 80);
             this.btnTableuDeBord.Margin = new System.Windows.Forms.Padding(4);
             this.btnTableuDeBord.Name = "btnTableuDeBord";
-            this.btnTableuDeBord.Size = new System.Drawing.Size(403, 80);
+            this.btnTableuDeBord.Size = new System.Drawing.Size(411, 80);
             this.btnTableuDeBord.TabIndex = 0;
             this.btnTableuDeBord.Text = "Tableau De Bord";
             this.btnTableuDeBord.UseVisualStyleBackColor = false;
@@ -58,7 +58,7 @@
             this.btnNouvelleMission.Location = new System.Drawing.Point(4, 212);
             this.btnNouvelleMission.Margin = new System.Windows.Forms.Padding(4);
             this.btnNouvelleMission.Name = "btnNouvelleMission";
-            this.btnNouvelleMission.Size = new System.Drawing.Size(403, 80);
+            this.btnNouvelleMission.Size = new System.Drawing.Size(411, 80);
             this.btnNouvelleMission.TabIndex = 1;
             this.btnNouvelleMission.Text = "Nouvelle Mission";
             this.btnNouvelleMission.UseVisualStyleBackColor = false;
@@ -72,7 +72,7 @@
             this.btnGestionEngin.Location = new System.Drawing.Point(4, 353);
             this.btnGestionEngin.Margin = new System.Windows.Forms.Padding(4);
             this.btnGestionEngin.Name = "btnGestionEngin";
-            this.btnGestionEngin.Size = new System.Drawing.Size(403, 80);
+            this.btnGestionEngin.Size = new System.Drawing.Size(411, 80);
             this.btnGestionEngin.TabIndex = 2;
             this.btnGestionEngin.Text = "Gestion Des Engins";
             this.btnGestionEngin.UseVisualStyleBackColor = false;
@@ -86,7 +86,7 @@
             this.btnGestionPersonnel.Location = new System.Drawing.Point(4, 490);
             this.btnGestionPersonnel.Margin = new System.Windows.Forms.Padding(4);
             this.btnGestionPersonnel.Name = "btnGestionPersonnel";
-            this.btnGestionPersonnel.Size = new System.Drawing.Size(403, 80);
+            this.btnGestionPersonnel.Size = new System.Drawing.Size(411, 80);
             this.btnGestionPersonnel.TabIndex = 3;
             this.btnGestionPersonnel.Text = "Gestion Du Personnel";
             this.btnGestionPersonnel.UseVisualStyleBackColor = false;
@@ -100,7 +100,7 @@
             this.btnStatistique.Location = new System.Drawing.Point(4, 624);
             this.btnStatistique.Margin = new System.Windows.Forms.Padding(4);
             this.btnStatistique.Name = "btnStatistique";
-            this.btnStatistique.Size = new System.Drawing.Size(403, 80);
+            this.btnStatistique.Size = new System.Drawing.Size(411, 80);
             this.btnStatistique.TabIndex = 4;
             this.btnStatistique.Text = "Statistique";
             this.btnStatistique.UseVisualStyleBackColor = false;
@@ -134,7 +134,7 @@
             this.Cursor = System.Windows.Forms.Cursors.Default;
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "UCMenueLateral";
-            this.Size = new System.Drawing.Size(411, 1073);
+            this.Size = new System.Drawing.Size(419, 891);
             this.Load += new System.EventHandler(this.UserControl1_Load);
             this.ResumeLayout(false);
 

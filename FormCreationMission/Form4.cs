@@ -41,7 +41,7 @@ namespace FormCreationMission
             MesDatas.DsGlobal.Clear();
             DataTable dt = new DataTable();
             dt = Connexion.Connec.GetSchema("Tables");
-            string xx = "Liste :\n";
+            
             for (int i = 0; i < dt.Rows.Count; i++)
             {
                 string ntable = dt.Rows[i]["TABLE_NAME"].ToString();
@@ -54,7 +54,7 @@ namespace FormCreationMission
 
             // placement du menu
             UCMenueLateral menu = new UCMenueLateral(this);
-            menu.Location = new System.Drawing.Point(12, 1);
+            menu.Dock = DockStyle.Left;
             this.Controls.Add(menu);
 
             //Nettoyage du panel d'affichage
@@ -276,5 +276,11 @@ namespace FormCreationMission
                 }
             }
         }
+        protected override void OnLoad(EventArgs e)
+        {
+            base.OnLoad(e);
+            this.Icon = new Icon("LOGO.ico"); // Set the taskbar icon
+        }
+
     }
 }

@@ -67,7 +67,8 @@ namespace FormCreationMission
                     Connexion.Connec.Open();
 
                 // Requête SQL pour récupérer les pompiers de la caserne
-                string sqlPompier = @"SELECT P.matricule, P.nom || ' ' || P.prenom AS nomComplet FROM Pompier P JOIN Affectation A ON P.matricule = A.matriculePompier WHERE A.idCaserne = @id";//Le || ' ' || c est pour la concatenation
+                string sqlPompier = @"SELECT P.matricule, P.nom || ' ' || P.prenom AS nomComplet FROM Pompier P JOIN Affectation
+A ON P.matricule = A.matriculePompier WHERE A.idCaserne = @id";//Le || ' ' || c est pour la concatenation
 
                 using (SQLiteCommand cmd = new SQLiteCommand(sqlPompier, Connexion.Connec))
                 {
@@ -184,7 +185,7 @@ namespace FormCreationMission
                 if (formConnexion.EstConnecte)
                 {
                     estAdmin = true; // L'utilisateur est maintenant admin
-                    // Connexion réussie → ouvre le formulaire de création du pompier
+                    // Connexion réussie  ouvre le formulaire de création du pompier
                     Form3 formCreer = new Form3();
                     formCreer.ShowDialog();
                 }

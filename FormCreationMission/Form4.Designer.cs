@@ -33,6 +33,7 @@
             this.chkbxEnCours = new System.Windows.Forms.CheckBox();
             this.btnActualiser = new System.Windows.Forms.Button();
             this.pnlAffichage = new System.Windows.Forms.Panel();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.SuspendLayout();
             // 
             // lblTableauBord
@@ -77,14 +78,13 @@
             this.pnlAffichage.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlAffichage.Location = new System.Drawing.Point(458, 100);
             this.pnlAffichage.Name = "pnlAffichage";
-            this.pnlAffichage.Size = new System.Drawing.Size(1454, 891);
+            this.pnlAffichage.Size = new System.Drawing.Size(1454, 852);
             this.pnlAffichage.TabIndex = 4;
             // 
             // Form4
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.ClientSize = new System.Drawing.Size(1924, 1055);
             this.Controls.Add(this.pnlAffichage);
             this.Controls.Add(this.btnActualiser);
@@ -104,5 +104,6 @@
         private System.Windows.Forms.Panel pnlAffichage;
         public System.Windows.Forms.Label lblTableauBord;
         public System.Windows.Forms.CheckBox chkbxEnCours;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
     }
 }
