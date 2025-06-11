@@ -134,6 +134,7 @@ namespace FormCreationMission
                 MessageBox.Show("❌ Veuillez remplir tous les champs avant de continuer.");
                 return;
             }
+
             //On affiche les panels des pompiers et des engins
             flpEngins.Visible = true;
             flpPompiers.Visible = true;
@@ -235,7 +236,7 @@ namespace FormCreationMission
                     }
                 }
 
-                // On parcoure les pompiers éligibles pour les ajouter au DataGridView
+                // نقوم بتصفّح رجال الإطفاء المؤهلين لإضافتهم إلى الـ DataGridView
                 int equipage = 0;
                 DataRow[] rowType = MesDatas.DsGlobal.Tables["TypeEngin"].Select($"code = '{typeEngin}'");
                 if (rowType.Length > 0)
@@ -243,7 +244,7 @@ namespace FormCreationMission
 
                 int totalPompiers = equipage * nombre;
                 //selection c est la liste finale
-                List<DataRow> selection = pompiersEligibles.Take(totalPompiers).ToList();//Elle prend les n premiers pompiers éligibles
+                List<DataRow> selection = pompiersEligibles.Take(totalPompiers).ToList();//تأخذ أوّل n من رجال الإطفاء المؤهلين
 
                 foreach (DataRow p in selection)
                 {
@@ -326,12 +327,12 @@ namespace FormCreationMission
             }
             try
             {
-                // --- Récupération des DataTables nécessaires
+                //Récupération des DataTables nécessaires
                 DataTable dtMission = MesDatas.DsGlobal.Tables["Mission"];
                 DataTable dtEngin = MesDatas.DsGlobal.Tables["Engin"];
                 DataTable dtPompier = MesDatas.DsGlobal.Tables["Pompier"];
                 DateTime date = DateTime.Now;
-                // --- Création de la nouvelle ligne en mémoire
+                // Création de la nouvelle ligne en mémoire
                 DataRow nouvelleMission = dtMission.NewRow();
                 nouvelleMission["motifAppel"] = txtMotif.Text.Trim();
                 nouvelleMission["adresse"] = txtRue.Text.Trim();
@@ -339,7 +340,7 @@ namespace FormCreationMission
                 nouvelleMission["ville"] = txtVille.Text.Trim();
                 nouvelleMission["dateHeureDepart"] = date;
                 nouvelleMission["terminee"] = 0; // Mission non terminée par défaut
-                // --- Vérification ID mission
+                // vérification ID mission
                 if (string.IsNullOrWhiteSpace(lblId.Text))
                 {
                     MessageBox.Show("❌ L'ID de la mission est vide.");
@@ -360,7 +361,7 @@ namespace FormCreationMission
                 nouvelleMission["idNatureSinistre"] = Convert.ToInt32(cbNatureSinistre.SelectedValue);
                 //Ajout dans le DataSet
                 dtMission.Rows.Add(nouvelleMission);
-                // --- Ajouter les pompiers dans la table Mobiliser
+                //Ajouter les pompiers dans la table Mobiliser
                 DataTable dtMobiliser = MesDatas.DsGlobal.Tables["Mobiliser"];
                 DataTable dtEmbarquer = MesDatas.DsGlobal.Tables["Embarquer"];
 
@@ -376,7 +377,7 @@ namespace FormCreationMission
                         {
                             int idHabilitation = Convert.ToInt32(habRows[0]["idHabilitation"]);
 
-                            // ➕ Nouvelle ligne dans Mobiliser
+                            //Nouvelle ligne dans Mobiliser
                             DataRow ligneMobiliser = dtMobiliser.NewRow();
                             ligneMobiliser["matriculePompier"] = matricule;
                             ligneMobiliser["idMission"] = nouvelleMission["id"];
@@ -462,13 +463,13 @@ namespace FormCreationMission
                 }
 
                 lblId.Text = prochainId.ToString();
-
+                //Confirmer les changements dans le dataset
                 MesDatas.DsGlobal.AcceptChanges();
 
-                // --- Rafraîchir tableau de bord
+                //Rafraîchir tableau de bord
                 if (tableauDeBord != null)
                 {
-                    tableauDeBord.btnActualiser.PerformClick();
+                    tableauDeBord.actualiser();
                 }
                 else
                 {

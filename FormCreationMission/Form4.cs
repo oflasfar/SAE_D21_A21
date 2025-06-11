@@ -109,7 +109,7 @@ namespace FormCreationMission
             {
                 pnlAffichage.Controls.Clear();
                 UCCreerMission uc = new UCCreerMission(this);
-                uc.Dock = DockStyle.Fill;
+                uc.Dock = DockStyle.Fill;//Pour remplire tous l espace disponible
                 pnlAffichage.Controls.Add(uc);
                 uc.BringToFront();
             }
@@ -281,6 +281,5 @@ namespace FormCreationMission
             base.OnLoad(e);
             this.Icon = new Icon("LOGO.ico"); // Set the taskbar icon
         }
-
     }
 }
